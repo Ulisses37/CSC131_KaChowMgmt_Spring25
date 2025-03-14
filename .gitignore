@@ -25,3 +25,5 @@ replay_pid*
 
 #intellij idea folder due to everybody using different IDE's
 .idea/
+
+.env
