@@ -1,8 +1,15 @@
 import express from "express";
 import dotenv from "dotenv";
+import {connectDB} from "./config/db.js"
+dotenv.config();
+connectDB();
+
+
+
+
 
 const app = express();
-console.log(process.env.MONGODB_URI);
+app.get("/products", (req, res) => {})
 
 app.listen(5000,() =>
 {
