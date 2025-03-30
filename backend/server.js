@@ -12,6 +12,6 @@ app.use(express.urlencoded({ extended: true }));
     app.use('/api/auth', authRoutes); //Account creation and Forgot password
 
 console.log(process.env.MONGO_URI);
-app.listen(5000, () => {
-    console.log("Server started at http://localhost:5000");
+app.listen(process.env.HOST_PORT, () => {
+    console.log("Server started at http://localhost:5000"); //or whatever your port is
 })
