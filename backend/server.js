@@ -11,7 +11,7 @@ connectDB();
 const app = express();
 app.get("/products", (req, res) => {})
 
-app.listen(5000,() =>
+app.listen(process.env.HOST_PORT,() =>
 {
     console.log("Server is ready at http://localhost:5000")
 })

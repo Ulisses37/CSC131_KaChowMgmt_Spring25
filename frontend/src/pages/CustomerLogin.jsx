@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import '../styles/CustomerLoginPageStyles.css'
+import '../styles/CustomerLoginStyles.css'
 
 function CustomerLoginPage() {
     // first thing in [] is the state variable, 
@@ -40,11 +40,15 @@ function CustomerLoginPage() {
       			<div class="button1">LOG IN</div>
     		</div>
 
-    		<empButton class="employee-login" id="EMPLOYEELOGINText">Employee Login</empButton>
-    		<div class="forgot-password" id="FORGOTPASSWORDText">FORGOT PASSWORD</div>
+    		<empButton class="employee-login" 
+                id="EMPLOYEELOGINText">Employee Login</empButton>
+    		<div class="forgot-password" 
+                id="FORGOTPASSWORDText">FORGOT PASSWORD</div>
 
     		<div class="key-field-wrapper">
-      			<input placeholder="Email Address" onChange={handleEmailChange} class="key-field"></input>
+      			<input placeholder="Email Address" 
+                onChange={handleEmailChange} 
+                class="key-field"></input>
     		</div>
 
     		<div class="password-input">
