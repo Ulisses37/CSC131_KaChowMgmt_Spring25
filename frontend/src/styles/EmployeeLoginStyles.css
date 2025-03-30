@@ -54,7 +54,7 @@
     width: 1741px;
     height: 1px;
 }
-.forgot-password {
+.emp-forgot-password {
     position: absolute;
     top: 697px;
     left: 796px;
@@ -66,7 +66,7 @@
     position: relative;
     line-height: 100%;
 }
-.button {
+.emp-login-button {
     position: absolute;
     top: 745px;
     left: 919px;
@@ -85,7 +85,7 @@
     position: relative;
     opacity: 0.8;
 }
-.username-input {
+.emp-email-input {
     position: absolute;
     top: 550px;
     left: 796px;
@@ -101,7 +101,7 @@
     justify-content: flex-start;
     padding: 20px 16px;
 }
-.id-input {
+.emp-id-input {
     position: absolute;
     top: 470px;
     left: 796px;
@@ -117,7 +117,7 @@
     justify-content: flex-start;
     padding: 20px 16px;
 }
-.password-input {
+.emp-password-input {
     position: absolute;
     top: 629px;
     left: 796px;

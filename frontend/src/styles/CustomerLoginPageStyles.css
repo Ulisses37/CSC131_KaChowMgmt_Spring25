@@ -74,7 +74,7 @@
   	position: relative;
   	line-height: 100%;
 }
-.button {
+.customer-login-button {
   	position: absolute;
   	top: 653px;
   	left: 920px;
@@ -96,7 +96,7 @@
   	color: #787575;
   	cursor: pointer;
 }
-.forgot-password {
+.customer-forgot-password {
   	position: absolute;
   	top: 617px;
   	left: 806px;
@@ -107,7 +107,7 @@
   	position: relative;
   	opacity: 0.8;
 }
-.key-field-wrapper {
+.customer-email-input {
   	position: absolute;
   	top: 472px;
   	left: 791px;
@@ -124,7 +124,7 @@
   	padding: 20px 16px;
   	color: #d5d5d5;
 }
-.password-input {
+.customer-password-input {
   	position: absolute;
   	top: 553px;
   	left: 791px;
