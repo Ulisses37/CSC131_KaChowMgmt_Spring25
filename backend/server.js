@@ -2,7 +2,6 @@ import express from "express";
 import dotenv from "dotenv";
 import {connectDB} from "./config/db.js"
 import ticketRoutes from "./routes/ticketRoutes.js";
-import vehicleRoutes from "./routes/vehicleRoutes.js";
 dotenv.config();
 connectDB();
 
@@ -14,10 +13,8 @@ app.use(express.json());
 
 app.use('/api/tickets', ticketRoutes);
 
-app.use('/api/vehicles', vehicleRoutes);
 
-
-app.listen(process.env.HOST_PORT,() =>
+app.listen(5000,() =>
 {
     console.log("Server is ready at http://localhost:5000")
 })
