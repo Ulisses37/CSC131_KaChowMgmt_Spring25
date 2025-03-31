@@ -1,0 +1,138 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #ffffff;
+}
+
+/* Page Container */
+.account-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header Styles */
+.account-header {
+    position: relative;
+    width: 100%;
+}
+
+.header-gradient {
+    height: 185px;
+    background: linear-gradient(90deg, #631818, #c93131);
+}
+
+.nav-bar {
+    height: 42px;
+    background-color: #211f1f;
+}
+
+.logo {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 250px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+/* Main Content Styles */
+.account-main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.form-container {
+    width: 100%;
+    max-width: 500px;
+    background-color: #f5f5f5;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+}
+
+.form-title {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+/* Form Styles */
+.account-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    width: 100%;
+}
+
+.form-input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #fff;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #c93131;
+    box-shadow: 0 0 0 2px rgba(201, 49, 49, 0.2);
+}
+
+.submit-button {
+    width: 100%;
+    padding: 15px;
+    background-color: #2c2c2c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #3c3c3c;
+}
+
+/* Login Prompt */
+.login-prompt {
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
+    font-size: 14px;
+}
+
+.login-link {
+    background: none;
+    border: none;
+    color: #c93131;
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: 500;
+    padding: 0;
+    font-size: 14px;
+}
+
+.login-link:hover {
+    color: #a02828;
+}
