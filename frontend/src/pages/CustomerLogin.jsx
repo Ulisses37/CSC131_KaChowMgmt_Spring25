@@ -23,6 +23,7 @@ function CustomerLoginPage() {
         }
 
         setIsLoading(true);
+        setError("");
         
         try {
             // Replace with actual API call
@@ -42,8 +43,18 @@ function CustomerLoginPage() {
                 setError(response.message || "Invalid credentials");
             }
         } catch (err) {
-            setError("An error occurred. Please try again.");
-            console.error("Login error:", err);
+            // Enhanced error handling
+            if (err.response) {
+                // Server responded with error status
+                setError(err.response.data.message || "Login failed");
+            } else if (err.request) {
+                // Request was made but no response
+                setError("Network error. Please try again.");
+            } else {
+                // Other errors
+                setError("An unexpected error occurred");
+                console.error("Login error:", err);
+            }
         } finally {
             setIsLoading(false);
         }
@@ -52,45 +63,51 @@ function CustomerLoginPage() {
     // Mock API with sample customer data
     async function authenticateCustomer(email, password) {
         await new Promise(resolve => setTimeout(resolve, 1000));
+
+        const response = await fetch('/api/customer/login', {  // REMEMBER TO CHANGE PORT NUMBER IF ITS DIFFERENT http://localhost/:' + process.env.REACT_APP_HOST_PORT + '/api/customerLogin
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        });
         
         // Mock customer database
-        const customers = [
-            {
-                email: "customer1@example.com",
-                password: "secure123", // In reality, backend hashes this
-                token: "cust-jwt-token-1",
-                customerData: {
-                    id: "CUST1001",
-                    name: "Alex Johnson",
-                    tier: "Gold Member",
-                    recentOrders: [
-                        { id: "ORD-2023-001", date: "2023-10-15", total: 149.99 },
-                        { id: "ORD-2023-002", date: "2023-10-20", total: 89.99 }
-                    ],
-                    preferences: {
-                        newsletter: true,
-                        smsAlerts: false
-                    }
-                }
-            },
-            {
-                email: "customer2@example.com",
-                password: "secure456",
-                token: "cust-jwt-token-2",
-                customerData: {
-                    id: "CUST1002",
-                    name: "Sam Wilson",
-                    tier: "Silver Member",
-                    recentOrders: [
-                        { id: "ORD-2023-003", date: "2023-10-18", total: 199.99 }
-                    ],
-                    preferences: {
-                        newsletter: false,
-                        smsAlerts: true
-                    }
-                }
-            }
-        ];
+        // const customers = [
+        //     {
+        //         email: "customer1@example.com",
+        //         password: "secure123", // In reality, backend hashes this
+        //         token: "cust-jwt-token-1",
+        //         customerData: {
+        //             id: "CUST1001",
+        //             name: "Alex Johnson",
+        //             tier: "Gold Member",
+        //             recentOrders: [
+        //                 { id: "ORD-2023-001", date: "2023-10-15", total: 149.99 },
+        //                 { id: "ORD-2023-002", date: "2023-10-20", total: 89.99 }
+        //             ],
+        //             preferences: {
+        //                 newsletter: true,
+        //                 smsAlerts: false
+        //             }
+        //         }
+        //     },
+        //     {
+        //         email: "customer2@example.com",
+        //         password: "secure456",
+        //         token: "cust-jwt-token-2",
+        //         customerData: {
+        //             id: "CUST1002",
+        //             name: "Sam Wilson",
+        //             tier: "Silver Member",
+        //             recentOrders: [
+        //                 { id: "ORD-2023-003", date: "2023-10-18", total: 199.99 }
+        //             ],
+        //             preferences: {
+        //                 newsletter: false,
+        //                 smsAlerts: true
+        //             }
+        //         }
+        //     }
+        // ];
 
         const customer = customers.find(c => 
             c.email === email && 

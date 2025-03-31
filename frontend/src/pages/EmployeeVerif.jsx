@@ -10,16 +10,18 @@ function EmployeeVerifPage() {
 
     const handleIdChange = (e) => {
         setEmployeeId(e.target.value);
-        setError(''); // Clear error when user types
+        setError('');
     };
 
-    const handleVerification = async () => {
+    const handleVerification = async (e) => {
+        e.preventDefault();
+        
         if (!employeeId) {
             setError('Please enter your Employee ID');
             return;
         }
 
-        // Basic ID format validation (adjust according to requirements)
+        // Basic ID format validation
         if (!/^[A-Za-z0-9]{6,10}$/.test(employeeId)) {
             setError('Please enter a valid Employee ID (6-10 alphanumeric characters)');
             return;
@@ -28,33 +30,49 @@ function EmployeeVerifPage() {
         setIsLoading(true);
         
         try {
-            // Simulate API verification (replace with actual API call)
-            const isVerified = await verifyEmployeeId(employeeId);
-            
-            if (isVerified) {
-                // Redirect to employee dashboard or next step
-                navigate('/employee-login');
+            // Real API call to verify employee ID
+            const response = await axios.post(
+                'http://localhost/:'+ process.env.REACT_APP_HOST_PORT + '/api/employeeLogin',
+                { employeeId },
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    withCredentials: true
+                }
+            );
+
+            const { isValid, employeeType, temporaryToken } = response.data;
+
+            if (isValid) {
+                // Store temporary verification token
+                sessionStorage.setItem('empVerificationToken', temporaryToken);
+                
+                // Navigate to employee login with ID pre-filled
+                navigate('/employee-login', { 
+                    state: { 
+                        verifiedEmployeeId: employeeId,
+                        employeeType // 'admin' or 'mechanic'
+                    } 
+                });
             } else {
                 setError('Invalid Employee ID. Please try again.');
             }
         } catch (err) {
-            setError('Verification failed. Please try again.');
-            console.error('Verification error:', err);
+            // Enhanced error handling
+            if (err.response) {
+                setError(err.response.data.message || "Verification failed");
+            } else if (err.request) {
+                setError("Network error. Please try again.");
+            } else {
+                setError("An unexpected error occurred");
+                console.error("Verification error:", err);
+            }
         } finally {
             setIsLoading(false);
         }
     };
-
-    // Mock verification function - replace with actual API call
-    const verifyEmployeeId = async (id) => {
-        // Simulate API delay
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        // Mock verification logic (replace with real verification)
-        // In a real app, this would call your backend API
-        return id === 'EMP12345'; // Example valid ID
-    };
-
+    
     return (
         <div className="employee-verifcation-page">
             <div className="employee-verifcation-page-child"></div>
@@ -117,3 +135,13 @@ function EmployeeVerifPage() {
 }
 
 export default EmployeeVerifPage
+
+//  // Mock verification function - replace with actual API call
+//  const verifyEmployeeId = async (id) => {
+//     // Simulate API delay
+//     await new Promise(resolve => setTimeout(resolve, 1000));
+    
+//     // Mock verification logic (replace with real verification)
+//     // In a real app, this would call your backend API
+//     return id === 'EMP12345'; // Example valid ID
+// }

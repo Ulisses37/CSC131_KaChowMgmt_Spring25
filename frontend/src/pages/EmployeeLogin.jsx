@@ -56,45 +56,55 @@ function EmployeeLoginPage() {
 
     // Enhanced mock verification with sample user data
     const verifyEmployeeLogin = async (credentials) => {
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        
 
-        // Sample admin user
-        const adminUsers = [{
-            email: 'admin@company.com',
-            id: 'ADMIN001',
-            password: 'admin123',
-            data: {
-                name: "Admin User",
-                role: "Administrator",
-                permissions: ["all"]
-            }
-        }];
+        const realLogin = async (email, password) => {
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            const response = await fetch('https://your-api.com/login', {  // REMEMBER TO CHANGE PORT NUMBER IF ITS DIFFERENT http://localhost/:' + process.env.REACT_APP_HOST_PORT + '/api/employeeLogin
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+            return await response.json();
+        };
 
-        // Sample mechanic users with individual data
-        const mechanicUsers = [
-            {
-                email: 'mechanic1@company.com',
-                id: 'MECH001',
-                password: 'mechanic123',
-                data: {
-                    name: "John Mechanic",
-                    specialty: "Engine Repair",
-                    currentJobs: 3,
-                    schedule: ["Mon", "Wed", "Fri"]
-                }
-            },
-            {
-                email: 'mechanic2@company.com',
-                id: 'MECH002',
-                password: 'mechanic123',
-                data: {
-                    name: "Sarah Technician",
-                    specialty: "Electrical Systems",
-                    currentJobs: 1,
-                    schedule: ["Tue", "Thu"]
-                }
-            }
-        ];
+        // // Sample admin user
+        // const adminUsers = [{
+        //     email: 'admin@company.com',
+        //     id: 'ADMIN001',
+        //     password: 'admin123',
+        //     data: {
+        //         name: "Admin User",
+        //         role: "Administrator",
+        //         permissions: ["all"]
+        //     }
+        // }];
+
+        // // Sample mechanic users with individual data
+        // const mechanicUsers = [
+        //     {
+        //         email: 'mechanic1@company.com',
+        //         id: 'MECH001',
+        //         password: 'mechanic123',
+        //         data: {
+        //             name: "John Mechanic",
+        //             specialty: "Engine Repair",
+        //             currentJobs: 3,
+        //             schedule: ["Mon", "Wed", "Fri"]
+        //         }
+        //     },
+        //     {
+        //         email: 'mechanic2@company.com',
+        //         id: 'MECH002',
+        //         password: 'mechanic123',
+        //         data: {
+        //             name: "Sarah Technician",
+        //             specialty: "Electrical Systems",
+        //             currentJobs: 1,
+        //             schedule: ["Tue", "Thu"]
+        //         }
+        //     }
+        // ];
 
         const foundAdmin = adminUsers.find(user => 
             user.email === credentials.email &&
