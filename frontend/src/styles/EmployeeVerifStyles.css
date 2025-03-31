@@ -1,0 +1,112 @@
+/* === Global Styles === */
+* {
+    margin: 0;
+    line-height: normal;
+  }
+
+  /* === Part Specific === */
+  .employee-verifcation-page-child {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: linear-gradient(90deg, #631818, #c93131);
+    width: 1920px;
+    height: 185px;
+}
+.employee-verifcation-page-item {
+    position: absolute;
+    top: 162px;
+    left: 0px;
+    background-color: #211f1f;
+    width: 1936px;
+    height: 42px;
+}
+.srs-csc-131-1-icon {
+    position: absolute;
+    top: 0px;
+    left: 776px;
+    width: 367.3px;
+    height: 309px;
+    object-fit: contain;
+    cursor: pointer;
+}
+.employee-verifcation-page-inner {
+    position: absolute;
+    top: 417px;
+    left: 652px;
+    background-color: #d9d9d9;
+    width: 616px;
+    height: 245px;
+}
+.line-div {
+    position: absolute;
+    top: 999.5px;
+    left: 97.5px;
+    border-top: 1px solid #000;
+    box-sizing: border-box;
+    width: 1741px;
+    height: 1px;
+}
+.employee-verification {
+    position: absolute;
+    top: 451px;
+    left: 796px;
+    font-size: 24px;
+}
+.button1 {
+    position: relative;
+    line-height: 100%;
+}
+.button {
+    position: absolute;
+    top: 600px;
+    left: 922px;
+    border-radius: 8px;
+    background-color: #2c2c2c;
+    border: 1px solid #2c2c2c;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    cursor: pointer;
+    color: #f5f5f5;
+    font-family: Inter;
+}
+.key-field {
+    position: relative;
+    opacity: 0.8;
+}
+.id-input-verif {
+    position: absolute;
+    top: 510px;
+    left: 796px;
+    border-radius: 4px;
+    background-color: #fff;
+    border: 1px solid #adadad;
+    box-sizing: border-box;
+    width: 327px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px 16px;
+    color: #d5d5d5;
+}
+.employee-verifcation-page {
+    width: 100%;
+    position: relative;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: #fff;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    height: 1080px;
+    overflow: hidden;
+    text-align: left;
+    font-size: 16px;
+    color: #000;
+    font-family: Montserrat;
+}
+
