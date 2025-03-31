@@ -23,6 +23,7 @@
     "forwarded": "^0.2.0",
     "function-bind": "^1.1.2",
     "http-errors": "^2.0.0",
+    "jsonwebtoken": "^9.0.2",
     "kareem": "^2.6.3",
     "media-typer": "^0.3.0",
     "methods": "^1.1.2",
