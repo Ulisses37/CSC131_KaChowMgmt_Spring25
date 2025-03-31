@@ -1,5 +1,7 @@
 import Customer from '../models/Customer.js';
 import Employee from '../models/Employee.js';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 // Customer
 const customerLogin = async (req, res) => {
@@ -97,3 +99,8 @@ const employeeLogin = async (req, res) => {
       });
     }
   };
+
+export default {
+  customerLogin,
+  employeeLogin
+};

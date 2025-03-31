@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-
+import mongoose from 'mongoose';
 // Reviews subdocument schema
 const reviewSchema = new mongoose.Schema({
     customerName: { type: String, required: true }, // Name of the customer who left the review
@@ -43,4 +42,4 @@ const employeeSchema = new mongoose.Schema({
 // Employee model
 const Employee = mongoose.model('Employee', employeeSchema);
 
-module.exports = Employee;
+export default Employee;

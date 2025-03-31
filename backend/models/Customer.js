@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-
+import mongoose from 'mongoose';
 // Vehicle subdocument schema
 const vehicleSchema = new mongoose.Schema({
     make: { type: String, required: true }, // Vehicle make (e.g., "Toyota")
@@ -20,4 +19,4 @@ const customerSchema = new mongoose.Schema({
 // Customer model
 const Customer = mongoose.model('Customer', customerSchema);
 
-module.exports = Customer;
+export default Customer;

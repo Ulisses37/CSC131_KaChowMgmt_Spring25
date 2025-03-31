@@ -1,0 +1,32 @@
+{
+  "name": "csc131_kachowmgmt_spring25",
+  "version": "1.0.0",
+  "description": "Kachow Management System (KMS)\r created by Ulisses Arredondo, Gina Kim, Margarette Ona, Justin Liu, Brian Chin, and Sang Nguyen",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ulisses37/CSC131_KaChowMgmt_Spring25.git"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ulisses37/CSC131_KaChowMgmt_Spring25/issues"
+  },
+  "homepage": "https://github.com/Ulisses37/CSC131_KaChowMgmt_Spring25#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "devenv": "^1.0.1",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.14.2",
+    "mongoose": "^8.12.1",
+    "mongose": "^0.0.2-security"
+  }
+}
