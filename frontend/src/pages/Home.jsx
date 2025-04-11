@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import '../styles/HomeStyles.css'
+import '../styles/HomeStyles.css';
+import AppointmentButton from '../components/BookAppointmentComponent'
 
 function HomePage() {
     return (
@@ -37,11 +38,7 @@ function HomePage() {
  			</div>
  			<div className="servicing-sacramento-since">Servicing Sacramento since 1857, we have highly trained specialists that have experience with all makes and models</div>
  			<Link to="/customer-login" style={{color: 'inherit',textDecoration: 'none'}}>
-				<div className="baa-button" id="baABUTTONContainer">
-					<div className="baa-button-child"></div>
-					<div className="book-an-appointment">BOOK AN APPOINTMENT</div>
-				</div>
-
+				<AppointmentButton/>
 			</Link>
 			<div className="home-child1"></div>
 

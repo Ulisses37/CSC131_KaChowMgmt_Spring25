@@ -1,0 +1,321 @@
+/* === Global Styles === */
+* {
+    margin: 0;
+    line-height: normal;
+  }
+
+  /* === Part Specific === */
+  .user-profile-page-child {
+    position: absolute;
+    top: 0px;
+    left: -1px;
+    width: 1920px;
+    height: 185px;
+}
+.user-profile-page-item {
+    position: absolute;
+    top: 999.5px;
+    left: 97.5px;
+    border-top: 1px solid #000;
+    box-sizing: border-box;
+    width: 1741px;
+    height: 1px;
+}
+.user-profile-page-inner {
+    position: absolute;
+    top: 152px;
+    left: 0px;
+    background-color: #211f1f;
+    width: 1936px;
+    height: 52px;
+}
+.srs-csc-131-1-icon {
+    position: absolute;
+    top: 0px;
+    left: 33px;
+    width: 367.3px;
+    height: 309px;
+    object-fit: cover;
+    cursor: pointer;
+}
+.button {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0%;
+    right: 0%;
+    bottom: 0%;
+    left: 0%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    background-color: #2c2c2c;
+    border: 1px solid #2c2c2c;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+.person-icon {
+    position: absolute;
+    height: 75%;
+    width: 75%;
+    top: 12.5%;
+    right: 12.5%;
+    bottom: 12.5%;
+    left: 12.5%;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+}
+.account-button-for-cutomer-vie {
+    position: absolute;
+    top: 43px;
+    left: 1803px;
+    width: 70px;
+    height: 70px;
+}
+.baa-button-child {
+    width: 100%;
+    position: absolute;
+    margin: 0 !important;
+    height: 100%;
+    top: 0%;
+    right: 0%;
+    bottom: 0%;
+    left: 0%;
+    border-radius: 100px;
+    background-color: #fdd01f;
+    z-index: 0;
+}
+.book-an-appointment {
+    position: relative;
+    font-weight: 600;
+    z-index: 1;
+}
+.baa-button {
+    position: absolute;
+    top: 36px;
+    left: 643px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    width: 631px;
+    height: 84px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 116px;
+    box-sizing: border-box;
+    gap: 0px;
+    cursor: pointer;
+    font-size: 32px;
+    color: #000;
+}
+.rectangle-icon {
+    position: absolute;
+    top: 309px;
+    left: 484px;
+    width: 1330px;
+    height: 613px;
+}
+.menu {
+    position: absolute;
+    top: 19px;
+    left: 90px;
+    font-weight: 500;
+}
+.menu-wrapper {
+    align-self: stretch;
+    position: relative;
+    border-radius: 5px;
+    background-color: #961a1a;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    height: 82px;
+    overflow: hidden;
+    flex-shrink: 0;
+    font-size: 35.91px;
+}
+.text {
+    position: relative;
+    font-weight: 500;
+}
+.text-wrapper {
+    align-self: stretch;
+    background-color: #211f1f;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+.manage {
+    margin: 0;
+}
+.text-container {
+    align-self: stretch;
+    background-color: #211f1f;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    text-align: center;
+}
+.customer-menu {
+    position: absolute;
+    top: 313px;
+    left: 74px;
+    border-radius: 5px;
+    background-color: #211f1f;
+    width: 285px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 32px;
+    color: #fff;
+}
+.honda-civic {
+    width: 327px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 60px;
+    flex-shrink: 0;
+}
+.st-reg-car-holder {
+    position: absolute;
+    top: 693px;
+    left: 511px;
+    border-radius: 4px;
+    background-color: #fff;
+    border: 1px solid #adadad;
+    box-sizing: border-box;
+    height: 60px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0px 10px;
+}
+.nd-reg-car-holder {
+    position: absolute;
+    top: 773px;
+    left: 511px;
+    border-radius: 4px;
+    background-color: #fff;
+    border: 1px solid #adadad;
+    box-sizing: border-box;
+    height: 60px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0px 10px;
+}
+.registered-vehicles {
+    position: absolute;
+    height: 4.26%;
+    width: 19.01%;
+    top: 59.91%;
+    left: 26.61%;
+    font-size: 35.91px;
+    font-weight: 500;
+    color: #333;
+    display: inline-block;
+}
+.change-password {
+    position: absolute;
+    height: 1.36%;
+    width: 12.03%;
+    top: 52.31%;
+    left: 26.61%;
+    font-size: 15px;
+    font-weight: 500;
+    color: #333;
+    display: inline-block;
+}
+.email-holder {
+    position: absolute;
+    top: 497px;
+    left: 511px;
+    border-radius: 4px;
+    background-color: #fff;
+    border: 1px solid #adadad;
+    box-sizing: border-box;
+    height: 60px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0px 10px;
+}
+.email {
+    position: absolute;
+    top: 454px;
+    left: 513px;
+    font-size: 35.91px;
+    font-weight: 500;
+    color: #333;
+    display: inline-block;
+    width: 106px;
+    height: 22px;
+}
+.name-holder {
+    position: absolute;
+    top: 376px;
+    left: 513px;
+    border-radius: 4px;
+    background-color: #fff;
+    border: 1px solid #adadad;
+    box-sizing: border-box;
+    height: 60px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0px 10px;
+}
+.name {
+    position: absolute;
+    height: 2.04%;
+    width: 7.14%;
+    top: 30.74%;
+    left: 26.72%;
+    font-size: 35.91px;
+    font-weight: 500;
+    color: #333;
+    display: inline-block;
+}
+.user-info-header {
+    position: absolute;
+    top: 255px;
+    left: 483px;
+    font-size: 40px;
+    font-weight: 600;
+    color: #000;
+    display: inline-block;
+    width: 897px;
+    height: 37px;
+}
+.user-profile-page {
+    width: 100%;
+    position: relative;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: #fff;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    height: 1080px;
+    overflow: hidden;
+    text-align: left;
+    font-size: 24px;
+    color: #131518;
+    font-family: Montserrat;
+}
+

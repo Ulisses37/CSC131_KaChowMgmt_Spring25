@@ -1,0 +1,236 @@
+/* === Global Styles === */
+* {
+    margin: 0;
+    line-height: normal;
+  }
+
+  /* === Part Specific === */
+  .directions-car-icon {
+    position: absolute;
+    top: 165px;
+    left: 1095px;
+    width: 900px;
+    height: 900px;
+}
+.background-red {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: linear-gradient(90deg, #631818, #c93131);
+    width: 1920px;
+    height: 185px;
+}
+.background-black {
+    position: absolute;
+    top: 183px;
+    left: 0px;
+    background-color: #211f1f;
+    width: 1936px;
+    height: 42px;
+}
+.srs-csc-131-1-icon {
+    position: absolute;
+    top: 0px;
+    left: 776px;
+    width: 367.3px;
+    height: 309px;
+    object-fit: cover;
+}
+.tickets {
+    width: 613px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    flex-shrink: 0;
+}
+.payroll-button {
+    position: absolute;
+    top: 676px;
+    left: calc(50% - 450px);
+    border-radius: 20px;
+    background-color: #d9d9d9;
+    width: 900px;
+    height: 100px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.invoice-button {
+    position: absolute;
+    top: 812px;
+    left: calc(50% - 450px);
+    border-radius: 20px;
+    background-color: #d9d9d9;
+    width: 900px;
+    height: 100px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.tickets2 {
+    width: 613px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.mechanic-button {
+    position: absolute;
+    top: 540px;
+    left: calc(50% - 450px);
+    border-radius: 20px;
+    background-color: #d9d9d9;
+    width: 900px;
+    height: 100px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.ticket-button {
+    position: absolute;
+    top: 404px;
+    left: calc(50% - 450px);
+    border-radius: 20px;
+    background-color: #d9d9d9;
+    width: 900px;
+    height: 100px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.admin-landing-page-child {
+    position: absolute;
+    top: 264px;
+    left: 34px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 100px;
+    background-color: rgba(201, 49, 49, 0.75);
+    width: 304px;
+    height: 89px;
+}
+.hello-admin {
+    position: absolute;
+    top: 284px;
+    left: 55px;
+    font-weight: 500;
+    text-align: left;
+}
+.button {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0%;
+    right: 0%;
+    bottom: 0%;
+    left: 0%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    background-color: #2c2c2c;
+    border: 1px solid #2c2c2c;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+.account-button-for-admin-child {
+    position: absolute;
+    top: 48px;
+    left: 15px;
+    background-color: #fff;
+    width: 39px;
+    height: 5px;
+}
+.account-button-for-admin-item {
+    position: absolute;
+    top: 32px;
+    left: 15px;
+    background-color: #fff;
+    width: 39px;
+    height: 5px;
+}
+.account-button-for-admin-inner {
+    position: absolute;
+    top: 16px;
+    left: 15px;
+    background-color: #fff;
+    width: 39px;
+    height: 5px;
+}
+.account-button-for-admin {
+    position: absolute;
+    top: 55px;
+    left: 1817px;
+    width: 70px;
+    height: 70px;
+}
+.tickets4 {
+    width: 613px;
+    position: relative;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    flex-shrink: 0;
+}
+.button1 {
+    width: 211px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 50px;
+    background-color: #fff;
+    height: 102px;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.button-parent {
+    position: absolute;
+    top: 441px;
+    left: 48px;
+    border-radius: 10px;
+    background: linear-gradient(180deg, rgba(174, 7, 7, 0.75), rgba(154, 27, 27, 0.05));
+    border: 1px solid #958585;
+    box-sizing: border-box;
+    width: 275px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 76px 32px;
+    gap: 65px;
+}
+.admin-landing-page {
+    width: 100%;
+    position: relative;
+    background-color: #fff;
+    height: 1080px;
+    overflow: hidden;
+    text-align: center;
+    font-size: 40px;
+    color: #000;
+    font-family: Montserrat;
+}
+
