@@ -25,6 +25,9 @@ app.use('/api/tickets', ticketRoutes);
 app.use('/api/vehicles', vehicleRoutes);
 app.use('/api/login', loginRouter);
 
+import mechanicRoutes from './routes/mechanicRoutes.js';
+app.use('/api', mechanicRoutes);
+
 app.listen(process.env.HOST_PORT,() =>
 {
     console.log("Server is ready at http://localhost:" + process.env.HOST_PORT)
