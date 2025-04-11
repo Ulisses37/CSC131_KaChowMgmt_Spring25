@@ -7,10 +7,11 @@
   /* === Part Specific === */
   .user-profile-page-child {
     position: absolute;
-    top: 0px;
-    left: -1px;
-    width: 1920px;
-    height: 185px;
+  	top: -3px;
+  	left: 0px;
+  	background: linear-gradient(90deg, #631818, #c93131);
+  	width: 1920px;
+  	height: 185px;
 }
 .user-profile-page-item {
     position: absolute;
@@ -29,14 +30,13 @@
     width: 1936px;
     height: 52px;
 }
-.srs-csc-131-1-icon {
+.srs-csc-131-2-icon {
     position: absolute;
+    object-fit: contain;
     top: 0px;
     left: 33px;
     width: 367.3px;
     height: 309px;
-    object-fit: cover;
-    cursor: pointer;
 }
 .button {
     position: absolute;
@@ -92,9 +92,8 @@
 }
 .baa-button {
     position: absolute;
-    top: 36px;
-    left: 643px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    top: 30px;
+    left: 644px;
     width: 631px;
     height: 84px;
     display: flex;
@@ -105,15 +104,15 @@
     box-sizing: border-box;
     gap: 0px;
     cursor: pointer;
-    font-size: 32px;
-    color: #000;
+    font-size: 30px;
 }
-.rectangle-icon {
+.gray-rectangle-bg {
     position: absolute;
     top: 309px;
     left: 484px;
     width: 1330px;
     height: 613px;
+    background-color:#d9d9d9
 }
 .menu {
     position: absolute;

@@ -5,7 +5,7 @@ import '../styles/CustomerLoginPageStyles.css';
 function CustomerLoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
+    const [error, setError] = useState("Invalid Credentials");
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
