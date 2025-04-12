@@ -130,16 +130,47 @@ export const completeTicket = async (req, res) => {
     }
 
     try {
-        const ticket = await Ticket.findOne({ ticketId: req.params.id });
+        const { timeSpentMinutes, mechanicComments, employeeId } = req.body; // Require employeeId
+        const ticketId = req.params.id;
+
+        // 1. Fetch the employee (to check role)
+        const employee = await Employee.findById(employeeId);
+        if (!employee) {
+            return res.status(404).json({ message: 'Employee not found' });
+        }
+
+        // 2. Find the ticket
+        const ticket = await Ticket.findById(ticketId);
         if (!ticket) {
             return res.status(404).json({ message: 'Ticket not found' });
         }
 
-        // Update ticket status
+        // 3. Check authorization
+        if (!employee.admin) {
+            // Mechanics can only complete their own tickets
+            if (!ticket.mechanicId || ticket.mechanicId.toString() !== employeeId) {
+                return res.status(403).json({
+                    message: 'You can only complete tickets assigned to you'
+                });
+            }
+        }
+
+        // 4. Update ticket
         ticket.completionStatus = 'Completed';
+        ticket.timeSpentMinutes = timeSpentMinutes;
+
+        if (mechanicComments) {
+            ticket.mechanicComments.push(mechanicComments);
+        }
+
+        // 5. Assign employee as mechanic if unassigned (admin override)
+        if (!ticket.mechanicId && employee.admin) {
+            ticket.mechanicId = employeeId;
+        }
+
         await ticket.save();
 
-        // Update vehicle's ticket arrays
+        // 6. Update vehicle (move ticket to pastTickets)
         const vehicle = await Vehicle.findOne({ vin: ticket.vechVIN });
         if (!vehicle) {
             return res.status(404).json({ message: 'Associated vehicle not found' });
@@ -154,6 +185,7 @@ export const completeTicket = async (req, res) => {
         );
 
         res.status(200).json(ticket);
+
     } catch (error) {
         res.status(500).json({
             message: 'Failed to complete ticket',

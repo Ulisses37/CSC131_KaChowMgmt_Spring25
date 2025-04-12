@@ -55,6 +55,24 @@ export const getEmployeeTickets = async (req, res) => {
     }
 };
 
+const getEmployee = async (req, res) => {
+    try {
+        // Fetch all employees where role is 'mechanic'
+        const employees = await Employee.find({});
+
+        res.status(200).json({
+            success: true,
+            data: employees,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error fetching employees",
+            error: error.message,
+        });
+    }
+};
+
 // Get single ticket (must belong to employee)
 export const getEmployeeTicket = async (req, res) => {
     try {

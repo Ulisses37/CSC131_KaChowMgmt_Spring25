@@ -53,3 +53,18 @@ export const validateCustomerTicketAccess = [
 
     // Optional: Add JWT validation later
 ];
+
+export const validateCompleteTicket = [
+    param('id').isMongoId().withMessage('Invalid ticket ID format'), // Validate MongoDB ID
+    body('timeSpentMinutes')
+        .isInt({ min: 1 })
+        .withMessage('Time spent must be a positive integer (minutes)'),
+    body('mechanicComments')
+        .optional()
+        .isString()
+        .withMessage('Mechanic comments must be a string'),
+    body('mechanicId')
+        .optional()
+        .isMongoId()
+        .withMessage('Invalid mechanic ID format')
+];

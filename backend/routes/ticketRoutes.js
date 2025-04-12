@@ -4,13 +4,15 @@ import {
     validateReschedule,
     validateCancel,
     validateRequest,
-    validateCustomerTicketAccess
+    validateCustomerTicketAccess,
+    validateCompleteTicket,
 } from "../middleware/validators/index.js";
 import {
     createTicket,
     cancelTicket,
     rescheduleTicket,
-    getVehicleMaintenanceStatus
+    getVehicleMaintenanceStatus,
+    completeTicket,
 } from '../controllers/ticketController.js';
 
 const router = express.Router();
@@ -40,6 +42,12 @@ router.patch('/:id/cancel',
 router.get('/customer/:customerId/vehicle/:vin/status',
     validateCustomerTicketAccess,
     getVehicleMaintenanceStatus
+);
+
+router.patch('/:id/complete',
+    validateCompleteTicket, // Use the stricter validator
+    validateRequest,        // Your existing error handler
+    completeTicket
 );
 
 export default router;
