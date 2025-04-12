@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './App.css';
-import kachowImage from './assets/SRS_CSC_131.png';
+import kachowImage from '../assets/SRS_CSC_131.png';
 
 const CreationSuccess = () => {
   const navigate = useNavigate();

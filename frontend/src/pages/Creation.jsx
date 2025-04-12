@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
-import kachowImage from './assets/SRS_CSC_131.png';
+import kachowImage from '../assets/SRS_CSC_131.png';
 
 const Creation = () => {
     const [customerId, setCustomerId] = useState('');
@@ -13,10 +13,11 @@ const Creation = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const ticket = {
-            id: customerId,
-            vin: vehicleNumber,
+            id: Date.now(),
+            customerId,
+            vehicleNumber,
             repairType: vehicleRepairType,
-            date: dateOfRepair
+            date: dateOfRepair,
         };
         console.log('Ticket created:', ticket);
         setCustomerId('');
@@ -46,8 +47,7 @@ const Creation = () => {
                     <input type="text" value={vehicleRepairType} onChange={(e) => setVehicleRepairType(e.target.value)} required />
                 </label>
                 <br />
-                <label>Select appointment time
-                    :
+                <label>Select appointment time:
                     <input type="date" value={dateOfRepair} onChange={(e) => setDateOfRepair(e.target.value)} required />
                 </label>
                 <br />
@@ -55,10 +55,19 @@ const Creation = () => {
                 <button type="submit">Create Ticket</button>
             </form>
             <br />
+            <button onClick={() => navigate('/viewappointment')}>View Appointment</button>
+            <br />
+            <br />
             <button onClick={() => navigate('/reschedule')}>Reschedule</button>
             <br />
             <br />
             <button onClick={() => navigate('/cancel')}>Cancel</button>
+            <br />
+            <br />
+            <button onClick={() => navigate('/ticketpage')}>M-TicketPage</button>
+            <br />
+            <br />
+            <button onClick={() => navigate('/ztesting')}>Testing</button>
             </div>
 
     );

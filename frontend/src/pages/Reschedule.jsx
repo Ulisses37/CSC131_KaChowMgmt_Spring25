@@ -1,22 +1,28 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
-import kachowImage from './assets/SRS_CSC_131.png';
+import kachowImage from '../assets/SRS_CSC_131.png';
 
-const Cancel = () => {
+const Reschedule = () => {
   const [appointmentId, setAppointmentId] = useState('');
+  const [newDate, setNewDate] = useState('');
 
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Appointment Cancelled:', appointmentId);
+    const rescheduleDetails = {
+      id: appointmentId,
+      newDate: newDate,
+    };
+    console.log('Appointment Rescheduled:', rescheduleDetails);
     setAppointmentId('');
-    navigate('/casuccess');
+    setNewDate('');
+    navigate('/resuccess');
   };
 
   return (
     <div className="container">
-      <h2>Cancel Appointment</h2>
+      <h2>Reschedule Appointment</h2>
       <img src={kachowImage} alt="Kachow" className="kachow-image" />
       <form onSubmit={handleSubmit}>
         <div>
@@ -29,17 +35,27 @@ const Cancel = () => {
             required
           />
         </div>
+        <div>
+          <label htmlFor="newDate">New Appointment Date:</label>
+          <input
+            type="date"
+            id="newDate"
+            value={newDate}
+            onChange={(e) => setNewDate(e.target.value)}
+            required
+          />
+        </div>
         <br />
-        <button type="submit">Cancel Appointment</button>
+        <button type="submit">Reschedule</button>
       </form>
       <br />
       <button onClick={() => navigate('/creation')}>Create</button>
       <br />
       <br />
-      <button onClick={() => navigate('/reschedule')}>Reschedule</button>
+      <button onClick={() => navigate('/cancel')}>Cancel</button>
       <br />
     </div>
   );
 };
 
-export default Cancel;
+export default Reschedule;
