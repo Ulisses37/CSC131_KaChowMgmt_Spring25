@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import '../styles/HomeStyles.css';
-import AppointmentButton from '../components/BookAppointmentComponent'
+import AppointmentButton from '../components/BookAppointmentComp'
 
 function HomePage() {
     return (

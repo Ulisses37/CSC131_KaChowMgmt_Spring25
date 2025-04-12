@@ -119,7 +119,7 @@ function EmployeeVerifPage() {
 
             {/* Verification Button */}
             <div 
-                className="button" 
+                className="verif-button" 
                 id="buttonContainer"
                 onClick={!isLoading ? handleVerification : null}
                 style={{

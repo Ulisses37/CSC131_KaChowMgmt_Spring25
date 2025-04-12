@@ -1,5 +1,3 @@
-import '../styles/HomeStyles.css'
-
 function AppointmentButton() {
  return (
     <div className="baa-button" id="baABUTTONContainer">

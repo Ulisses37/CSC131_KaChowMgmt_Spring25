@@ -15,6 +15,7 @@ import ServiceHistory from './pages/ServiceHistory'           // might need to c
 import ELogin from './pages/EmployeeLogin'
 import EVerif from './pages/EmployeeVerif'
 import ADashboard from './pages/AdminDashboard'
+import AssignTicket from './pages/AdminTicketView'
 import MDashboard from './pages/MechanicDashboard'
 
 function App() {
@@ -41,7 +42,7 @@ function App() {
         <Route path="/employee-verification" element={<EVerif />} /> 
         <Route path="/employee-login" element={<ELogin />} />
         <Route path="/admin-dashboard" element={<ADashboard />}/>
-
+        <Route path="/admin-ticket-view" element={<AssignTicket/>}/>
         <Route path="/mechanic-dashboard" element={<MDashboard />}/>
       </Routes>
       </Router>

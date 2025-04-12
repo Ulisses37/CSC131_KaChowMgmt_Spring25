@@ -1,7 +1,8 @@
 import { useLocation } from 'react-router-dom';
 import '../styles/CustomerDashboardStyles.css';
 import Menu from '../components/CustomerMenuComponent';
-import AppointmentButton from '../components/BookAppointmentComponent'
+import AppointmentButton from '../components/BookAppointmentComp'
+import DropMenu from '../components/CustomerDropMenuComp'
 
 function CustomerDashboardPage() {
     const { state } = useLocation();
@@ -22,10 +23,7 @@ function CustomerDashboardPage() {
             <div className="user-profile-page-item"></div>
             <div className="user-profile-page-inner"></div>
             <img className="srs-csc-131-2-icon" alt="" src="SRS_CSC_131 1.png"></img>
-            <div className="account-button-for-cutomer-vie">
-                <div className="button"></div>
-                <img className="person-icon" alt="" src="person.svg"></img>
-            </div>
+            <DropMenu/>
             <AppointmentButton/>
             <div className="gray-rectangle-bg"></div>
             <Menu />
@@ -34,14 +32,14 @@ function CustomerDashboardPage() {
             {customerData.cars?.length > 0 ? (
                 customerData.cars.map((car, index) => (
                     <div key={index} className={`${index === 0 ? 'st-reg-car-holder' : 'nd-reg-car-holder'}`}>
-                        <div className="honda-civic">
+                        <div className="user-info-bar">
                             {car.make} {car.model} ({car.year || car.plateNumber})
                         </div>
                     </div>
                 ))
             ) : (
                 <div className="st-reg-car-holder">
-                    <div className="honda-civic">No cars registered</div>
+                    <div className="user-info-bar">No cars registered</div>
                 </div>
             )}
 
@@ -49,11 +47,11 @@ function CustomerDashboardPage() {
             <div className="user-info-header">User Information</div>
             <div className="name">Name</div>
             <div className="name-holder">
-                <div className="honda-civic">{customerData.name || "N/A"}</div>
+                <div className="user-info-bar">{customerData.name || "N/A"}</div>
             </div>
             <div className="email">Email</div>
             <div className="email-holder">
-                <div className="honda-civic">{customerData.email || "N/A"}</div>
+                <div className="user-info-bar">{customerData.email || "N/A"}</div>
             </div>
             <div className="change-password">Change Password</div>
         </div>
