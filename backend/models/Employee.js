@@ -1,4 +1,6 @@
 import mongoose from 'mongoose';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 
 // Reviews subdocument schema
 const reviewSchema = new mongoose.Schema({
@@ -40,7 +42,46 @@ const employeeSchema = new mongoose.Schema({
     reviews: [reviewSchema] // Array of reviews subdocuments
 });
 
-// Employee model
-const Employee = mongoose.model('Employee', employeeSchema);
+// Password hashing (pre-save hook)
+employeeSchema.pre('save', async function(next) {
+    if (!this.isModified('password')) return next();
 
+    try {
+        const salt = await bcrypt.genSalt(10); // 10 rounds
+        this.password = await bcrypt.hash(this.password, salt);
+        next();
+    } catch (err) {
+        next(err);
+    }
+});
+
+// Generate JWT token
+employeeSchema.methods.generateAuthToken = function() {
+    return jwt.sign(
+        {
+            _id: this._id,
+            isAdmin: this.admin
+        },
+        process.env.JWT_SECRET,
+        { expiresIn: '7d' }
+    );
+};
+
+// Password verification
+employeeSchema.methods.comparePassword = async function(candidatePassword) {
+    return await bcrypt.compare(candidatePassword, this.password);
+};
+
+// Static login method
+employeeSchema.statics.findByCredentials = async function(email, password) {
+    const employee = await this.findOne({ email });
+    if (!employee) throw new Error('Invalid email or password');
+
+    const isMatch = await employee.comparePassword(password);
+    if (!isMatch) throw new Error('Invalid email or password');
+
+    return employee;
+};
+
+const Employee = mongoose.model('Employee', employeeSchema);
 export default Employee;

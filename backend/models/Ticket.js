@@ -11,7 +11,12 @@ const ticketSchema = new mongoose.Schema({
     mechanicId: { type: mongoose.Schema.Types.ObjectId, ref: 'Employee'}, // Reference to the Employee
     ticketType: { type: String, required: true }, // Type of ticket (e.g., "Maintenance", "Repair")
     customerComments: { type: String }, // Comments from the customer
-    mechanicComments: [{ type: String }] // Array of comments from the mechanic
+    mechanicComments: [{ type: String }], // Array of comments from the mechanic
+    timeSpentMinutes: {
+        type: Number,
+        min: 1,
+        required: function() { return this.completionStatus === 'Completed' }
+    }
 });
 
 
