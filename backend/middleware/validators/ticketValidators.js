@@ -1,4 +1,4 @@
-import { body } from 'express-validator';
+import { param, body } from 'express-validator';
 import {
     validateMongoId,
     validateISO8601Date,
@@ -32,10 +32,24 @@ export const validateCreateTicket = [
 ];
 
 export const validateReschedule = [
-    ...flatValidator(validateTicketId()),
+    ...flatValidator(validateTicketId),
     ...flatValidator(validateISO8601Date('newAppDate'))
 ];
 
 export const validateCancel = [
-    ...flatValidator(validateTicketId())
+    ...flatValidator(validateTicketId)
+];
+
+export const validateCustomerTicketAccess = [
+    param('customerId')
+        .isMongoId()
+        .withMessage('Invalid customer ID format'),
+
+    param('vin')
+        .isString()
+        .trim()
+        .isLength({ min: 17, max: 17 })
+        .withMessage('VIN must be 17 characters'),
+
+    // Optional: Add JWT validation later
 ];

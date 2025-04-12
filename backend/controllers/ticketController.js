@@ -1,7 +1,7 @@
 import Ticket from '../models/Ticket.js';
 import Vehicle from '../models/Vehicle.js';
 import Customer from '../models/Customer.js';
-import { getNextTicketId } from '../utils/getNextTicketId.js';
+import  getNextTicketId  from '../utils/getNextTicketId.js';
 import { validationResult } from 'express-validator';
 
 // Create New Ticket
@@ -157,6 +157,53 @@ export const completeTicket = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             message: 'Failed to complete ticket',
+            error: error.message
+        });
+    }
+};
+
+export const getVehicleMaintenanceStatus = async (req, res) => {
+    try {
+        const { customerId, vin } = req.params;
+
+        // Verify customer owns the vehicle
+        const vehicle = await Vehicle.findOne({
+            vin,
+            owner: customerId
+        }).populate('currentTickets pastTickets');
+
+        if (!vehicle) {
+            return res.status(404).json({
+                message: 'Vehicle not found or not owned by customer'
+            });
+        }
+
+        // Format response
+        const response = {
+            vehicle: {
+                make: vehicle.make,
+                model: vehicle.model,
+                year: vehicle.year,
+                vin: vehicle.vin
+            },
+            currentStatus: vehicle.currentTickets.map(ticket => ({
+                ticketId: ticket.ticketId,
+                type: ticket.ticketType,
+                status: ticket.completionStatus,
+                lastUpdated: ticket.updatedAt
+            })),
+            maintenanceHistory: vehicle.pastTickets.map(ticket => ({
+                ticketId: ticket.ticketId,
+                type: ticket.ticketType,
+                completedDate: ticket.updatedAt,
+                workPerformed: ticket.mechanicComments
+            }))
+        };
+
+        res.json(response);
+    } catch (error) {
+        res.status(500).json({
+            message: 'Failed to retrieve maintenance status',
             error: error.message
         });
     }

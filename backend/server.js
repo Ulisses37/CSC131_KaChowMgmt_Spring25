@@ -4,6 +4,8 @@ import {connectDB} from "./config/db.js"
 import ticketRoutes from "./routes/ticketRoutes.js";
 import vehicleRoutes from "./routes/vehicleRoutes.js";
 import authRoutes  from "./routes/authRoutes.js";
+import employeeRoutes from "./routes/employeeRoutes.js";
+
 
 import loginRouter from "./routes/loginRoute.js";
 dotenv.config();
@@ -24,9 +26,8 @@ app.use('/api/auth', authRoutes); //Account creation and Forgot password
 app.use('/api/tickets', ticketRoutes);
 app.use('/api/vehicles', vehicleRoutes);
 app.use('/api/login', loginRouter);
+app.use('/api/employees', employeeRoutes);
 
-import mechanicRoutes from './routes/mechanicRoutes.js';
-app.use('/api', mechanicRoutes);
 
 app.listen(process.env.HOST_PORT,() =>
 {

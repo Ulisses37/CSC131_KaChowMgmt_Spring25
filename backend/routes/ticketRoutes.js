@@ -3,12 +3,14 @@ import {
     validateCreateTicket,
     validateReschedule,
     validateCancel,
-    validateRequest
+    validateRequest,
+    validateCustomerTicketAccess
 } from "../middleware/validators/index.js";
 import {
     createTicket,
     cancelTicket,
     rescheduleTicket,
+    getVehicleMaintenanceStatus
 } from '../controllers/ticketController.js';
 
 const router = express.Router();
@@ -32,6 +34,12 @@ router.patch('/:id/cancel',
     validateCancel,
     validateRequest,
     cancelTicket
+);
+
+// CUSTOMER PULL TICKET STATUS
+router.get('/customer/:customerId/vehicle/:vin/status',
+    validateCustomerTicketAccess,
+    getVehicleMaintenanceStatus
 );
 
 export default router;
