@@ -30,10 +30,13 @@ import TicketPage from './pages/TicketPage.jsx';
 
 import './App.css';
 
+import CPassword from './pages/ChangePassword'
 function App() {
     return (
         <div>
             <div className="body"></div>
+    <CPassword/>
+    /*<>
         <Router>
             <Routes>
                 <Route path="/" element={<Home/>} /> {/* Default route */}
