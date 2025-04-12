@@ -25,10 +25,10 @@ const forgotPassword = async (req, res) =>{
   
   
       var transporter = nodemailer.createTransport({ //Our company email login information
-        service: 'gmail',
+        service: process.env.EMAIL_SERVICE,
         auth: {
-          user: 'kachowtest@gmail.com',
-          pass: 'abhy iscd gdgf opon',
+          user: process.env.EMAIL_USER, //email here
+          pass: process.env.EMAIL_PASSWORD, //password here
   
         }
       });
@@ -96,4 +96,43 @@ const forgotPassword = async (req, res) =>{
     }
   } 
 
-  export { forgotPassword, resetPassword }
+
+
+
+  //KMS-73 B Change Password
+  const changePassword = async (req, res) => { //Use this function if customer wants to change password from their profile page
+    const email = req.user.email; 
+    const { oldPassword, oldPasswordRetyped, newPassword } = req.body; //Obtained from input fields
+
+    try {
+        if (oldPassword !== oldPasswordRetyped) {
+            return res.status(400).json({ message: 'Typed passwords do not match' });
+        }
+
+        const customer = await Customer.findOne({ email });
+        if (!customer) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Compare hashed password (if stored hashed)
+        const isMatch = await bcrypt.compare(oldPassword, customer.password);
+        if (!isMatch) {
+            return res.status(401).json({ message: 'Old password is incorrect' });
+        }
+
+        // Hash and save the new password
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
+        customer.password = hashedPassword;
+        customer.resetPasswordToken = null;
+        customer.resetTokenExpiration = null;
+        await customer.save();
+
+        res.status(200).json({ message: 'Password change successful' });
+    } catch (error) {
+        console.error('Error changing password:', error);
+        res.status(500).json({ message: 'Error changing password', error: error.message });
+    }
+};
+
+  export { forgotPassword, resetPassword, changePassword }
