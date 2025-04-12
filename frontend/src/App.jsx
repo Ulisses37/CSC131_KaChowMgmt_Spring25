@@ -12,11 +12,12 @@ import Home from './pages/Home'
 import CLogin from './pages/CustomerLogin'
 import FPassword from './pages/ForgotPassword'
 import AccCreation from './pages/AccountCreation'
+import CPassword from './pages/ChangePassword'
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <AccCreation/>
+    <CPassword/>
     /*<>
      <Router>
       <Route>
