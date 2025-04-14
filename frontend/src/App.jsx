@@ -11,38 +11,37 @@ import CLogin from './pages/CustomerLogin'  // note the first letter of what is 
 import CDashboard from './pages/CustomerDashboard'
 import ApptManagement from './pages/AppointmentManagement'    // might need to change the name of this
 import ServiceHistory from './pages/ServiceHistory'           // might need to change the name of this
+import CPassword from './pages/ChangePassword'
+import FPassword from './pages/ForgotPassword'
+import AccCreation from './pages/AccountCreation'
+import ApptCreation from './pages/Creation.jsx';
+import CreationSuccess from './pages/CreationSuccess.jsx';
+import ApptReschedule from './pages/Reschedule.jsx';
+import RescheduleSuccess from './pages/RescheduleSuccess.jsx';
+import ApptCancel from './pages/Cancel.jsx';
+import CancelSuccess from './pages/CancelSuccess.jsx';
+import ViewAppointment from './pages/ViewAppointment.jsx';
 // Employee Related Pages
 import ELogin from './pages/EmployeeLogin'
 import EVerif from './pages/EmployeeVerif'
 import ADashboard from './pages/AdminDashboard'
 import AssignTicket from './pages/AdminTicketView'
 import MDashboard from './pages/MechanicDashboard'
-import FPassword from './pages/ForgotPassword'
-import AccCreation from './pages/AccountCreation'
-import Creation from './pages/Creation.jsx';
-import CreationSuccess from './pages/CreationSuccess.jsx';
-import Reschedule from './pages/Reschedule.jsx';
-import RescheduleSuccess from './pages/RescheduleSuccess.jsx';
-import Cancel from './pages/Cancel.jsx';
-import CancelSuccess from './pages/CancelSuccess.jsx';
-import ViewAppointment from './pages/ViewAppointment.jsx';
-import TicketPage from './pages/TicketPage.jsx';
+import MechTicketPage from './pages/TicketPage.jsx';
 
 import './App.css';
 
-import CPassword from './pages/ChangePassword'
+
 function App() {
-    return (
-        <div>
-            <div className="body"></div>
-    <CPassword/>
-    /*<>
-        <Router>
-            <Routes>
-                <Route path="/" element={<Home/>} /> {/* Default route */}
-                <Route path="/customer-login" element={<CLogin />} />
-        {/* route path for account creation */}
-        {/* route path for forgot password page */}
+  return (
+    <>
+      <Router>
+      <Routes>
+        <Route path="/" element={<Home/>} /> {/* Default route */}
+        <Route path="/customer-login" element={<CLogin />} />
+        <Route path="/account-creation" element={<AccCreation/>} />
+        <Route path="/forgot-password" element={<FPassword/>} />
+        <Route path="/change-password" element={<CPassword/>} />
         {/* route path for change password confirmation */}
         <Route path="/customer-dashboard" element={<CDashboard />}/>
         <Route path="/appointment-management" element={<ApptManagement />}/>  {/* might need to change the name of this */}
@@ -55,25 +54,23 @@ function App() {
         <Route path="/service-history" element={<ServiceHistory />}/>         {/* might need to change the name of this */}
         {/* route path for feedback page */}
         {/* route path for logged out page */}
-                <Route path="/account-creation" element={<AccCreation/>}
-                <Route path="/employee-verification" element={<EVerif />} />
-                <Route path="/employee-login" element={<ELogin />} />
-                <Route path="/admin-dashboard" element={<ADashboard />}/>
+        <Route path="/employee-verification" element={<EVerif />} />
+        <Route path="/employee-login" element={<ELogin />} />
+        <Route path="/admin-dashboard" element={<ADashboard />}/>
         <Route path="/admin-ticket-view" element={<AssignTicket/>}/>
-                <Route path="/mechanic-dashboard" element={<MDashboard />}/>
-                <Route path="/" element={<Creation />} />
-                <Route path="/creation" element={<Creation />} />
-                <Route path="/reschedule" element={<Reschedule />} />
-                <Route path="/cancel" element={<Cancel />} />
-                <Route path="/crsuccess" element={<CreationSuccess />} />
-                <Route path="/resuccess" element={<RescheduleSuccess />} />
-                <Route path="/casuccess" element={<CancelSuccess />} />
-                <Route path="/viewappointment" element={<ViewAppointment />} />
-                <Route path="/ticketpage" element={<TicketPage />} />
-            </Routes>
-        </Router>
-        </div>
-    );
+        <Route path="/mechanic-dashboard" element={<MDashboard />}/>
+        <Route path="/appt-creation" element={<ApptCreation />} />
+        <Route path="/appt-reschedule" element={<ApptReschedule />} />
+        <Route path="/appt=cancel" element={<ApptCancel />} />
+        <Route path="/crsuccess" element={<CreationSuccess />} />
+        <Route path="/resuccess" element={<RescheduleSuccess />} />
+        <Route path="/casuccess" element={<CancelSuccess />} />
+        <Route path="/viewappointment" element={<ViewAppointment />} />
+        <Route path="/ticketpage" element={<MechTicketPage />} />
+      </Routes>
+      </Router>
+    </>
+  )
 }
 
-export default App;
+export default App
