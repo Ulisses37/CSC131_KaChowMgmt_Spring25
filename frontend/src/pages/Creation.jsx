@@ -57,10 +57,10 @@ const Creation = () => {
             <button onClick={() => navigate('/viewappointment')}>View Appointment</button>
             <br />
             <br />
-            <button onClick={() => navigate('/reschedule')}>Reschedule</button>
+            <button onClick={() => navigate('/appt-reschedule')}>Reschedule</button>
             <br />
             <br />
-            <button onClick={() => navigate('/cancel')}>Cancel</button>
+            <button onClick={() => navigate('/appt-cancel')}>Cancel</button>
             <br />
             <br />
             <button onClick={() => navigate('/ticketpage')}>M-TicketPage</button>
