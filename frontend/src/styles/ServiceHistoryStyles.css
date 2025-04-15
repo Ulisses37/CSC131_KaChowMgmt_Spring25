@@ -1,0 +1,297 @@
+
+body {
+    margin: 0;
+    line-height: normal;
+}
+
+.service-history-page-child {
+    position: absolute;
+    top: 0px;
+    left: -1px;
+    width: 1920px;
+    height: 185px;
+}
+.service-history-page-item {
+    position: absolute;
+    top: 999.5px;
+    left: 97.5px;
+    border-top: 1px solid #000;
+    box-sizing: border-box;
+    width: 1741px;
+    height: 1px;
+}
+.service-history-page-inner {
+    position: absolute;
+    top: 152px;
+    left: 0px;
+    background-color: #211f1f;
+    width: 1936px;
+    height: 52px;
+}
+.srs-csc-131-1-icon {
+    position: absolute;
+    top: 0px;
+    left: 33px;
+    width: 367.3px;
+    height: 309px;
+    object-fit: cover;
+    cursor: pointer;
+}
+.service-history-page1 {
+    position: absolute;
+    top: 846px;
+    left: 699px;
+    font-size: 16px;
+    font-weight: 600;
+}
+.rectangle-icon {
+    position: absolute;
+    top: 309px;
+    left: 465px;
+    width: 1330px;
+    height: 613px;
+}
+.rectangle-div {
+    position: absolute;
+    top: 334px;
+    left: 500px;
+    background-color: #f5f0f0;
+    width: 1260px;
+    height: 150px;
+}
+.datetime-completion {
+    margin: 0;
+    font-weight: 600;
+}
+.pm {
+    margin: 0;
+}
+.datetime {
+    position: absolute;
+    top: 343px;
+    left: 1586px;
+    display: inline-block;
+    width: 178px;
+    height: 87px;
+}
+.service-history-header {
+    position: absolute;
+    top: 255px;
+    left: 484px;
+    font-size: 40px;
+    font-weight: 600;
+    display: inline-block;
+    width: 320px;
+    height: 37px;
+}
+.menu {
+    position: absolute;
+    top: 19px;
+    left: 90px;
+    font-weight: 500;
+}
+.menu-wrapper {
+    align-self: stretch;
+    position: relative;
+    border-radius: 5px;
+    background-color: #961a1a;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    height: 82px;
+    overflow: hidden;
+    flex-shrink: 0;
+    font-size: 35.91px;
+}
+.text {
+    position: relative;
+    font-weight: 500;
+}
+.text-wrapper {
+    align-self: stretch;
+    background-color: #211f1f;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+.text-container {
+    align-self: stretch;
+    background-color: #211f1f;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    text-align: center;
+}
+.customer-menu {
+    position: absolute;
+    top: 313px;
+    left: 74px;
+    border-radius: 5px;
+    background-color: #211f1f;
+    width: 285px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 32px;
+    color: #fff;
+}
+.button {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0%;
+    right: 0%;
+    bottom: 0%;
+    left: 0%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    background-color: #2c2c2c;
+    border: 1px solid #2c2c2c;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+.person-icon {
+    position: absolute;
+    height: 75%;
+    width: 75%;
+    top: 12.5%;
+    right: 12.5%;
+    bottom: 12.5%;
+    left: 12.5%;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+}
+.account-button-for-cutomer-vie {
+    position: absolute;
+    top: 43px;
+    left: 1803px;
+    width: 70px;
+    height: 70px;
+}
+.vin1 {
+    font-weight: 600;
+}
+.vin {
+    position: absolute;
+    top: 70px;
+    left: 8px;
+    display: inline-block;
+    width: 285px;
+    height: 41px;
+}
+.makemodel {
+    position: absolute;
+    top: 36px;
+    left: 8px;
+    display: inline-block;
+    width: 290px;
+    height: 41px;
+}
+.ticket {
+    position: absolute;
+    top: 2px;
+    left: 8px;
+    display: inline-block;
+    width: 211px;
+    height: 41px;
+}
+.appointment-type {
+    position: absolute;
+    top: 2px;
+    left: 351px;
+    text-align: center;
+    display: inline-block;
+    width: 484px;
+    height: 135px;
+}
+.button2 {
+    position: relative;
+    line-height: 100%;
+}
+.button1 {
+    position: absolute;
+    top: 97px;
+    left: 514px;
+    border-radius: 8px;
+    background-color: #fdd01f;
+    border: 1px solid #2c2c2c;
+    box-sizing: border-box;
+    width: 157px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #131518;
+    font-family: Inter;
+}
+.vin-parent {
+    position: absolute;
+    top: 336px;
+    left: 507px;
+    width: 1253px;
+    height: 148px;
+    overflow: hidden;
+}
+.baa-button-child {
+    width: 100%;
+    position: absolute;
+    margin: 0 !important;
+    height: 100%;
+    top: 0%;
+    right: 0%;
+    bottom: 0%;
+    left: 0%;
+    border-radius: 100px;
+    background-color: #fdd01f;
+    z-index: 0;
+}
+.book-an-appointment {
+    position: relative;
+    font-weight: 600;
+    z-index: 1;
+}
+.baa-button {
+    position: absolute;
+    top: 36px;
+    left: 643px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    width: 631px;
+    height: 84px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 116px;
+    box-sizing: border-box;
+    gap: 0px;
+    cursor: pointer;
+    font-size: 32px;
+}
+.service-history-page {
+    width: 100%;
+    position: relative;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: #fff;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    height: 1080px;
+    overflow: hidden;
+    text-align: left;
+    font-size: 20px;
+    color: #000;
+    font-family: Montserrat;
+}
+
