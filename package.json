@@ -11,6 +11,7 @@
     "call-bound": "^1.0.4",
     "content-disposition": "^0.5.4",
     "cookie-signature": "^1.0.6",
+    "cors": "^2.8.5",
     "destroy": "^1.2.0",
     "devenv": "^1.0.1",
     "dotenv": "^16.4.7",
