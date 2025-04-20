@@ -36,7 +36,7 @@ function CustomerLoginPage() {
                 // Redirect with FULL customer data
                 navigate("/customer-dashboard", {
                     state: {
-                        customerData: response.customerData
+                        customerSchema: response.customerSchema
                     }
                 });
             } else {
@@ -60,7 +60,7 @@ function CustomerLoginPage() {
         }
     }
 
-    // Mock API with sample customer data
+    // Call to the API
     async function authenticateCustomer(email, password) {
         await new Promise(resolve => setTimeout(resolve, 1000));
 
@@ -69,61 +69,7 @@ function CustomerLoginPage() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password })
         });
-        
-        // // Mock customer database
-        // const customers = [
-        //     {
-        //         email: "customer1@example.com",
-        //         password: "secure123", // In reality, backend hashes this
-        //         token: "cust-jwt-token-1",
-        //         customerData: {
-        //             id: "CUST1001",
-        //             name: "Alex Johnson",
-        //             tier: "Gold Member",
-        //             recentOrders: [
-        //                 { id: "ORD-2023-001", date: "2023-10-15", total: 149.99 },
-        //                 { id: "ORD-2023-002", date: "2023-10-20", total: 89.99 }
-        //             ],
-        //             preferences: {
-        //                 newsletter: true,
-        //                 smsAlerts: false
-        //             }
-        //         }
-        //     },
-        //     {
-        //         email: "customer2@example.com",
-        //         password: "secure456",
-        //         token: "cust-jwt-token-2",
-        //         customerData: {
-        //             id: "CUST1002",
-        //             name: "Sam Wilson",
-        //             tier: "Silver Member",
-        //             recentOrders: [
-        //                 { id: "ORD-2023-003", date: "2023-10-18", total: 199.99 }
-        //             ],
-        //             preferences: {
-        //                 newsletter: false,
-        //                 smsAlerts: true
-        //             }
-        //         }
-        //     }
-        // ];
 
-        // const customer = customers.find(c => 
-        //     c.email === email && 
-        //     c.password === password
-        // );
-
-        // return customer ? 
-        //     { 
-        //         success: true, 
-        //         token: customer.token,
-        //         customerData: customer.customerData 
-        //     } : 
-        //     { 
-        //         success: false, 
-        //         message: "Invalid email or password" 
-        //     };
         return response;
     }
 
@@ -203,7 +149,7 @@ function CustomerLoginPage() {
                 style={isLoading ? { opacity: 0.7, cursor: 'not-allowed' } : { cursor: 'pointer' }}
                 disabled={isLoading}
             >
-                <div className="button1">
+                <div className="customer-login-button-text">
                     {isLoading ? 'LOGGING IN...' : 'LOG IN'}
                 </div>
             </div>
@@ -219,3 +165,58 @@ export default CustomerLoginPage;
 //     headers: { 'Content-Type': 'application/json' },
 //     body: JSON.stringify({ email, password })
 // });
+
+// // Mock customer database
+        // const customers = [
+        //     {
+        //         email: "customer1@example.com",
+        //         password: "secure123", // In reality, backend hashes this
+        //         token: "cust-jwt-token-1",
+        //         customerData: {
+        //             id: "CUST1001",
+        //             name: "Alex Johnson",
+        //             tier: "Gold Member",
+        //             recentOrders: [
+        //                 { id: "ORD-2023-001", date: "2023-10-15", total: 149.99 },
+        //                 { id: "ORD-2023-002", date: "2023-10-20", total: 89.99 }
+        //             ],
+        //             preferences: {
+        //                 newsletter: true,
+        //                 smsAlerts: false
+        //             }
+        //         }
+        //     },
+        //     {
+        //         email: "customer2@example.com",
+        //         password: "secure456",
+        //         token: "cust-jwt-token-2",
+        //         customerData: {
+        //             id: "CUST1002",
+        //             name: "Sam Wilson",
+        //             tier: "Silver Member",
+        //             recentOrders: [
+        //                 { id: "ORD-2023-003", date: "2023-10-18", total: 199.99 }
+        //             ],
+        //             preferences: {
+        //                 newsletter: false,
+        //                 smsAlerts: true
+        //             }
+        //         }
+        //     }
+        // ];
+
+        // const customer = customers.find(c => 
+        //     c.email === email && 
+        //     c.password === password
+        // );
+
+        // return customer ? 
+        //     { 
+        //         success: true, 
+        //         token: customer.token,
+        //         customerData: customer.customerData 
+        //     } : 
+        //     { 
+        //         success: false, 
+        //         message: "Invalid email or password" 
+        //     };

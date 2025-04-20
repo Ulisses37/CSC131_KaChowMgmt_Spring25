@@ -7,15 +7,10 @@ import vehicleRoutes from "./routes/vehicleRoutes.js";
 import authRoutes  from "./routes/authRoutes.js";
 import serviceHistoryRouter from './routes/serviceHistoryRoutes.js';
 import employeeRoutes from "./routes/employeeRoutes.js";
-
-
 import loginRouter from "./routes/loginRoute.js";
+
 dotenv.config();
 connectDB();
-
-
-
-
 
 const app = express();
 
