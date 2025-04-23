@@ -1,0 +1,89 @@
+/* General container styling */
+body {
+    background-color: #f9f9f9;
+    margin: 0;
+    font-family: 'Monsterat', sans-serif;
+}
+
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Header styling */
+h2 {
+    color: #d73706;
+    font-size: 24px;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 20px;
+}
+
+/* Image styling */
+.kachow-image {
+    max-width: 100%;
+    height: auto;
+    margin: 20px 0;
+    border-radius: 10px;
+}
+
+/* Label styling */
+label {
+    display: block;
+    color: #d73706;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+/* Input field styling */
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+input:focus {
+    outline: none;
+    border-color: #d73706;
+    box-shadow: 0 0 5px rgba(215, 55, 6, 0.5);
+}
+
+/* Button styling */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #d73706;
+    color: rgb(246, 254, 0);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    margin: 10px 5px;
+}
+
+button:hover {
+    background-color: #621d08;
+}
+
+/* Navigation buttons */
+.navigation-buttons {
+    margin-top: 20px;
+}
+
+.navigation-buttons button {
+    margin: 5px;
+}

@@ -1,0 +1,67 @@
+/* General page styling */
+body {
+    background-color: #f9f9f9;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Header styling */
+h2 {
+    color: #d73706;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Image styling */
+.kachow-image {
+    max-width: 100%;
+    height: auto;
+    margin: 20px 0;
+    border-radius: 10px;
+}
+
+/* Label styling */
+label {
+    display: block;
+    color: #d73706;
+    font-size: 16px;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+/* Input field styling */
+input {
+    width: 300px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+input:focus {
+    outline: none;
+    border-color: #d73706;
+    box-shadow: 0 0 5px rgba(215, 55, 6, 0.5);
+}
+
+/* Button styling */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #d73706;
+    color: rgb(246, 254, 0);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 5px;
+}
+
+button:hover {
+    background-color: #621d08;
+}

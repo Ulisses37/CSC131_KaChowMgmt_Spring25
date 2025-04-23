@@ -1,0 +1,80 @@
+/* General page styling */
+body {
+    background-color: #f9f9f9;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Header styling */
+h2 {
+    color: #d73706;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Button container */
+.clock-buttons {
+    margin-bottom: 20px;
+}
+
+/* Button styling */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.clock-in-button {
+    background-color: #4caf50;
+    color: white;
+}
+
+.clock-in-button:hover {
+    background-color: #388e3c;
+}
+
+.clock-out-button {
+    background-color: #f44336;
+    color: white;
+}
+
+.clock-out-button:hover {
+    background-color: #d32f2f;
+}
+
+/* Clock times styling */
+.clock-times h3 {
+    margin: 10px 0;
+    color: #333;
+}
+
+.clock-times p {
+    font-size: 16px;
+    color: #555;
+}
+
+/* Time difference styling */
+.time-difference h3 {
+    margin-top: 20px;
+    color: #333;
+}
+
+.time-difference p {
+    font-size: 18px;
+    color: #4caf50;
+    font-weight: bold;
+}
+
+/* Error message styling */
+.error-message {
+    color: #f44336;
+    font-size: 14px;
+    margin-top: 10px;
+    font-weight: bold;
+}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 
-const Creation = () => {
+const AppointmentCreation = () => {
     const [customerId, setCustomerId] = useState('');
     const [vehicleNumber, setVehicleNumber] = useState('');
     const [vehicleRepairType, setVehicleRepairType] = useState('');
@@ -27,9 +27,9 @@ const Creation = () => {
     };
 
     return (
-        <div className="container">
+        <div>
             <h2>Create a Ticket</h2>
-            <img className="srs-csc-131-2-icon" alt="" src="SRS_CSC_131 1.png"></img>
+            <img src={kachowImage} alt="Kachow" className="kachow-image" />
             <form onSubmit={handleSubmit}>
                 <label>
                     Customer ID:
@@ -46,7 +46,8 @@ const Creation = () => {
                     <input type="text" value={vehicleRepairType} onChange={(e) => setVehicleRepairType(e.target.value)} required />
                 </label>
                 <br />
-                <label>Select appointment time:
+                <label>
+                    Select appointment time:
                     <input type="date" value={dateOfRepair} onChange={(e) => setDateOfRepair(e.target.value)} required />
                 </label>
                 <br />
@@ -57,16 +58,18 @@ const Creation = () => {
             <button onClick={() => navigate('/viewappointment')}>View Appointment</button>
             <br />
             <br />
-            <button onClick={() => navigate('/appt-reschedule')}>Reschedule</button>
+            <button onClick={() => navigate('/reschedule')}>Reschedule</button>
             <br />
             <br />
-            <button onClick={() => navigate('/appt-cancel')}>Cancel</button>
+            <button onClick={() => navigate('/cancel')}>Cancel</button>
             <br />
             <br />
             <button onClick={() => navigate('/ticketpage')}>M-TicketPage</button>
-            </div>
-
+            <br />
+            <br />
+            <button onClick={() => navigate('/employeeclock')}>Employee Clock</button>
+        </div>
     );
 };
 
-export default Creation;
+export default AppointmentCreation;
