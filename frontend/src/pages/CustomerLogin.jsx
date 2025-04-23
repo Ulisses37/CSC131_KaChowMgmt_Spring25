@@ -89,7 +89,7 @@ function CustomerLoginPage() {
             <div className="no-account">No account?</div>
             
             {/* ----------------- NEED TO CHANGE ------------------- */}
-            <Link to="/create-account" style={{color: 'inherit',textDecoration: 'none'}}>
+            <Link to="/account-creation" style={{color: 'inherit',textDecoration: 'none'}}>
                 <div className="create-one" id="CREATEONEText">CREATE ONE</div>
             </Link>
             {/* ---------------------------------------------------- */}

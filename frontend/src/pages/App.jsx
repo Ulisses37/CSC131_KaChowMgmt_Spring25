@@ -43,7 +43,7 @@ function App() {
             {/* route path for change password confirmation */}
             <Route path="/customer-dashboard" element={<CDashboard />}/>
             <Route path="/appointment-management" element={<ApptManagement />}/>  {/* might need to change the name of this */}
-            <Route path="/appt-creation" element={<ApptCreation />} />
+            <Route path="/appt-creation" element={<ApptCreation/>} />
             <Route path="/crsuccess" element={<CreationSuccess />} />
             {/* route path for view status */}
             <Route path="/appt-reschedule" element={<ApptReschedule />} />
