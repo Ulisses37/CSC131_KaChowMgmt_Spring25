@@ -14,12 +14,12 @@ import ServiceHistory from './pages/ServiceHistory'           // might need to c
 import CPassword from './pages/ChangePassword'
 import FPassword from './pages/ForgotPassword'
 import AccCreation from './pages/AccountCreation'
-import ApptCreation from './pages/Creation.jsx';
-import CreationSuccess from './pages/CreationSuccess.jsx';
-import ApptReschedule from './pages/Reschedule.jsx';
-import RescheduleSuccess from './pages/RescheduleSuccess.jsx';
-import ApptCancel from './pages/Cancel.jsx';
-import CancelSuccess from './pages/CancelSuccess.jsx';
+import ApptCreation from './pages/AppointmentCreation.jsx';
+import CreationSuccess from './pages/AppointmentCreationSuccess.jsx';
+import ApptReschedule from './pages/AppointmentReschedule.jsx';
+import RescheduleSuccess from './pages/AppointmentRescheduleSuccess.jsx';
+import ApptCancel from './pages/AppointmentCancel.jsx';
+import CancelSuccess from './pages/AppointmentCancelSuccess.jsx';
 import ViewAppointment from './pages/ViewAppointment.jsx';
 // Employee Related Pages
 import ELogin from './pages/EmployeeLogin'
@@ -28,6 +28,7 @@ import ADashboard from './pages/AdminDashboard'
 import AssignTicket from './pages/AdminTicketView'
 import MDashboard from './pages/MechanicDashboard'
 import MechTicketPage from './pages/TicketPage.jsx';
+import EmployeeClock from './pages/EmployeeClock.jsx';
 
 import './App.css';
 function App() {
@@ -60,6 +61,7 @@ function App() {
             <Route path="/mechanic-dashboard" element={<MDashboard />}/>
             <Route path="/viewappointment" element={<ViewAppointment />} />
             <Route path="/ticketpage" element={<MechTicketPage />} />
+            <Route path="/employee-clock" element={<EmployeeClock />} />
           </Routes>
           </Router>
         </>

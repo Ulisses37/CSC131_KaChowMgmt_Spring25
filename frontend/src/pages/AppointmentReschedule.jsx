@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 
-const Reschedule = () => {
+const AppointmentReschedule = () => {
   const [appointmentId, setAppointmentId] = useState('');
   const [newDate, setNewDate] = useState('');
 
@@ -20,41 +20,36 @@ const Reschedule = () => {
   };
 
   return (
-    <div className="container">
+    <div>
       <h2>Reschedule Appointment</h2>
-      <img className="srs-csc-131-2-icon" alt="" src="SRS_CSC_131 1.png"></img>
+      <img src={kachowImage} alt="Kachow" className="kachow-image" />
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="appointmentId">Appointment ID:</label>
-          <input
-            type="text"
-            id="appointmentId"
-            value={appointmentId}
-            onChange={(e) => setAppointmentId(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="newDate">New Appointment Date:</label>
-          <input
-            type="date"
-            id="newDate"
-            value={newDate}
-            onChange={(e) => setNewDate(e.target.value)}
-            required
-          />
-        </div>
+        <label htmlFor="appointmentId">Appointment ID:</label>
+        <input
+          type="text"
+          id="appointmentId"
+          value={appointmentId}
+          onChange={(e) => setAppointmentId(e.target.value)}
+          required
+        />
+        <br />
+        <label htmlFor="newDate">New Appointment Date:</label>
+        <input
+          type="date"
+          id="newDate"
+          value={newDate}
+          onChange={(e) => setNewDate(e.target.value)}
+          required
+        />
         <br />
         <button type="submit">Reschedule</button>
       </form>
       <br />
       <button onClick={() => navigate('/creation')}>Create</button>
       <br />
-      <br />
       <button onClick={() => navigate('/cancel')}>Cancel</button>
-      <br />
     </div>
   );
 };
 
-export default Reschedule;
+export default AppointmentReschedule;

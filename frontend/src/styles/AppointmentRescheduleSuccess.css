@@ -1,0 +1,41 @@
+/* Same as CreationSuccess.css */
+body {
+    background-color: #f9f9f9;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+
+h2 {
+    color: #d73706;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.kachow-image {
+    max-width: 100%;
+    height: auto;
+    margin: 20px 0;
+    border-radius: 10px;
+}
+
+p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #d73706;
+    color: rgb(246, 254, 0);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #621d08;
+}
