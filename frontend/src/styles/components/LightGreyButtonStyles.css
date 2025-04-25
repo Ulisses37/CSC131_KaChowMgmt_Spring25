@@ -1,0 +1,26 @@
+.account-container {
+    width: 900px;
+    height: 100px;
+    padding: 10px;
+    background: #D9D9D9;
+    overflow: hidden;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    display: inline-flex;
+  }
+  
+  .account-title {
+    width: 613px;
+    height: 48px;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    color: black;
+    font-size: 40px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
