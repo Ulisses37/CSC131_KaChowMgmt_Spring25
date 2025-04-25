@@ -83,5 +83,36 @@ employeeSchema.statics.findByCredentials = async function(email, password) {
     return employee;
 };
 
+// Get total hours worked (for all entries)
+employeeSchema.methods.getTotalHoursWorked = function() {
+    return this.hoursWorked.reduce((total, entry) => {
+        if (entry.clockOut) {
+            const hours = (entry.clockOut - entry.clockIn) / (1000 * 60 * 60);
+            return total + hours;
+        }
+        return total;
+    }, 0);
+};
+
+// Get current session hours (if clocked in)
+employeeSchema.methods.getCurrentSessionHours = function() {
+    const lastEntry = this.hoursWorked[this.hoursWorked.length - 1];
+    if (lastEntry && !lastEntry.clockOut) {
+        return (new Date() - lastEntry.clockIn) / (1000 * 60 * 60);
+    }
+    return 0;
+};
+
+// Get all time entries (formatted)
+employeeSchema.methods.getTimeEntries = function() {
+    return this.hoursWorked.map(entry => ({
+        clockIn: entry.clockIn,
+        clockOut: entry.clockOut || null,
+        duration: entry.clockOut 
+            ? (entry.clockOut - entry.clockIn) / (1000 * 60 * 60)
+            : null
+    }));
+};
+
 const Employee = mongoose.model('Employee', employeeSchema);
 export default Employee;

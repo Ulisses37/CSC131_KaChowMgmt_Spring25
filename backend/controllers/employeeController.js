@@ -114,3 +114,124 @@ export const updateTicketStatus = async (req, res) => {
         res.status(500).json({ error: 'Server error' });
     }
 };
+
+// Clock in functionality
+export const clockIn = async (req, res) => {
+    try {
+        const employee = await Employee.findById(req.employee._id);
+        
+        // Check if employee is already clocked in
+        if (employee.hoursWorked.length > 0 && !employee.hoursWorked[employee.hoursWorked.length - 1].clockOut) {
+            return res.status(400).json({ 
+                success: false,
+                error: 'You are already clocked in' 
+            });
+        }
+        
+        // Add new clock-in entry
+        employee.hoursWorked.push({ clockIn: new Date() });
+        await employee.save();
+        
+        res.status(200).json({ 
+            success: true,
+            message: 'Clocked in successfully',
+            clockInTime: employee.hoursWorked[employee.hoursWorked.length - 1].clockIn
+        });
+    } catch (error) {
+        res.status(500).json({ 
+            success: false,
+            error: 'Server error: ' + error.message 
+        });
+    }
+};
+
+// Clock out functionality
+export const clockOut = async (req, res) => {
+    try {
+        const employee = await Employee.findById(req.employee._id);
+        
+        // Check if employee is clocked in
+        if (employee.hoursWorked.length === 0 || employee.hoursWorked[employee.hoursWorked.length - 1].clockOut) {
+            return res.status(400).json({ 
+                success: false,
+                error: 'You are not currently clocked in' 
+            });
+        }
+        
+        // Set clock-out time on the last entry
+        const lastEntry = employee.hoursWorked[employee.hoursWorked.length - 1];
+        lastEntry.clockOut = new Date();
+        await employee.save();
+        
+        // Calculate duration in hours
+        const durationHours = (lastEntry.clockOut - lastEntry.clockIn) / (1000 * 60 * 60);
+        
+        res.status(200).json({ 
+            success: true,
+            message: 'Clocked out successfully',
+            clockInTime: lastEntry.clockIn,
+            clockOutTime: lastEntry.clockOut,
+            durationHours: durationHours.toFixed(2)
+        });
+    } catch (error) {
+        res.status(500).json({ 
+            success: false,
+            error: 'Server error: ' + error.message 
+        });
+    }
+};
+
+// Get current clock status
+export const getClockStatus = async (req, res) => {
+    try {
+        const employee = await Employee.findById(req.employee._id);
+        const lastEntry = employee.hoursWorked[employee.hoursWorked.length - 1];
+        
+        const isClockedIn = lastEntry && !lastEntry.clockOut;
+        
+        let responseData = {
+            success: true,
+            isClockedIn,
+            currentSession: null
+        };
+        
+        if (isClockedIn) {
+            const currentDuration = (new Date() - lastEntry.clockIn) / (1000 * 60 * 60);
+            responseData.currentSession = {
+                clockInTime: lastEntry.clockIn,
+                currentDuration: currentDuration.toFixed(2)
+            };
+        }
+        
+        res.status(200).json(responseData);
+    } catch (error) {
+        res.status(500).json({ 
+            success: false,
+            error: 'Server error: ' + error.message 
+        });
+    }
+};
+
+// Get all time entries for employee
+export const getTimeEntries = async (req, res) => {
+    try {
+        const employee = await Employee.findById(req.employee._id);
+        const timeEntries = employee.hoursWorked.map(entry => ({
+            clockIn: entry.clockIn,
+            clockOut: entry.clockOut || null,
+            duration: entry.clockOut 
+                ? (entry.clockOut - entry.clockIn) / (1000 * 60 * 60)
+                : null
+        }));
+        
+        res.status(200).json({
+            success: true,
+            data: timeEntries
+        });
+    } catch (error) {
+        res.status(500).json({ 
+            success: false,
+            error: 'Server error: ' + error.message 
+        });
+    }
+};
