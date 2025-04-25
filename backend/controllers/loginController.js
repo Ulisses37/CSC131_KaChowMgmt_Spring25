@@ -42,6 +42,12 @@ const customerLogin = async (req, res) => {
       res.status(200).json({
         status: 'success',
         token,
+        customer: { 
+          id: customer._id,
+          name: customer.name,
+          email: customer.email,
+          vehicles: customer.vehicles || []
+        }
       });
     } catch (err) {
       res.status(400).json({
@@ -91,6 +97,13 @@ const employeeLogin = async (req, res) => {
       res.status(200).json({
         status: 'success',
         token,
+        employee: { 
+          id: employee._id,
+          name: employee.name,
+          email: employee.email,
+          admin: employee.admin // Include admin status in response
+        },
+        role: employee.admin ? 'admin' : 'mechanic' // Explicit role field
       });
     } catch (err) {
       res.status(400).json({

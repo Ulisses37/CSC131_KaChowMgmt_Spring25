@@ -1,0 +1,205 @@
+.container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: white;
+    overflow: hidden;
+}
+
+.header-gradient {
+    width: 1920px;
+    height: 185px;
+    left: 0;
+    top: -13px;
+    position: absolute;
+    background: linear-gradient(90deg, #631818 0%, #C93131 100%);
+}
+
+.nav-bar {
+    width: 1936px;
+    height: 42px;
+    left: -8px;
+    top: 172px;
+    position: absolute;
+    background: #211F1F;
+}
+
+.logo {
+    width: 367.29px;
+    height: 309px;
+    left: 768.14px;
+    top: 9.48px;
+    position: absolute;
+}
+
+.menu-icon {
+    width: 70px;
+    height: 70px;
+    left: 1817px;
+    top: 55px;
+    position: absolute;
+}
+
+.menu-icon-bg {
+    width: 70px;
+    height: 70px;
+    padding: 12px;
+    left: 0;
+    top: 0;
+    position: absolute;
+    background: var(--Background-Brand-Default, #2C2C2C);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    outline: 1px var(--Border-Brand-Default, #2C2C2C) solid;
+    outline-offset: -1px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    display: inline-flex;
+}
+
+.menu-line-1 {
+    width: 39px;
+    height: 5px;
+    left: 15px;
+    top: 48px;
+    position: absolute;
+    background: white;
+}
+
+.menu-line-2 {
+    width: 39px;
+    height: 5px;
+    left: 15px;
+    top: 32px;
+    position: absolute;
+    background: white;
+}
+
+.menu-line-3 {
+    width: 39px;
+    height: 5px;
+    left: 15px;
+    top: 16px;
+    position: absolute;
+    background: white;
+}
+
+.title-container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 21px;
+    padding-right: 62px;
+    left: 65px;
+    top: 48px;
+    position: absolute;
+    background: #C93131;
+    overflow: hidden;
+    border-radius: 100px;
+    justify-content: center;
+    align-items: center;
+    gap: 27px;
+    display: inline-flex;
+}
+
+.arrow-icon {
+    width: 33.70px;
+    height: 31.34px;
+    position: relative;
+    transform: rotate(180deg);
+    transform-origin: top left;
+}
+
+.arrow-shape {
+    width: 15.45px;
+    height: 18.28px;
+    left: 7.02px;
+    top: 6.53px;
+    position: absolute;
+    background: white;
+}
+
+.title-text {
+    color: white;
+    font-size: 40px;
+    font-family: 'Montserrat';
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+.circle-bg-1 {
+    width: 700px;
+    height: 700px;
+    left: -133px;
+    top: 517px;
+    position: absolute;
+}
+
+.circle-1 {
+    width: 466.67px;
+    height: 466.67px;
+    left: 116.67px;
+    top: 116.67px;
+    position: absolute;
+    background: linear-gradient(180deg, rgba(99, 24, 24, 0.40) 0%, rgba(201, 49, 49, 0.75) 100%);
+}
+
+.circle-bg-2 {
+    width: 411px;
+    height: 414px;
+    left: 381px;
+    top: 739px;
+    position: absolute;
+}
+
+.circle-2 {
+    width: 274px;
+    height: 276px;
+    left: 68.50px;
+    top: 69px;
+    position: absolute;
+    background: linear-gradient(180deg, rgba(99, 24, 24, 0.40) 0%, rgba(201, 49, 49, 0.75) 100%);
+}
+
+.mechanic-card-1,
+.mechanic-card-2,
+.mechanic-card-3 {
+    width: 900px;
+    height: 100px;
+    padding: 10px;
+    left: 510px;
+    position: absolute;
+    background: #D9D9D9;
+    overflow: hidden;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    display: inline-flex;
+}
+
+.mechanic-card-1 {
+    top: 417px;
+}
+
+.mechanic-card-2 {
+    top: 553px;
+}
+
+.mechanic-card-3 {
+    top: 689px;
+}
+
+.mechanic-text {
+    width: 613px;
+    height: 48px;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    color: black;
+    font-size: 40px;
+    font-family: 'Montserrat';
+    font-weight: 400;
+    word-wrap: break-word;
+}

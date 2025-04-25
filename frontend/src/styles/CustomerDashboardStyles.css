@@ -2,17 +2,18 @@
 * {
     margin: 0;
     line-height: normal;
-  }
-
-  /* === Part Specific === */
-  .user-profile-page-child {
-    position: absolute;
-  	top: -3px;
-  	left: 0px;
-  	background: linear-gradient(90deg, #631818, #c93131);
-  	width: 1920px;
-  	height: 185px;
 }
+
+/* === Part Specific === */
+.user-profile-page-child {
+    position: absolute;
+    top: -3px;
+    left: 0px;
+    background: linear-gradient(90deg, #631818, #c93131);
+    width: 1920px;
+    height: 185px;
+}
+
 .user-profile-page-item {
     position: absolute;
     top: 999.5px;
@@ -22,6 +23,7 @@
     width: 1741px;
     height: 1px;
 }
+
 .user-profile-page-inner {
     position: absolute;
     top: 152px;
@@ -30,6 +32,7 @@
     width: 1936px;
     height: 52px;
 }
+
 .srs-csc-131-2-icon {
     position: absolute;
     object-fit: contain;
@@ -52,11 +55,13 @@
     background-color: #fdd01f;
     z-index: 0;
 }
+
 .book-an-appointment {
     position: relative;
     font-weight: 600;
     z-index: 1;
 }
+
 .baa-button {
     position: absolute;
     top: 30px;
@@ -73,76 +78,16 @@
     cursor: pointer;
     font-size: 30px;
 }
+
 .gray-rectangle-bg {
     position: absolute;
     top: 309px;
     left: 484px;
     width: 1330px;
     height: 613px;
-    background-color:#d9d9d9
+    background-color: #d9d9d9;
 }
-.menu {
-    position: absolute;
-    top: 19px;
-    left: 90px;
-    font-weight: 500;
-}
-.menu-wrapper {
-    align-self: stretch;
-    position: relative;
-    border-radius: 5px;
-    background-color: #961a1a;
-    border: 1px solid #000;
-    box-sizing: border-box;
-    height: 82px;
-    overflow: hidden;
-    flex-shrink: 0;
-    font-size: 35.91px;
-}
-.text {
-    position: relative;
-    font-weight: 500;
-}
-.text-wrapper {
-    align-self: stretch;
-    background-color: #211f1f;
-    overflow: hidden;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-}
-.manage {
-    margin: 0;
-}
-.text-container {
-    align-self: stretch;
-    background-color: #211f1f;
-    overflow: hidden;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    text-align: center;
-}
-.customer-menu {
-    position: absolute;
-    top: 313px;
-    left: 74px;
-    border-radius: 5px;
-    background-color: #211f1f;
-    width: 285px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    font-size: 32px;
-    color: #fff;
-}
+
 .user-info-bar {
     width: 327px;
     position: relative;
@@ -151,38 +96,32 @@
     height: 60px;
     flex-shrink: 0;
 }
-.st-reg-car-holder {
+
+.st-reg-car-holder, .nd-reg-car-holder {
     position: absolute;
+    border-radius: 4px;
+    background-color: #fff;
+    border: 1px solid #adadad;
+    box-sizing: border-box;
+    height: 60px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0px 10px;
+}
+
+.st-reg-car-holder {
     top: 693px;
     left: 511px;
-    border-radius: 4px;
-    background-color: #fff;
-    border: 1px solid #adadad;
-    box-sizing: border-box;
-    height: 60px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 0px 10px;
 }
+
 .nd-reg-car-holder {
-    position: absolute;
     top: 773px;
     left: 511px;
-    border-radius: 4px;
-    background-color: #fff;
-    border: 1px solid #adadad;
-    box-sizing: border-box;
-    height: 60px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 0px 10px;
 }
+
 .registered-vehicles {
     position: absolute;
     height: 4.26%;
@@ -194,6 +133,7 @@
     color: #333;
     display: inline-block;
 }
+
 .change-password {
     position: absolute;
     height: 1.36%;
@@ -205,6 +145,7 @@
     color: #333;
     display: inline-block;
 }
+
 .email-holder {
     position: absolute;
     top: 497px;
@@ -221,6 +162,7 @@
     justify-content: flex-start;
     padding: 0px 10px;
 }
+
 .email {
     position: absolute;
     top: 454px;
@@ -232,6 +174,7 @@
     width: 106px;
     height: 22px;
 }
+
 .name-holder {
     position: absolute;
     top: 376px;
@@ -248,6 +191,7 @@
     justify-content: flex-start;
     padding: 0px 10px;
 }
+
 .name {
     position: absolute;
     height: 2.04%;
@@ -259,6 +203,7 @@
     color: #333;
     display: inline-block;
 }
+
 .user-info-header {
     position: absolute;
     top: 255px;
@@ -270,6 +215,7 @@
     width: 897px;
     height: 37px;
 }
+
 .user-profile-page {
     width: 100%;
     position: relative;
@@ -285,12 +231,29 @@
     font-family: Montserrat;
 }
 
+/* To make the name and email bar auto resize*/
+.auto-fit {
+    width: fit-content;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.name-holder,
+.email-holder {
+    width: auto;
+    min-width: 250px;
+    max-width: 600px;
+}
+
+/* Vehicle Information Parts*/
+
 /* Drop Down Menu styling */
 .account-button-container {
     position: relative;
     display: inline-block;
-  }
-  
+}
+
 .account-button-for-customer-view {
     display: flex;
     align-items: center;
@@ -302,7 +265,7 @@
     cursor: pointer;
     position: relative;
 }
-  
+
 .button {
     position: absolute;
     width: 50px;
@@ -320,13 +283,14 @@
     color: #f5f5f5;
     font-family: Inter;
 }
+
 .person-icon {
     width: 50px;
     height: 50px;
     z-index: 1;
 }
-  
-  /* Flyout menu styling */
+
+/* Flyout menu styling */
 .flyout-menu {
     position: absolute;
     left: 1650px;
@@ -338,21 +302,21 @@
     z-index: 100;
     overflow: hidden;
 }
-  
-  .menu-item {
+
+.menu-item {
     display: block;
     padding: 12px 16px;
     color: #333;
     text-decoration: none;
     transition: background-color 0.2s;
     border-bottom: 1px solid #f0f0f0;
-  }
-  
-  .menu-item:hover {
+}
+
+.menu-item:hover {
     background-color: #f8f8f8;
-  }
-  
-  .menu-item.logout {
+}
+
+.menu-item.logout {
     color: #c93131;
     border-bottom: none;
     width: 100%;
@@ -360,5 +324,5 @@
     background: none;
     border: none;
     cursor: pointer;
-  }
+}
 

@@ -10,7 +10,7 @@ function HomePage() {
     		<div className="home-inner"></div>
     		<img className="homepage-pic-icon" alt="" src="homepage pic.png"></img>
     		<img className="srs-csc-131-2-icon" alt="" src="SRS_CSC_131 1.png"></img>
-            <div className="rectangle-div"></div>
+            <div className="top-border"></div>
             <div className="account-button-for-home-page">
  				<div className="accountButton"></div>
 				<img className="person-icon" alt="" src="person.svg"></img>
@@ -40,7 +40,7 @@ function HomePage() {
  			<Link to="/customer-login" style={{color: 'inherit',textDecoration: 'none'}}>
 				<AppointmentButton/>
 			</Link>
-			<div className="home-child1"></div>
+			<div className="bottom-border"></div>
 
   	    </div>
     )

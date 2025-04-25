@@ -1,0 +1,201 @@
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background: white;
+  }
+  
+  .container {
+    width: 100%;
+    height: 100%;
+    padding: 0 77px;
+    overflow: hidden;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .header-container {
+    width: 1920px;
+    height: 284px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .ticket-box {
+    width: 306px;
+    height: 111px;
+    padding: 10px;
+    position: absolute;
+    left: 79px;
+    top: 10px;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 10px;
+    overflow: hidden;
+  }
+  
+  .yellow-box {
+    background: #FFED91;
+  }
+  
+  .ticket-number {
+    font-size: 15px;
+    font-weight: 400;
+    color: black;
+    word-wrap: break-word;
+  }
+  
+  .header-gradient {
+    width: 1920px;
+    height: 185px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(90deg, #631818 0%, #C93131 100%);
+  }
+  
+  .header-bar {
+    width: 1936px;
+    height: 42px;
+    position: absolute;
+    top: 183px;
+    background: #211F1F;
+  }
+  
+  .header-image {
+    width: 367.29px;
+    height: 309px;
+    position: absolute;
+    top: 0;
+    left: 776px;
+  }
+  
+  .menu-button {
+    position: absolute;
+    top: 55px;
+    left: 1817px;
+    width: 70px;
+    height: 70px;
+  }
+  
+  .menu-button::before {
+    content: '';
+    background: #2C2C2C;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    outline: 1px solid #2C2C2C;
+    width: 70px;
+    height: 70px;
+    position: absolute;
+  }
+  
+  .menu-icon {
+    width: 39px;
+    height: 5px;
+    background: white;
+    position: absolute;
+    left: 15px;
+  }
+  
+  .menu-icon:nth-child(1) { top: 48px; }
+  .menu-icon:nth-child(2) { top: 32px; }
+  .menu-icon:nth-child(3) { top: 16px; }
+  
+  .ticket-history-button {
+    position: absolute;
+    top: 48px;
+    left: 65px;
+    padding: 20px 62px 20px 21px;
+    background: #C93131;
+    border-radius: 100px;
+    display: inline-flex;
+    align-items: center;
+    gap: 27px;
+    overflow: hidden;
+  }
+  
+  .arrow-icon {
+    width: 33.7px;
+    height: 31.34px;
+    transform: rotate(180deg);
+    position: relative;
+  }
+  
+  .arrow-body {
+    position: absolute;
+    width: 15.45px;
+    height: 18.28px;
+    left: 7.02px;
+    top: 6.53px;
+    background: white;
+  }
+  
+  .button-text {
+    color: white;
+    font-size: 40px;
+    font-weight: 500;
+    word-wrap: break-word;
+  }
+  
+  .history-body {
+    width: 1766px;
+    height: 774px;
+    padding: 0 10px 300px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .history-header {
+    width: 1745px;
+    height: 131px;
+    background: #961A1A;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .header-text {
+    position: absolute;
+    top: 36px;
+    color: white;
+    font-size: 32px;
+    font-weight: 600;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .history-row {
+    width: 1745px;
+    padding: 10px 50px 10px 15px;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  .data-box {
+    width: 306px;
+    height: 57px;
+    padding: 10px;
+    background: #ECDEFE;
+    border-radius: 2px;
+    outline: 1px solid #211F1F;
+    outline-offset: -1px;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 400;
+    color: black;
+    text-align: center;
+  }
+  
