@@ -7,6 +7,7 @@ const reviewSchema = new mongoose.Schema({
     customerName: { type: String, required: true }, // Name of the customer who left the review
     ticketNumber: { type: String, required: true }, // Ticket number associated with the review
     starRating: { type: Number, required: true, min: 1, max: 5 }, // Star rating (1-5)
+    satisfactory: { type: Boolean, required: true }, // Whether the customer was satisfied (yes/no)
     comments: { type: String } // Comments from the customer
 });
 
