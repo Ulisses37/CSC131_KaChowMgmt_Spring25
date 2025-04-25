@@ -1,4 +1,5 @@
 import { useLocation } from 'react-router-dom';
+import LgButton from '../components/LightGreyButtonComponent';
 
 function AdminDashboardPage() {
     const { state } = useLocation();
@@ -7,10 +8,10 @@ function AdminDashboardPage() {
     return (
         <div className="admin-landing-page">
             <img className="directions-car-icon" alt="" src="directions_car.svg"></img>
-            <div className="background-red"></div>
+            <div className="gradient-box"></div>
             <div className="background-black"></div>
             <img className="srs-csc-131-1-icon" alt="" src="SRS_CSC_131 1.png"></img>
-            <div className="payroll-button">
+            {/* <div className="payroll-button">
                 <div className="tickets">PAYROLL</div>
             </div>
             <div className="invoice-button">
@@ -21,7 +22,11 @@ function AdminDashboardPage() {
             </div>
             <div className="ticket-button">
                 <div className="tickets">TICKETS</div>
-            </div>
+            </div> */}
+            <LgButton text="PAYROLL" style={{ position: 'absolute', top: '100px', left: '50px' }}/>
+            <LgButton text="INVOICE" style={{ position: 'absolute', top: '100px', left: '50px' }}/>
+            <LgButton text="MECHANICS" style={{ position: 'absolute', top: '100px', left: '50px' }}/>
+            <LgButton text="TICKETS" style={{ position: 'absolute', top: '100px', left: '50px' }}/>
             <div className="admin-landing-page-child"></div>
             <div className="hello-admin">Hello, Admin</div>                 {/*<h1>Welcome, {userData?.name}</h1>*/}
             <div className="account-button-for-admin">
