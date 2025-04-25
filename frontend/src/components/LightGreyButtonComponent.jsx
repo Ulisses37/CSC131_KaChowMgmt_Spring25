@@ -1,11 +1,15 @@
 import React from 'react';
-'../styles/components/LightGreyButtonStyles.css';
+import '../styles/components/LightGreyButtonStyles.css';
 
-const LgButton = ({ text = 'DEFAULT' }) => {
-  return (
-    <div className="account-container" data-property-1="Default">
-      <div className="account-title">{text}</div>
-    </div>
+const LgButton = ({ text = 'ACCOUNT', style = {}, className = '' }) => {
+    return(
+        <div
+        className={`account-container ${className}`}
+        data-property-1="Default"
+        style={style}
+        >
+            <div className="account-title">{text}</div>
+        </div>
   );
 };
 
