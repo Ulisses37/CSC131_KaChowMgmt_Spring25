@@ -31,6 +31,12 @@ import MechTicketPage from './pages/TicketPage.jsx';
 import EmployeeClock from './pages/EmployeeClock.jsx';
 
 import './App.css';
+
+function ProtectedRoute({ children }) {
+  const token = localStorage.getItem('customerToken');
+  return token ? children : <Navigate to="/customer-login" replace />;
+}
+
 function App() {
   return (
     <>
@@ -42,7 +48,11 @@ function App() {
             <Route path="/forgot-password" element={<FPassword/>} />
             <Route path="/change-password" element={<CPassword/>} />
             {/* route path for change password confirmation */}
-            <Route path="/customer-dashboard" element={<CDashboard />}/>
+            <Route path="/customer-dashboard" element={
+              <ProtectedRoute>
+                <CDashboard />
+              </ProtectedRoute>
+            }/>
             <Route path="/appointment-management" element={<ApptManagement />}/>  {/* might need to change the name of this */}
             <Route path="/appt-creation" element={<ApptCreation />} />
             <Route path="/crsuccess" element={<CreationSuccess />} />
@@ -54,7 +64,6 @@ function App() {
             <Route path="/service-history" element={<ServiceHistory />}/>         {/* might need to change the name of this */}
             {/* route path for feedback page */}
             {/* route path for logged out page */}
-            <Route path="/employee-verification" element={<EVerif />} />
             <Route path="/employee-login" element={<ELogin />} />
             <Route path="/admin-dashboard" element={<ADashboard />}/>
             <Route path="/admin-ticket-view" element={<AssignTicket/>}/>
