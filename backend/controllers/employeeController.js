@@ -235,3 +235,257 @@ export const getTimeEntries = async (req, res) => {
         });
     }
 };
+
+//Admin: Get all employees with their time entries
+export const getAllEmployeesTimeEntries = async (req, res) => {
+    try {
+        // Make sure requester is admin (extra security)
+        if (!req.employee.admin) {
+            return res.status(403).json({
+                success: false,
+                error: 'Admin privileges required'
+            });
+        }
+
+        const employees = await Employee.find({}, 'name email hoursWorked payRate');
+
+        // Format the response data
+        const employeesData = employees.map(employee => {
+            const timeEntries = employee.hoursWorked.map(entry => ({
+                id: entry._id,
+                clockIn: entry.clockIn,
+                clockOut: entry.clockOut || null,
+                duration: entry.clockOut
+                    ? ((entry.clockOut - entry.clockIn) / (1000 * 60 * 60)).toFixed(2)
+                    : null,
+                isPaid: entry.isPaid || false,
+                paymentDate: entry.paymentDate || null,
+                // Calculate pay amount for this entry
+                payAmount: entry.clockOut
+                    ? ((entry.clockOut - entry.clockIn) / (1000 * 60 * 60) * employee.payRate).toFixed(2)
+                    : null
+            }));
+
+            return {
+                id: employee._id,
+                name: employee.name,
+                email: employee.email,
+                payRate: employee.payRate,
+                timeEntries
+            };
+        });
+
+        res.status(200).json({
+            success: true,
+            data: employeesData
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: 'Server error: ' + error.message
+        });
+    }
+};
+
+// Admin: Update time entry for an employee
+export const updateTimeEntry = async (req, res) => {
+    try {
+        // Make sure requester is admin
+        if (!req.employee.admin) {
+            return res.status(403).json({
+                success: false,
+                error: 'Admin privileges required'
+            });
+        }
+
+        const { employeeId, entryId } = req.params;
+        const { clockIn, clockOut, isPaid } = req.body;
+
+        const employee = await Employee.findById(employeeId);
+        if (!employee) {
+            return res.status(404).json({
+                success: false,
+                error: 'Employee not found'
+            });
+        }
+
+        // Find the specific time entry
+        const timeEntry = employee.hoursWorked.id(entryId);
+        if (!timeEntry) {
+            return res.status(404).json({
+                success: false,
+                error: 'Time entry not found'
+            });
+        }
+
+        // Update fields if provided
+        if (clockIn) timeEntry.clockIn = new Date(clockIn);
+        if (clockOut) timeEntry.clockOut = new Date(clockOut);
+
+        // Handle payment status
+        if (isPaid !== undefined) {
+            timeEntry.isPaid = isPaid;
+            if (isPaid) {
+                timeEntry.paymentDate = new Date();
+            } else {
+                timeEntry.paymentDate = null;
+            }
+        }
+
+        await employee.save();
+
+        res.status(200).json({
+            success: true,
+            message: 'Time entry updated successfully',
+            data: {
+                id: timeEntry._id,
+                clockIn: timeEntry.clockIn,
+                clockOut: timeEntry.clockOut,
+                duration: timeEntry.clockOut
+                    ? ((timeEntry.clockOut - timeEntry.clockIn) / (1000 * 60 * 60)).toFixed(2)
+                    : null,
+                isPaid: timeEntry.isPaid,
+                paymentDate: timeEntry.paymentDate,
+                payAmount: timeEntry.clockOut
+                    ? ((timeEntry.clockOut - timeEntry.clockIn) / (1000 * 60 * 60) * employee.payRate).toFixed(2)
+                    : null
+            }
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: 'Server error: ' + error.message
+        });
+    }
+};
+
+// Admin: Mark multiple time entries as paid
+export const markEntriesAsPaid = async (req, res) => {
+    try {
+        // Make sure requester is admin
+        if (!req.employee.admin) {
+            return res.status(403).json({
+                success: false,
+                error: 'Admin privileges required'
+            });
+        }
+
+        const { employeeId } = req.params;
+        const { entryIds } = req.body;
+
+        if (!entryIds || !Array.isArray(entryIds) || entryIds.length === 0) {
+            return res.status(400).json({
+                success: false,
+                error: 'Entry IDs must be provided as an array'
+            });
+        }
+
+        const employee = await Employee.findById(employeeId);
+        if (!employee) {
+            return res.status(404).json({
+                success: false,
+                error: 'Employee not found'
+            });
+        }
+
+        const paymentDate = new Date();
+        let totalPaid = 0;
+        let updatedEntries = [];
+
+        // Update each time entry
+        entryIds.forEach(entryId => {
+            const entry = employee.hoursWorked.id(entryId);
+            if (entry && entry.clockOut && !entry.isPaid) {
+                entry.isPaid = true;
+                entry.paymentDate = paymentDate;
+
+                const hours = (entry.clockOut - entry.clockIn) / (1000 * 60 * 60);
+                const payAmount = hours * employee.payRate;
+                totalPaid += payAmount;
+
+                updatedEntries.push({
+                    id: entry._id,
+                    hours: hours.toFixed(2),
+                    payAmount: payAmount.toFixed(2)
+                });
+            }
+        });
+
+        await employee.save();
+
+        res.status(200).json({
+            success: true,
+            message: `${updatedEntries.length} time entries marked as paid`,
+            data: {
+                employeeId: employee._id,
+                employeeName: employee.name,
+                payRate: employee.payRate,
+                totalPaid: totalPaid.toFixed(2),
+                updatedEntries
+            }
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: 'Server error: ' + error.message
+        });
+    }
+};
+
+// Get payroll summary for all employees
+export const getPayrollSummary = async (req, res) => {
+    try {
+        // Make sure requester is admin
+        if (!req.employee.admin) {
+            return res.status(403).json({
+                success: false,
+                error: 'Admin privileges required'
+            });
+        }
+
+        const employees = await Employee.find({}, 'name email hoursWorked payRate');
+
+        const payrollData = employees.map(employee => {
+            let unpaidHours = 0;
+            let unpaidAmount = 0;
+            let paidHours = 0;
+            let paidAmount = 0;
+
+            employee.hoursWorked.forEach(entry => {
+                if (entry.clockOut) {
+                    const hours = (entry.clockOut - entry.clockIn) / (1000 * 60 * 60);
+                    const amount = hours * employee.payRate;
+
+                    if (entry.isPaid) {
+                        paidHours += hours;
+                        paidAmount += amount;
+                    } else {
+                        unpaidHours += hours;
+                        unpaidAmount += amount;
+                    }
+                }
+            });
+
+            return {
+                id: employee._id,
+                name: employee.name,
+                email: employee.email,
+                payRate: employee.payRate,
+                unpaidHours: unpaidHours.toFixed(2),
+                unpaidAmount: unpaidAmount.toFixed(2),
+                paidHours: paidHours.toFixed(2),
+                paidAmount: paidAmount.toFixed(2)
+            };
+        });
+
+        res.status(200).json({
+            success: true,
+            data: payrollData
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: 'Server error: ' + error.message
+        });
+    }
+};
