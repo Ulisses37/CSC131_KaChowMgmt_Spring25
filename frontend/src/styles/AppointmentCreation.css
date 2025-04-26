@@ -1,35 +1,33 @@
-/* General container styling */
+
+* {
+    margin: 0;
+    line-height: normal;
+  }
+
+.srs-csc-131-1-icon {
+    position: absolute;
+    top: 50px;
+    left: 30px;
+    max-width: 100%;
+    height: auto;
+}
+
 body {
     background-color: #f9f9f9;
     margin: 0;
-    font-family: 'Monsterat', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    padding: 20px;
 }
 
-.container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-    font-family: 'Montserrat', sans-serif;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
 
 /* Header styling */
 h2 {
+    margin-top: 185px;
     color: #d73706;
     font-size: 24px;
     font-family: 'Montserrat', sans-serif;
     margin-bottom: 20px;
-}
-
-/* Image styling */
-.kachow-image {
-    max-width: 100%;
-    height: auto;
-    margin: 20px 0;
-    border-radius: 10px;
 }
 
 /* Label styling */
@@ -86,4 +84,78 @@ button:hover {
 
 .navigation-buttons button {
     margin: 5px;
+}
+
+/* Error message styling */
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* Success message styling */
+.success-message {
+    color: green;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* Form container styling */
+form {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping to the next row if needed */
+    gap: 20px; /* Adds spacing between form groups */
+}
+
+/* Form group styling */
+.form-group {
+    display: flex;
+    flex-direction: column; /* Stacks label and input vertically */
+    width: 45%; /* Each form group takes up 45% of the width */
+}
+
+/* Label styling */
+.form-group label {
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    color: #333;
+    margin-bottom: 5px; /* Adds spacing between label and input */
+}
+
+/* Input styling */
+.form-group input {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Button styling */
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #d73706;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #621d08;
+}
+
+/* Dropdown styling */
+.form-group select {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    font-family: 'Montserrat', sans-serif;
 }

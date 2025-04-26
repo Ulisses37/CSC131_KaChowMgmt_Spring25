@@ -7,10 +7,10 @@ const TicketPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Function to fetch tickets from the API
+    // Fetch tickets from the backend API
     const fetchTickets = async () => {
       try {
-        const response = await fetch('https://your-api-endpoint.com/tickets'); // Replace with your API endpoint
+        const response = await fetch('/api/tickets'); // Replace with your API endpoint
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -26,69 +26,59 @@ const TicketPage = () => {
     fetchTickets();
   }, []);
 
-  const handleAcceptTicket = async (ticketId) => {
-    try {
-      // Replace with your API endpoint for accepting a ticket
-      const response = await fetch(`https://your-api-endpoint.com/tickets/${ticketId}/accept`, {
-        method: 'POST',
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      // Update the ticket list to reflect the accepted ticket
-      setTickets((prevTickets) =>
-        prevTickets.filter((ticket) => ticket.id !== ticketId)
-      );
-
-      alert('Ticket accepted successfully!');
-    } catch (error) {
-      console.error('Error accepting ticket:', error);
-      alert('Failed to accept the ticket.');
-    }
-  };
-
   if (loading) {
     return <div>Loading tickets...</div>;
   }
 
+  const currentTickets = tickets.filter(
+    (ticket) => new Date(ticket.date) >= new Date()
+  );
+  const pastTickets = tickets.filter(
+    (ticket) => new Date(ticket.date) < new Date()
+  );
+
   return (
     <div>
-      <h1>Mechanic Tickets</h1>
+      <h1>Your Tickets</h1>
+
       <section>
-        {tickets.length > 0 ? (
+        <h2>Current Tickets</h2>
+        {currentTickets.length > 0 ? (
           <ul>
-            {tickets.map((ticket) => (
-              <li key={ticket.id} className="ticket-item">
-                <h3>Customer: {ticket.customerName}</h3>
-                <p>Car Model: {ticket.carModel}</p>
-                <p>License Plate: {ticket.licensePlate}</p>
-                <p>Issue: {ticket.issue}</p>
-                <p>Appointment Date: {ticket.date}</p>
-                <div>
-                  <p>Progress: {ticket.progress}%</p>
-                  <div className="progress-bar">
-                    <div
-                      className="progress-bar-fill"
-                      style={{ width: `${ticket.progress}%` }}
-                    ></div>
-                  </div>
-                </div>
-                <button
-                  onClick={() => handleAcceptTicket(ticket.id)}
-                  className="accept-button"
-                >
-                  Accept Ticket
-                </button>
+            {currentTickets.map((ticket) => (
+              <li key={ticket.id}>
+                <strong>Customer:</strong> {ticket.customerName} <br />
+                <strong>Car Model:</strong> {ticket.carModel} <br />
+                <strong>License Plate:</strong> {ticket.licensePlate} <br />
+                <strong>Issue:</strong> {ticket.issue} <br />
+                <strong>Date:</strong> {ticket.date}
               </li>
             ))}
           </ul>
         ) : (
-          <p>No tickets assigned.</p>
+          <p>No current tickets.</p>
         )}
       </section>
-      <button onClick={() => navigate('/')}>Go Back to Home</button>
+
+      <section>
+        <h2>Past Tickets</h2>
+        {pastTickets.length > 0 ? (
+          <ul>
+            {pastTickets.map((ticket) => (
+              <li key={ticket.id}>
+                <strong>Customer:</strong> {ticket.customerName} <br />
+                <strong>Car Model:</strong> {ticket.carModel} <br />
+                <strong>License Plate:</strong> {ticket.licensePlate} <br />
+                <strong>Issue:</strong> {ticket.issue} <br />
+                <strong>Date:</strong> {ticket.date}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No past tickets.</p>
+        )}
+      </section>
+      <button onClick={() => navigate('/appt-creation')}>Go Back to Create</button>
     </div>
   );
 };
