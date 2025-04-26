@@ -289,3 +289,70 @@ export const getVehicleMaintenanceStatus = async (req, res) => {
     });
   }
 };
+export const addTicketReview = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { starRating, comments, satisfactory } = req.body;
+
+        // Validate star rating
+        if (starRating < 1 || starRating > 5) {
+            return res.status(400).json({
+                success: false,
+                error: 'Star rating must be between 1 and 5'
+            });
+        }
+
+        // Find the ticket
+        const ticket = await Ticket.findById(id);
+        if (!ticket) {
+            return res.status(404).json({
+                success: false,
+                error: 'Ticket not found'
+            });
+        }
+
+        // Check if ticket is completed
+        if (ticket.completionStatus !== 'Completed') {
+            return res.status(400).json({
+                success: false,
+                error: 'Can only review completed tickets'
+            });
+        }
+
+        // Find the employee
+        const employee = await Employee.findById(ticket.mechanicId);
+        if (!employee) {
+            return res.status(404).json({
+                success: false,
+                error: 'Employee not found'
+            });
+        }
+
+        // Add review to employee's reviews array
+        const review = {
+            customerName: (await Customer.findById(ticket.customerId)).name,
+            ticketNumber: ticket.ticketId,
+            starRating,
+            comments,
+            satisfactory
+        };
+
+        employee.reviews.push(review);
+        await employee.save();
+
+        // Update ticket with review status
+        ticket.reviewed = true;
+        await ticket.save();
+
+        res.status(200).json({
+            success: true,
+            message: 'Review added successfully'
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: 'Server error: ' + error.message
+        });
+    }
+};

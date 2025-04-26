@@ -13,6 +13,7 @@ import {
     rescheduleTicket,
     getVehicleMaintenanceStatus,
     completeTicket,
+    addTicketReview, // Add this import
 } from '../controllers/ticketController.js';
 
 const router = express.Router();
@@ -48,6 +49,12 @@ router.patch('/:id/complete',
     validateCompleteTicket, // Use the stricter validator
     validateRequest,        // Your existing error handler
     completeTicket
+);
+
+// Add this new route at the end
+router.post('/:id/review',
+    validateRequest,
+    addTicketReview
 );
 
 export default router;

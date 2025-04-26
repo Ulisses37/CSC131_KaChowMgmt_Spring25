@@ -7,14 +7,18 @@ const reviewSchema = new mongoose.Schema({
     customerName: { type: String, required: true }, // Name of the customer who left the review
     ticketNumber: { type: String, required: true }, // Ticket number associated with the review
     starRating: { type: Number, required: true, min: 1, max: 5 }, // Star rating (1-5)
+    satisfactory: { type: Boolean, required: true }, // Whether the customer was satisfied (yes/no)
     comments: { type: String } // Comments from the customer
 });
 
 // the HoursWorked subdocument schema
 const hoursWorkedSchema = new mongoose.Schema({
     clockIn: { type: Date, required: true }, // Clock-in time
-    clockOut: { type: Date } // Clock-out time (optional, as it may not be set initially)
+    clockOut: { type: Date }, // Clock-out time (optional, as it may not be set initially)
+    isPaid: { type: Boolean, default: false }, // Whether this time period has been paid
+    paymentDate: { type: Date } // When the payment was processed
 });
+
 
 // BankInfo subdocument schema
 const bankInfoSchema = new mongoose.Schema({
