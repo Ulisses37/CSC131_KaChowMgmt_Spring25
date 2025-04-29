@@ -4,7 +4,7 @@ import Ticket from '../models/Ticket.js';
 //Send List of Mechanics
 const getAllMechanics = async (req, res) => {
     try {
-      const mechanics = await Employee.find({ role: 'mechanic' });
+      const mechanics = await Employee.find({});
   
       res.status(200).json({
         status: 'success',
