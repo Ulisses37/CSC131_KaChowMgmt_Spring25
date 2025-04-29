@@ -65,3 +65,37 @@ button {
 button:hover {
     background-color: #621d08;
 }
+
+/* Error message styling */
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* Success message styling */
+.success-message {
+    color: green;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* Dropdown styling */
+select {
+    width: 300px; /* Matches the width of input fields */
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    color: #333;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+select:focus {
+    outline: none;
+    border-color: #d73706;
+    box-shadow: 0 0 5px rgba(215, 55, 6, 0.5);
+}
