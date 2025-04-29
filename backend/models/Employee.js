@@ -14,8 +14,11 @@ const reviewSchema = new mongoose.Schema({
 // the HoursWorked subdocument schema
 const hoursWorkedSchema = new mongoose.Schema({
     clockIn: { type: Date, required: true }, // Clock-in time
-    clockOut: { type: Date } // Clock-out time (optional, as it may not be set initially)
+    clockOut: { type: Date }, // Clock-out time (optional, as it may not be set initially)
+    isPaid: { type: Boolean, default: false }, // Whether this time period has been paid
+    paymentDate: { type: Date } // When the payment was processed
 });
+
 
 // BankInfo subdocument schema
 const bankInfoSchema = new mongoose.Schema({

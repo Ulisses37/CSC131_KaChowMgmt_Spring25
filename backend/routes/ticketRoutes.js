@@ -16,6 +16,9 @@ import {
     addTicketReview, // Add this import
 } from '../controllers/ticketController.js';
 
+import { getTicketMechanics } from '../controllers/ticketController.js';
+import { assignMechanictoTicket } from '../controllers/paticketController.js';
+
 const router = express.Router();
 
 // CREATE TICKET
@@ -56,5 +59,9 @@ router.post('/:id/review',
     validateRequest,
     addTicketReview
 );
+
+// Admin Assign Ticket
+router.get('/tickets/:id', getTicketMechanics);
+router.patch('/tickets/:id/mechanic/:employeeId', assignMechanictoTicket);
 
 export default router;

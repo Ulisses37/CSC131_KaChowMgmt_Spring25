@@ -7,7 +7,12 @@ import {
     clockIn,
     clockOut,
     getClockStatus,
-    getTimeEntries
+    getTimeEntries,
+    getAllEmployeesTimeEntries,
+    updateTimeEntry,
+    markEntriesAsPaid,
+    getPayrollSummary
+
 } from '../controllers/employeeController.js';
 import {
     validateRequest,
@@ -44,7 +49,7 @@ router.get('/:employeeId/tickets',
     getEmployeeTickets
 );
 
-// GET specific ticket assigned to an employee
+// GET a specific ticket assigned to an employee
 router.get('/:employeeId/tickets/:ticketId',
     auth,
     validateEmployeeId,
@@ -126,19 +131,33 @@ router.get('/:employeeId/time-entries',
     getTimeEntries
 );
 
-// GET logged-in employee's data (for account page)
-router.get('/me', 
-    auth, 
-    async (req, res) => {
-        try {
-            const employee = await Employee.findById(req.employee._id)
-                .select('name email specialties bankAccountNumber bankRoutingNumber');
-            
-            res.json(employee);
-        } catch (err) {
-            res.status(500).json({ message: 'Server error' });
-        }
-    }
+// Admin: Get all employees with their time entries
+router.get('/admin/time-entries',
+    auth,
+    authorizeAdmin,
+    getAllEmployeesTimeEntries
 );
+
+// Admin: Update time entry for an employee
+router.patch('/admin/:employeeId/time-entries/:entryId',
+    auth,
+    authorizeAdmin,
+    updateTimeEntry
+);
+
+// Admin: Mark multiple time entries as paid
+router.post('/admin/:employeeId/mark-paid',
+    auth,
+    authorizeAdmin,
+    markEntriesAsPaid
+);
+
+// Admin: Get payroll summary for all employees
+router.get('/admin/payroll-summary',
+    auth,
+    authorizeAdmin,
+    getPayrollSummary
+);
+
 
 export default router;
