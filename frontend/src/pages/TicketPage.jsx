@@ -1,21 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../styles/TicketPage.css';
+import HeaderBar from '../components/HeaderBarComponent';
 
 const TicketPage = () => {
   const [tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(true);
+  const employeeId = 101; // Replace with the logged-in employee's ID or fetch dynamically
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch tickets from the backend API
     const fetchTickets = async () => {
       try {
-        const response = await fetch('/api/tickets'); // Replace with your API endpoint
+        // Replace this URL with your actual API endpoint
+        const response = await fetch('https://api.example.com/tickets');
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          throw new Error('Failed to fetch tickets');
         }
         const data = await response.json();
-        setTickets(data);
+
+        // Filter tickets assigned to the specific employee
+        const assignedTickets = data.filter((ticket) => ticket.assignedTo === employeeId);
+        setTickets(assignedTickets);
       } catch (error) {
         console.error('Error fetching tickets:', error);
       } finally {
@@ -24,61 +30,39 @@ const TicketPage = () => {
     };
 
     fetchTickets();
-  }, []);
+  }, [employeeId]);
 
   if (loading) {
     return <div>Loading tickets...</div>;
   }
 
-  const currentTickets = tickets.filter(
-    (ticket) => new Date(ticket.date) >= new Date()
-  );
-  const pastTickets = tickets.filter(
-    (ticket) => new Date(ticket.date) < new Date()
-  );
+  if (tickets.length === 0) {
+    return <div>No tickets assigned to you.</div>;
+  }
 
   return (
     <div>
-      <h1>Your Tickets</h1>
-
-      <section>
-        <h2>Current Tickets</h2>
-        {currentTickets.length > 0 ? (
-          <ul>
-            {currentTickets.map((ticket) => (
-              <li key={ticket.id}>
-                <strong>Customer:</strong> {ticket.customerName} <br />
-                <strong>Car Model:</strong> {ticket.carModel} <br />
-                <strong>License Plate:</strong> {ticket.licensePlate} <br />
-                <strong>Issue:</strong> {ticket.issue} <br />
-                <strong>Date:</strong> {ticket.date}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No current tickets.</p>
-        )}
-      </section>
-
-      <section>
-        <h2>Past Tickets</h2>
-        {pastTickets.length > 0 ? (
-          <ul>
-            {pastTickets.map((ticket) => (
-              <li key={ticket.id}>
-                <strong>Customer:</strong> {ticket.customerName} <br />
-                <strong>Car Model:</strong> {ticket.carModel} <br />
-                <strong>License Plate:</strong> {ticket.licensePlate} <br />
-                <strong>Issue:</strong> {ticket.issue} <br />
-                <strong>Date:</strong> {ticket.date}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No past tickets.</p>
-        )}
-      </section>
-      <button onClick={() => navigate('/appt-creation')}>Go Back to Create</button>
+      <HeaderBar />
+      <br />
+      <img
+        className="srs-csc-131-1-icon"
+        alt="Company Logo"
+        src="/SRS_CSC_131 1.png"
+        onClick={() => navigate("/")}
+      />
+      <h1 className="ticket-header">Tickets Assigned to You</h1>
+      <ul className="ticket-list">
+        {tickets.map((ticket) => (
+          <li
+            key={ticket.id}
+            className="ticket-item"
+            onClick={() => navigate(`/ticket/${ticket.id}`)} // Navigate to ticket details page
+          >
+            <strong>Issue:</strong> {ticket.issue} <br />
+            <strong>Date:</strong> {ticket.date}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

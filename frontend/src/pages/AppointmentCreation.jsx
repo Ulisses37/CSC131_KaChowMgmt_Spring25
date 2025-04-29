@@ -145,8 +145,6 @@ const AppointmentCreation = () => {
                 <button onClick={() => navigate('/viewappointment')}>View Appointment</button>
                 <button onClick={() => navigate('/appt-reschedule')}>Reschedule</button>
                 <button onClick={() => navigate('/appt-cancel')}>Cancel</button>
-                <button onClick={() => navigate('/employee-clock')}>Clock</button>
-                <button onClick={() => navigate('/employee-payroll')}>Payroll</button>
             </div>
      </div>
     )};
