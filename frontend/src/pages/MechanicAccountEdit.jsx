@@ -1,70 +1,88 @@
+import '../styles/MechAccountEditStyles.css';
 function MechanicAccountEditPage(){
     return (
-        <div class="container">
-            <div class="header-bar"></div>
-            <div class="sub-header"></div>
-            <img class="main-image" src="https://placehold.co/367x309" />
-            <div class="empty-block"></div>
-            <div class="form-wrapper">
-                <div class="input-box"></div>
-                <div class="label">First Name</div>
-                <div class="placeholder">Enter First Name</div>
-
-                <div class="input-box"></div>
-                <div class="label">Last Name</div>
-                <div class="placeholder">Enter Last name</div>
-
-                <div class="input-box-large"></div>
-                <div class="label label-wide">Email</div>
-                <div class="placeholder placeholder-wide">Enter Email Address</div>
-
-                <div class="input-box-large"></div>
-                <div class="label label-wide">Address</div>
-                <div class="placeholder placeholder-wide">Enter Adress</div>
-
-                <div class="input-box-large"></div>
-                <div class="label label-wide">Contact Number</div>
-                <div class="placeholder placeholder-wide">Please Enter Your Number</div>
-
-                <div class="input-box"></div>
-                <div class="label">City</div>
-                <div class="placeholder">Enter Your City</div>
-
-                <div class="input-box"></div>
-                <div class="label">State</div>
-                <div class="placeholder">Select your State</div>
-
-                <div class="dropdown-icon">
-                <div class="dropdown-box"></div>
-                <div class="dropdown-arrow"></div>
-                </div>
-
-                <div class="input-box-large"></div>
-                <div class="label label-wide">Password</div>
-                <div class="placeholder placeholder-wide">Enter Secure Password</div>
-
-                <div class="input-box-small"></div>
-                <div class="label">Bank Account Number</div>
-                <div class="placeholder">Enter Your Bank Acount Number</div>
-
-                <div class="input-box-small"></div>
-                <div class="label">Bank Routing Number</div>
-                <div class="placeholder placeholder-wide">Enter Your Bank Routing Number</div>
-            </div>
-
-            <div class="enter-button">
-                <div class="enter-text">Enter</div>
-            </div>
-
-            <div class="variant-button"></div>
-
-            <div class="edit-button">
-                <div class="edit-icon">
-                <div class="edit-icon-inner"></div>
-                </div>
-                <div class="edit-text">Edit Account</div>
-            </div>
-        </div>
+        <div class="edit-account">
+<div class="background-red">
+</div>
+<div class="background-black">
+</div>
+<img class="srs-csc-131-1-icon" alt="" src="SRS_CSC_131 1.png"/>
+<div class="edit-account-child">
+</div>
+<div class="edit-profile-component">
+<div class="firstname">
+<div class="firstname-child">
+</div>
+<div class="first-name">First Name</div>
+<div class="enter-first-name">Enter First Name</div>
+</div>
+<div class="lastname">
+<div class="lastname-child">
+</div>
+<div class="first-name">Last Name</div>
+<div class="enter-last-name">Enter Last name</div>
+</div>
+<div class="email">
+<div class="email-child">
+</div>
+<div class="email1">Email</div>
+<div class="enter-email-address">Enter Email Address</div>
+</div>
+<div class="address">
+<div class="address-child">
+</div>
+<div class="address1">Address</div>
+<div class="enter-adress">Enter Adress</div>
+</div>
+<div class="address">
+<div class="address-child">
+</div>
+<div class="address1">Contact Number</div>
+<div class="enter-adress">Please Enter Your Number</div>
+</div>
+<div class="firstname">
+<div class="firstname-child">
+</div>
+<div class="first-name">City</div>
+<div class="enter-first-name">Enter Your City</div>
+<img class="keyboard-arrow-down" alt="" src="Keyboard arrow down.svg"/>
+</div>
+<div class="state">
+<div class="state-child">
+</div>
+<div class="first-name">State</div>
+<div class="select-your-state">Select your State</div>
+<img class="keyboard-arrow-down1" alt="" src="Keyboard arrow down.svg"/>
+</div>
+<div class="address">
+<div class="address-child">
+</div>
+<div class="email1">Password</div>
+<div class="enter-email-address">Enter Secure Password</div>
+</div>
+<div class="banknumber">
+<div class="banknumber-child">
+</div>
+<div class="first-name">Bank Account Number</div>
+<div class="enter-first-name">Enter Your Bank Acount Number</div>
+</div>
+<div class="banknumber">
+<div class="banknumber-child">
+</div>
+<div class="first-name">Bank Routing Number</div>
+<div class="enter-your-bank">Enter Your Bank Routing Number</div>
+</div>
+</div>
+<div class="enter-wrapper">
+<div class="enter">Enter</div>
+</div>
+<div class="edit-account-item">
+</div>
+<div class="play-arrow-filled-parent" id="frameContainer1">
+<img class="play-arrow-filled-icon" alt="" src="play_arrow_filled.svg"/>
+<div class="text">Edit Account</div>
+</div>
+</div>
 
     )
 }

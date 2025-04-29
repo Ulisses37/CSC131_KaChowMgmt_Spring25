@@ -1,4 +1,4 @@
-import { useLocation, Navigate, useNavigate } from 'react-router-dom'; // Added useNavigate import
+import { useLocation, Navigate, useNavigate } from 'react-router-dom'; 
 import '../styles/CustomerDashboardStyles.css';
 import Menu from '../components/CustomerMenuComponent';
 import AppointmentButton from '../components/BookAppointmentComp';
@@ -10,7 +10,7 @@ function CustomerDashboardPage() {
     const token = localStorage.getItem('customerToken');
     const navigate = useNavigate(); // Initialize the navigate function
 
-    // Debugging logs - add these temporarily
+    // Debugging logs 
     console.log('Dashboard State:', state);
     console.log('Token exists:', !!token);
     console.log('CustomerData:', customerData);

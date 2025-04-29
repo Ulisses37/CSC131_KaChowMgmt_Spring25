@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import '../styles/CustomerLoginPageStyles.css';
 import HeaderBar from '../components/HeaderBarComponent'; 
+import '../styles/CustomerLoginPageStyles.css';
+
 
 function CustomerLoginPage() {
     const [email, setEmail] = useState("");

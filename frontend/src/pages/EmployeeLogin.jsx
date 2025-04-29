@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/EmployeeLoginStyles.css';
+import HeaderBar from '../components/HeaderBarComponent'; 
 
 function EmployeeLoginPage() {
     const [email, setEmail] = useState('');
@@ -89,8 +90,7 @@ function EmployeeLoginPage() {
 
     return(
         <div className="employee-login-page">
-            <div className="employee-login-page-child"></div>
-            <div className="employee-login-page-item"></div>
+            <HeaderBar/>
             <img 
                 className="srs-csc-131-1-icon" 
                 alt="Company Logo" 

@@ -126,4 +126,19 @@ router.get('/:employeeId/time-entries',
     getTimeEntries
 );
 
+// GET logged-in employee's data (for account page)
+router.get('/me', 
+    auth, 
+    async (req, res) => {
+        try {
+            const employee = await Employee.findById(req.employee._id)
+                .select('name email specialties bankAccountNumber bankRoutingNumber');
+            
+            res.json(employee);
+        } catch (err) {
+            res.status(500).json({ message: 'Server error' });
+        }
+    }
+);
+
 export default router;

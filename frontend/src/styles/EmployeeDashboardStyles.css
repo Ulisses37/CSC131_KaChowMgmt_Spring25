@@ -1,0 +1,71 @@
+/* === Global Styles === */
+* {
+    margin: 0;
+    line-height: normal;
+  }
+
+/* === Part Specific === */
+.srs-csc-131-1-icon {
+    position: absolute;
+  	top: 0px;
+  	left: 776px;
+  	width: 367.3px;
+  	height: 309px;
+  	object-fit: contain;
+}
+
+.directions-car-icon {
+    position: absolute; 
+    display: flex;
+    width: 900px;
+    height: 900px;
+    top: 165px;
+    left: 1095px;
+    /* padding: 187.5px 112.5px 112.5px 112.5px; */
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+/* Admin Greeting */
+/* .admin-greeting-container {
+    width: 304px;
+    height: 89px;
+    left: 34px;
+    top: 264px;
+    position: absolute;
+    background: rgba(201.16, 49.45, 49.45, 0.75);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 100px;
+}
+
+.admin-greeting {
+    left: 55px;
+    top: 284px;
+    position: absolute;
+    color: black;
+    font-size: 40px;
+    font-weight: 500;
+    word-wrap: break-word;
+} */
+
+.admin-greeting-container {
+    position: relative;
+    display: inline-block;
+    padding: 10px 30px;
+    background: rgba(201.16, 49.45, 49.45, 0.75);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 100px;
+    left: 34px;
+    top: 264px;
+    min-width: 304px;
+}
+
+.admin-greeting {
+    color: black;
+    font-size: 40px;
+    font-family: Montserrat;
+    font-weight: 500;
+    white-space: nowrap;
+    margin: 0;
+}

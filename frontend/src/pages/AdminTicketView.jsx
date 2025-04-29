@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../styles/AdminTicketViewStyles.css';
+import HeaderBar from '../components/HeaderBarComponent'; 
 
 function AdminTicketViewPage() {
     const navigate = useNavigate();
@@ -64,24 +66,26 @@ function AdminTicketViewPage() {
 
     return (
         <div className="assigning-ticket-page">
-            <div className="assigning-ticket-page-banner">
-//                 <div className="client-name-vin-service-wrapper">
-//                     <div className="client-name-vin">#0001</div>
-//                 </div>
-//                 <div className="background-red"></div>
-//                 <div className="background-black"></div>
-//                 <img className="srs-csc-131-1-icon" alt="" src="SRS_CSC_131 1.png"></img>
-//                 <div className="account-button">
-//                     <div className="button"></div>
-//                     <div className="account-button-child"></div>
-//                     <div className="account-button-item"></div>
-//                     <div className="account-button-inner"></div>
-//                 </div>
-//                 <div className="play-arrow-filled-parent" id="frameContainer1">
-//                     <img className="play-arrow-filled-icon" alt="" src="play_arrow_filled.svg"></img>
-//                     <div className="text">TICKETS</div>
-//                 </div>
-//             </div>
+            <HeaderBar/>
+            <img className="srs-csc-131-1-icon" alt="" src="SRS_CSC_131 1.png"></img>
+            {/* <div className="assigning-ticket-page-banner">
+                 <div className="client-name-vin-service-wrapper">
+                     <div className="client-name-vin">#0001</div>
+                 </div>
+                 <div className="background-red"></div>
+                <div className="background-black"></div>
+                 <img className="srs-csc-131-1-icon" alt="" src="SRS_CSC_131 1.png"></img>
+                 <div className="account-button">
+                     {/* <div className="button"></div> */}
+                     {/* <div className="account-button-child"></div>
+                     <div className="account-button-item"></div>
+                     <div className="account-button-inner"></div>
+                 </div>
+                 <div className="play-arrow-filled-parent" id="frameContainer1">
+                     <img className="play-arrow-filled-icon" alt="" src="play_arrow_filled.svg"></img>
+                     <div className="text">TICKETS</div>
+                 </div>
+                    div> */}
             
             <div className="assigning-ticket-adjust">
                 {/* UNASSIGNED TICKETS TABLE */}
@@ -165,7 +169,6 @@ function AdminTicketViewPage() {
                             </span>
                         </div>
                     </div>
-
                     {assignedTickets.map(ticket => (
                         <div className="instance-parent" key={ticket.id}>
                             {/* Clickable Ticket Number */}

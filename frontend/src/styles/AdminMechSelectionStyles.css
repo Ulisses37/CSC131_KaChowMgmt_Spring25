@@ -1,205 +1,238 @@
-.container {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    background: white;
-    overflow: hidden;
+body {
+    margin: 0;
+    line-height: normal;
 }
 
-.header-gradient {
+
+:root {
+    
+    /* Fonts */
+    --font-montserrat: Montserrat;
+    
+    /* font sizes */
+    --font-size-21xl: 40px;
+    
+    /* Colors */
+    --color-black: #000;
+    --color-gainsboro: #d9d9d9;
+    --color-white: #fff;
+    
+    /* Paddings */
+    --padding-3xs: 10px;
+    --padding-xl: 20px;
+    
+    /* Border radiuses */
+    --br-xl: 20px;
+    
+    /* Figma Variables */
+    
+    /* Color Variables */
+    --Background-Brand-Default: #2c2c2c;
+    --Border-Brand-Default: #2c2c2c;
+    
+    /* Number Variables */
+    --Stroke-Border: 1px;
+    --Space-200: 8px;
+    --Radius-200: 8px;
+    --Space-300: 12px;
+    
+}
+
+.background-red-icon {
+    position: absolute;
+    top: -13px;
+    left: 0px;
     width: 1920px;
     height: 185px;
-    left: 0;
-    top: -13px;
-    position: absolute;
-    background: linear-gradient(90deg, #631818 0%, #C93131 100%);
 }
-
-.nav-bar {
+.background-black-icon {
+    position: absolute;
+    top: 172px;
+    left: -8px;
     width: 1936px;
     height: 42px;
-    left: -8px;
-    top: 172px;
-    position: absolute;
-    background: #211F1F;
 }
-
-.logo {
-    width: 367.29px;
-    height: 309px;
-    left: 768.14px;
+.srs-csc-131-1-icon {
+    position: absolute;
     top: 9.48px;
-    position: absolute;
+    left: 768.14px;
+    width: 367.3px;
+    height: 309px;
+    object-fit: cover;
 }
-
-.menu-icon {
-    width: 70px;
-    height: 70px;
-    left: 1817px;
-    top: 55px;
+.button {
     position: absolute;
-}
-
-.menu-icon-bg {
-    width: 70px;
-    height: 70px;
-    padding: 12px;
-    left: 0;
-    top: 0;
-    position: absolute;
-    background: var(--Background-Brand-Default, #2C2C2C);
+    height: 100%;
+    width: 100%;
+    top: 0%;
+    right: 0%;
+    bottom: 0%;
+    left: 0%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 8px;
-    outline: 1px var(--Border-Brand-Default, #2C2C2C) solid;
-    outline-offset: -1px;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    display: inline-flex;
-}
-
-.menu-line-1 {
-    width: 39px;
-    height: 5px;
-    left: 15px;
-    top: 48px;
-    position: absolute;
-    background: white;
-}
-
-.menu-line-2 {
-    width: 39px;
-    height: 5px;
-    left: 15px;
-    top: 32px;
-    position: absolute;
-    background: white;
-}
-
-.menu-line-3 {
-    width: 39px;
-    height: 5px;
-    left: 15px;
-    top: 16px;
-    position: absolute;
-    background: white;
-}
-
-.title-container {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 21px;
-    padding-right: 62px;
-    left: 65px;
-    top: 48px;
-    position: absolute;
-    background: #C93131;
+    border-radius: var(--Radius-200);
+    background-color: var(--Background-Brand-Default);
+    border: var(--Stroke-Border) solid var(--Border-Brand-Default);
+    box-sizing: border-box;
     overflow: hidden;
-    border-radius: 100px;
-    justify-content: center;
-    align-items: center;
-    gap: 27px;
-    display: inline-flex;
 }
-
-.arrow-icon {
-    width: 33.70px;
-    height: 31.34px;
-    position: relative;
-    transform: rotate(180deg);
-    transform-origin: top left;
-}
-
-.arrow-shape {
-    width: 15.45px;
-    height: 18.28px;
-    left: 7.02px;
-    top: 6.53px;
+.account-button-for-admin-child {
     position: absolute;
-    background: white;
+    top: 48px;
+    left: 15px;
+    background-color: var(--color-white);
+    width: 39px;
+    height: 5px;
 }
-
-.title-text {
-    color: white;
-    font-size: 40px;
-    font-family: 'Montserrat';
+.account-button-for-admin-item {
+    position: absolute;
+    top: 32px;
+    left: 15px;
+    background-color: var(--color-white);
+    width: 39px;
+    height: 5px;
+}
+.account-button-for-admin-inner {
+    position: absolute;
+    top: 16px;
+    left: 15px;
+    background-color: var(--color-white);
+    width: 39px;
+    height: 5px;
+}
+.account-button-for-admin {
+    position: absolute;
+    top: 55px;
+    left: 1817px;
+    width: 70px;
+    height: 70px;
+}
+.play-arrow-filled-icon {
+    width: 33.7px;
+    position: relative;
+    height: 31.3px;
+    object-fit: contain;
+}
+.text {
+    position: relative;
     font-weight: 500;
-    word-wrap: break-word;
 }
-
-.circle-bg-1 {
+.play-arrow-filled-parent {
+    position: absolute;
+    top: 48px;
+    left: 65px;
+    border-radius: 100px;
+    background-color: #c93131;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-xl) 62px var(--padding-xl) 21px;
+    gap: 27px;
+    cursor: pointer;
+    text-align: left;
+    color: var(--color-white);
+}
+.person-icon {
+    position: absolute;
+    top: 517px;
+    left: -133px;
     width: 700px;
     height: 700px;
-    left: -133px;
-    top: 517px;
-    position: absolute;
 }
-
-.circle-1 {
-    width: 466.67px;
-    height: 466.67px;
-    left: 116.67px;
-    top: 116.67px;
+.icon {
     position: absolute;
-    background: linear-gradient(180deg, rgba(99, 24, 24, 0.40) 0%, rgba(201, 49, 49, 0.75) 100%);
+    height: 66.67%;
+    width: 66.67%;
+    top: 16.67%;
+    right: 16.67%;
+    bottom: 16.67%;
+    left: 16.67%;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
 }
-
-.circle-bg-2 {
+.person {
+    position: absolute;
+    top: 739px;
+    left: 381px;
     width: 411px;
     height: 414px;
-    left: 381px;
-    top: 739px;
-    position: absolute;
 }
-
-.circle-2 {
-    width: 274px;
-    height: 276px;
-    left: 68.50px;
-    top: 69px;
-    position: absolute;
-    background: linear-gradient(180deg, rgba(99, 24, 24, 0.40) 0%, rgba(201, 49, 49, 0.75) 100%);
+.tickets {
+    width: 613px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    flex-shrink: 0;
 }
-
-.mechanic-card-1,
-.mechanic-card-2,
-.mechanic-card-3 {
+.payroll-button {
+    position: absolute;
+    top: 689px;
+    left: calc(50% - 450px);
+    border-radius: var(--br-xl);
+    background-color: var(--color-gainsboro);
     width: 900px;
     height: 100px;
-    padding: 10px;
-    left: 510px;
-    position: absolute;
-    background: #D9D9D9;
     overflow: hidden;
-    border-radius: 20px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    display: inline-flex;
-}
-
-.mechanic-card-1 {
-    top: 417px;
-}
-
-.mechanic-card-2 {
-    top: 553px;
-}
-
-.mechanic-card-3 {
-    top: 689px;
-}
-
-.mechanic-text {
-    width: 613px;
-    height: 48px;
-    text-align: center;
-    justify-content: center;
     display: flex;
-    flex-direction: column;
-    color: black;
-    font-size: 40px;
-    font-family: 'Montserrat';
-    font-weight: 400;
-    word-wrap: break-word;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-3xs);
+    box-sizing: border-box;
 }
+.tickets1 {
+    width: 613px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.mechanic-button {
+    position: absolute;
+    top: 553px;
+    left: calc(50% - 450px);
+    border-radius: var(--br-xl);
+    background-color: var(--color-gainsboro);
+    width: 900px;
+    height: 100px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-3xs);
+    box-sizing: border-box;
+}
+.ticket-button {
+    position: absolute;
+    top: 417px;
+    left: calc(50% - 450px);
+    border-radius: var(--br-xl);
+    background-color: var(--color-gainsboro);
+    width: 900px;
+    height: 100px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-3xs);
+    box-sizing: border-box;
+}
+.mechanic-statistics-main {
+    width: 100%;
+    position: relative;
+    background-color: var(--color-white);
+    height: 1080px;
+    overflow: hidden;
+    text-align: center;
+    font-size: var(--font-size-21xl);
+    color: var(--color-black);
+    font-family: var(--font-montserrat);
+}
+

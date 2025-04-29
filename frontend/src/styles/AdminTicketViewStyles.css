@@ -8,11 +8,15 @@
 
 /* === Page Structure === */
 .assigning-ticket-page {
-    width: 100%;
+    /* width: 100%;
     min-height: 100vh;
     background-color: #fff;
     position: relative;
     overflow-x: hidden;
+    display: flex; */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .assigning-ticket-page-banner {
@@ -26,11 +30,17 @@
     padding: 0 50px;
 }
 
-.assigning-ticket-adjust {
+/* .assigning-ticket-adjust {
     display: flex;
     flex-direction: column;
     padding: 30px 50px;
     gap: 40px;
+} */
+
+.assigning-ticket-adjust {
+    flex: 1;
+    padding: 30px 50px;
+    margin-top: 0; /* Removes any existing top margin */
 }
 
 /* === Tables === */
@@ -214,12 +224,37 @@
     gap: 15px;
 }
 
+/* Table Header Elements */
+
+/* Ensures all header text is white and properly aligned */
+.ticket-parent > div,
+.ticket-group > div {
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Specific styling for the ticket header */
+.ticket, .ticket1 {
+    font-weight: 600;
+}
+
+.client-name-vin-service-wrapper {
+    display: none; /* Hides the misplaced element */
+}
+
 .account-button-child,
 .account-button-item,
 .account-button-inner {
     width: 30px;
     height: 4px;
     background-color: white;
+}
+
+.ticket-parent .estimated-time p,
+.ticket-group .estimated-time1 p {
+    color: white;
 }
 
 /* === Responsive Adjustments === */
