@@ -27,8 +27,10 @@ import EVerif from './pages/EmployeeVerif'
 import ADashboard from './pages/AdminDashboard'
 import AssignTicket from './pages/AdminTicketView'
 import MDashboard from './pages/MechanicDashboard'
-import MechTicketPage from './pages/TicketPage.jsx';
+import TicketPage from './pages/TicketPage.jsx';
+import TicketPageDetails from './pages/TicketPageDetails.jsx';
 import EmployeeClock from './pages/EmployeeClock.jsx';
+import EmployeePayroll from './pages/EmployeePayroll.jsx';
 
 import './App.css';
 
@@ -69,8 +71,10 @@ function App() {
             <Route path="/admin-ticket-view" element={<AssignTicket/>}/>
             <Route path="/mechanic-dashboard" element={<MDashboard />}/>
             <Route path="/viewappointment" element={<ViewAppointment />} />
-            <Route path="/ticketpage" element={<MechTicketPage />} />
+            <Route path="/ticketpage" element={<TicketPage />} />
+            <Route path="/ticket/:id" element={<TicketPageDetails />} />
             <Route path="/employee-clock" element={<EmployeeClock />} />
+            <Route path="/employee-payroll" element={<EmployeePayroll />} />
           </Routes>
           </Router>
         </>

@@ -65,3 +65,17 @@ button {
 button:hover {
     background-color: #621d08;
 }
+
+/* Error message styling */
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* Success message styling */
+.success-message {
+    color: green;
+    font-size: 14px;
+    margin-top: 10px;
+}
