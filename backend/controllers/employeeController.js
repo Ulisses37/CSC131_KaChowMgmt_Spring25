@@ -489,3 +489,41 @@ export const getPayrollSummary = async (req, res) => {
         });
     }
 };
+
+//Mechanic Update - no route,"" needs employeePersonal schema 
+
+export const updateEmployee = async (req, res) => {
+    try {
+        const employeeToUpdate = await Employee.findOne({
+            _id: req.params.employeeId, // Use _id to match MongoDB's ObjectId
+         });
+    
+        if (!employeeToUpdate) {
+           return res.status(404).json({ success: false, message: 'Employee not found' });
+        }
+        const updates = req.body;
+
+        const employee = await Employee.findByIdAndUpdate(id, updates, { new: true });
+
+        if (!employee) {
+            return res.status(404).json({ success: false, message: 'Employee not found' });
+        }
+
+        const updatedData = employee.toObject();
+        delete updatedData.password;
+
+        res.json({
+            success: true,
+            message: 'Employee updated successfully',
+            data: updatedData
+        });
+
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            error: 'Server error: ' + err.message
+        });
+    }
+};
+
+

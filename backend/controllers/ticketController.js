@@ -356,3 +356,31 @@ export const addTicketReview = async (req, res) => {
         });
     }
 };
+
+// get ticket for page, get mechanics for dropdown - #ticketRoutes.js
+export const getTicketGetMechanics = async (req, res) => {
+  try {
+      const mechanics = await Employee.find({ role: 'mechanic' }) //drop down
+
+      const ticket = await Ticket.findById(id);
+      if (!ticket) {
+        return res.status(404).json({
+          status: 'fail',
+          message: 'Ticket not found.',
+        });
+      } //front end will display ticket page
+
+      const updatedTicket = ticket.toObject();
+
+      res.json({
+          success: true,
+          message: 'Mechanic dropdown loaded into ticket page',
+      });
+
+  } catch (err) {
+      res.status(500).json({
+          success: false,
+          error: 'Server error: ' + err.message
+      });
+  }
+};
