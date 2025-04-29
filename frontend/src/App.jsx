@@ -24,12 +24,8 @@ import ELogin from './pages/EmployeeLogin'
 import EVerif from './pages/EmployeeVerif'
 import ADashboard from './pages/AdminDashboard'
 import AssignTicket from './pages/AdminTicketView'
-import MDashboard from './pages/MechanicDashboard'
 import TicketPage from './pages/TicketPage.jsx';
 import TicketPageDetails from './pages/TicketPageDetails.jsx';
-import ELogin from './pages/EmployeeLogin';
-import ADashboard from './pages/AdminDashboard';
-import AssignTicket from './pages/AdminTicketView';
 import AMechDetails from './pages/AdminMechAcctView';
 import AMechSelect from './pages/AdminMechSelection';
 import Invoice from './pages/Invoice';

@@ -1,90 +1,257 @@
+import React, { useState, useEffect } from 'react';
+import HeaderBar from '../components/HeaderBarComponent';
 import '../styles/MechAccountEditStyles.css';
-function MechanicAccountEditPage(){
-    return (
-        <div class="edit-account">
-<div class="background-red">
-</div>
-<div class="background-black">
-</div>
-<img class="srs-csc-131-1-icon" alt="" src="SRS_CSC_131 1.png"/>
-<div class="edit-account-child">
-</div>
-<div class="edit-profile-component">
-<div class="firstname">
-<div class="firstname-child">
-</div>
-<div class="first-name">First Name</div>
-<div class="enter-first-name">Enter First Name</div>
-</div>
-<div class="lastname">
-<div class="lastname-child">
-</div>
-<div class="first-name">Last Name</div>
-<div class="enter-last-name">Enter Last name</div>
-</div>
-<div class="email">
-<div class="email-child">
-</div>
-<div class="email1">Email</div>
-<div class="enter-email-address">Enter Email Address</div>
-</div>
-<div class="address">
-<div class="address-child">
-</div>
-<div class="address1">Address</div>
-<div class="enter-adress">Enter Adress</div>
-</div>
-<div class="address">
-<div class="address-child">
-</div>
-<div class="address1">Contact Number</div>
-<div class="enter-adress">Please Enter Your Number</div>
-</div>
-<div class="firstname">
-<div class="firstname-child">
-</div>
-<div class="first-name">City</div>
-<div class="enter-first-name">Enter Your City</div>
-<img class="keyboard-arrow-down" alt="" src="Keyboard arrow down.svg"/>
-</div>
-<div class="state">
-<div class="state-child">
-</div>
-<div class="first-name">State</div>
-<div class="select-your-state">Select your State</div>
-<img class="keyboard-arrow-down1" alt="" src="Keyboard arrow down.svg"/>
-</div>
-<div class="address">
-<div class="address-child">
-</div>
-<div class="email1">Password</div>
-<div class="enter-email-address">Enter Secure Password</div>
-</div>
-<div class="banknumber">
-<div class="banknumber-child">
-</div>
-<div class="first-name">Bank Account Number</div>
-<div class="enter-first-name">Enter Your Bank Acount Number</div>
-</div>
-<div class="banknumber">
-<div class="banknumber-child">
-</div>
-<div class="first-name">Bank Routing Number</div>
-<div class="enter-your-bank">Enter Your Bank Routing Number</div>
-</div>
-</div>
-<div class="enter-wrapper">
-<div class="enter">Enter</div>
-</div>
-<div class="edit-account-item">
-</div>
-<div class="play-arrow-filled-parent" id="frameContainer1">
-<img class="play-arrow-filled-icon" alt="" src="play_arrow_filled.svg"/>
-<div class="text">Edit Account</div>
-</div>
-</div>
 
-    )
+function MechanicAccountEditPage() {
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        address: '',
+        contactNumber: '',
+        city: '',
+        state: '',
+        bankAccountNumber: '',
+        bankRoutingNumber: ''
+    });
+    const [originalData, setOriginalData] = useState(null);
+
+    // Fetch mechanic's current data
+    useEffect(() => {
+        const fetchMechanicData = async () => {
+            try {
+                if (useMockData) {
+                    // Use mock data
+                    const mockData = generateMockMechanic();
+                    setOriginalData(mockData);
+                    setFormData({
+                        firstName: mockData.name.split(' ')[0] || '',
+                        lastName: mockData.name.split(' ')[1] || '',
+                        address: mockData.address || '',
+                        contactNumber: mockData.phone || '',
+                        city: mockData.city || '',
+                        state: mockData.state || '',
+                        bankAccountNumber: mockData.bankAccountNumber || '',
+                        bankRoutingNumber: mockData.bankRoutingNumber || ''
+                    });
+                    console.log("Using mock mechanic data:", mockData);
+                    return;
+                }
+
+                const response = await fetch('/api/employees/me', {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                });
+                const data = await response.json();
+                setOriginalData(data);
+                setFormData({
+                    firstName: data.name.split(' ')[0] || '',
+                    lastName: data.name.split(' ')[1] || '',
+                    address: data.address || '',
+                    contactNumber: data.phone || '',
+                    city: data.city || '',
+                    state: data.state || '',
+                    bankAccountNumber: data.bankAccountNumber || '',
+                    bankRoutingNumber: data.bankRoutingNumber || ''
+                });
+            } catch (error) {
+                console.error('Error fetching mechanic data:', error);
+            }
+        };
+        fetchMechanicData();
+    }, []);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        
+        try {
+            // Prepare only changed fields for submission
+            const changes = {};
+            Object.keys(formData).forEach(key => {
+                if (formData[key] !== '' && 
+                    (!originalData || formData[key] !== originalData[key])) {
+                    changes[key] = formData[key];
+                }
+            });
+
+            // If name fields are changed, combine them
+            if (changes.firstName || changes.lastName) {
+                changes.name = `${changes.firstName || formData.firstName} ${changes.lastName || formData.lastName}`;
+                delete changes.firstName;
+                delete changes.lastName;
+            }
+
+            if (Object.keys(changes).length === 0) {
+                alert('No changes to save');
+                return;
+            }
+
+            const response = await fetch('/api/employees/me', {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                },
+                body: JSON.stringify(changes)
+            });
+
+            if (response.ok) {
+                alert('Profile updated successfully');
+                // Refresh the data
+                const updatedData = await response.json();
+                setOriginalData(updatedData);
+            } else {
+                throw new Error('Failed to update profile');
+            }
+        } catch (error) {
+            console.error('Error updating profile:', error);
+            alert('Error updating profile');
+        }
+    };
+
+    if (!originalData) {
+        return <div>Loading...</div>;
+    }
+
+    return (
+        <div className="edit-account">
+            <HeaderBar />
+            
+            <div className="edit-profile-component">
+                {/* First Name */}
+                <div className="firstname">
+                    <input
+                        type="text"
+                        name="firstName"
+                        value={formData.firstName}
+                        onChange={handleChange}
+                        className="firstname-child input-field"
+                        placeholder="Enter First Name"
+                    />
+                    <div className="first-name">First Name</div>
+                </div>
+
+                {/* Last Name */}
+                <div className="lastname">
+                    <input
+                        type="text"
+                        name="lastName"
+                        value={formData.lastName}
+                        onChange={handleChange}
+                        className="lastname-child input-field"
+                        placeholder="Enter Last Name"
+                    />
+                    <div className="first-name">Last Name</div>
+                </div>
+
+                {/* Email (readonly) */}
+                <div className="email">
+                    <input
+                        type="email"
+                        value={originalData.email}
+                        readOnly
+                        className="email-child input-field"
+                    />
+                    <div className="email1">Email</div>
+                </div>
+
+                {/* Address */}
+                <div className="address">
+                    <input
+                        type="text"
+                        name="address"
+                        value={formData.address}
+                        onChange={handleChange}
+                        className="address-child input-field"
+                        placeholder="Enter Address"
+                    />
+                    <div className="address1">Address</div>
+                </div>
+
+                {/* Contact Number */}
+                <div className="address">
+                    <input
+                        type="tel"
+                        name="contactNumber"
+                        value={formData.contactNumber}
+                        onChange={handleChange}
+                        className="address-child input-field"
+                        placeholder="Enter Phone Number"
+                    />
+                    <div className="address1">Contact Number</div>
+                </div>
+
+                {/* City */}
+                <div className="firstname">
+                    <input
+                        type="text"
+                        name="city"
+                        value={formData.city}
+                        onChange={handleChange}
+                        className="firstname-child input-field"
+                        placeholder="Enter Your City"
+                    />
+                    <div className="first-name">City</div>
+                </div>
+
+                {/* State */}
+                <div className="state">
+                    <input
+                        type="text"
+                        name="state"
+                        value={formData.state}
+                        onChange={handleChange}
+                        className="state-child input-field"
+                        placeholder="Select your State"
+                    />
+                    <img className="keyboard-arrow-down1" alt="" src="Keyboard arrow down.svg"/>
+                </div>
+
+                {/* Bank Account Number */}
+                <div className="banknumber">
+                    <input
+                        type="text"
+                        name="bankAccountNumber"
+                        value={formData.bankAccountNumber}
+                        onChange={handleChange}
+                        className="banknumber-child input-field"
+                        placeholder="Enter Your Bank Account Number"
+                    />
+                    <div className="first-name">Bank Account Number</div>
+                </div>
+
+                {/* Bank Routing Number */}
+                <div className="banknumber">
+                    <input
+                        type="text"
+                        name="bankRoutingNumber"
+                        value={formData.bankRoutingNumber}
+                        onChange={handleChange}
+                        className="banknumber-child input-field"
+                        placeholder="Enter Your Bank Routing Number"
+                    />
+                    <div className="first-name">Bank Routing Number</div>
+                </div>
+            </div>
+
+            <button className="enter-wrapper" onClick={handleSubmit}>
+                <div className="enter">Save</div>
+            </button>
+
+            <div className="play-arrow-filled-parent">
+                <img className="play-arrow-filled-icon" alt="" src="play_arrow_filled.svg"/>
+                <div className="text">Edit Account</div>
+            </div>
+        </div>
+    );
 }
 
-export default MechanicAccountEditPage
+export default MechanicAccountEditPage;

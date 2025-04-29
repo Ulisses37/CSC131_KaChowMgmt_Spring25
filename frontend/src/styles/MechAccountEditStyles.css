@@ -26,7 +26,7 @@ body {
   
 }
 
-.background-red {
+/* .background-red {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -327,5 +327,38 @@ body {
   font-size: var(--font-size-7xl);
   color: var(--color-gray-200);
   font-family: var(--font-montserrat);
+} */
+/* Add these styles at the end of your CSS file */
+/* .input-field {
+  position: absolute;
+  top: 36px;
+  left: -2px;
+  border-radius: var(--br-8xs);
+  background-color: var(--color-white);
+  border: 2px solid var(--color-gray-100);
+  box-sizing: border-box;
+  width: calc(100% - 4px);
+  height: 74px;
+  padding: 0 20px;
+  font-size: var(--font-size-5xl);
+  font-family: var(--font-montserrat);
+  outline: none;
 }
 
+.input-field:focus {
+  border-color: #c93131;
+}
+
+.email-child.input-field {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.enter-wrapper {
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.enter-wrapper:hover {
+  background-color: #2a9d3f !important;
+} */

@@ -358,7 +358,7 @@ export const addTicketReview = async (req, res) => {
 };
 
 // get ticket for page, get mechanics for dropdown - #ticketRoutes.js
-export const getTicketGetMechanics = async (req, res) => {
+export const getTicketMechanics = async (req, res) => {
   try {
       const mechanics = await Employee.find({ role: 'mechanic' }) //drop down
 

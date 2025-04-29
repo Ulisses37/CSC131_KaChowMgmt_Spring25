@@ -13,11 +13,11 @@ import {
     rescheduleTicket,
     getVehicleMaintenanceStatus,
     completeTicket,
-    addTicketReview, // Add this import
+    addTicketReview, 
+    getTicketMechanics,
 } from '../controllers/ticketController.js';
 
-import { getTicketMechanics } from '../controllers/ticketController.js';
-import { assignMechanictoTicket } from '../controllers/paticketController.js';
+import { assignMechanictoTicket } from '../controllers/patchTicketController.js';
 
 const router = express.Router();
 
