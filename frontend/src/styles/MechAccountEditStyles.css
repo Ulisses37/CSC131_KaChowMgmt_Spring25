@@ -3,7 +3,6 @@ body {
   line-height: normal;
 }
 
-
 :root {
   
   /* Fonts */
@@ -26,7 +25,7 @@ body {
   
 }
 
-/* .background-red {
+.background-red {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -327,9 +326,9 @@ body {
   font-size: var(--font-size-7xl);
   color: var(--color-gray-200);
   font-family: var(--font-montserrat);
-} */
+}
 /* Add these styles at the end of your CSS file */
-/* .input-field {
+.input-field {
   position: absolute;
   top: 36px;
   left: -2px;
@@ -361,4 +360,4 @@ body {
 
 .enter-wrapper:hover {
   background-color: #2a9d3f !important;
-} */
+}

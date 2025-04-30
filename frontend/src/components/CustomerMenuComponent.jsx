@@ -20,8 +20,8 @@ function CustomerMenuBar() {
             </div>
             <div className="text-container" onClick={() => goTo('/appointment-management')}>
                 <div className="text">
-                    <p className="manage">Manage</p>
-                    <p className="manage">Appointments</p>
+                    <div className="manage">Manage</div>
+                    <div className="manage">Appointments</div>
                 </div>
             </div>
             <div className="text-wrapper" onClick={() => goTo('/service-history')}>
