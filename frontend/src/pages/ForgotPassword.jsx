@@ -29,7 +29,8 @@ function ForgotPasswordPage() {
 
         try {
             // First check if email exists in your system
-            const checkResponse = await fetch('http://localhost/:' + process.env.REACT_APP_HOST_PORT + '/api/auth/password/forgot-password', {
+            const checkResponse = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/auth/password/forgot-password`, {
+            //const checkResponse = await fetch('http://localhost/:' + process.env.REACT_APP_HOST_PORT + '/api/auth/password/forgot-password', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -46,7 +47,8 @@ function ForgotPasswordPage() {
             }
 
             // If email exists, send reset link
-            const resetResponse = await fetch('http://localhost:5000/api/auth/password/reset-password/', {
+            const resetResponse = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/auth/password/reset-password/`, {
+            //const resetResponse = await fetch('http://localhost:5000/api/auth/password/reset-password/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
