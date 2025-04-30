@@ -6,6 +6,7 @@ import {
     validateRequest,
     validateCustomerTicketAccess,
     validateCompleteTicket,
+    validateAssignMechanic,
 } from "../middleware/validators/index.js";
 import {
     createTicket,
@@ -13,11 +14,11 @@ import {
     rescheduleTicket,
     getVehicleMaintenanceStatus,
     completeTicket,
-    addTicketReview, 
+    addTicketReview,
     getTicketMechanics,
 } from '../controllers/ticketController.js';
 
-import { assignMechanictoTicket } from '../controllers/patchTicketController.js';
+import { assignMechanictoTicket } from '../controllers/patchticketController.js';
 
 const router = express.Router();
 
@@ -61,7 +62,13 @@ router.post('/:id/review',
 );
 
 // Admin Assign Ticket
-router.get('/tickets/:id', getTicketMechanics);
-router.patch('/tickets/:id/mechanic/:employeeId', assignMechanictoTicket);
+router.get('/tickets/:id',
+    getTicketMechanics);
+    
+// Updated route with validator
+router.patch('/tickets/:id',
+    validateAssignMechanic,
+    validateRequest,
+    assignMechanictoTicket);
 
 export default router;
