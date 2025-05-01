@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import HeaderBar from '../components/HeaderBarComponent';
 import { useNavigate } from 'react-router';
+import '../styles/EmployeeClock.css'; // Import the CSS file
 
 const EmployeeClock = () => {
   const [clockInTime, setClockInTime] = useState(null);
@@ -76,37 +77,41 @@ const EmployeeClock = () => {
   return (
     <div>
       <HeaderBar />
-      <br/>
-      <br/>
-      <br/>
+      <br />
+      <br />
+      <br />
       <img
-                className="srs-csc-131-1-icon"
-                alt="Company Logo"
-                src="/SRS_CSC_131 1.png"
-                onClick={() => navigate("/")}
-            />
+        className="srs-csc-131-1-icon"
+        alt="Company Logo"
+        src="/SRS_CSC_131 1.png"
+        onClick={() => navigate("/")}
+      />
       <h2>Employee Clock In/Out</h2>
-      <div className="clock-buttons">
-        <button onClick={handleClockIn} className="clock-in-button">
-          Clock In
-        </button>
-        <button onClick={handleClockOut} className="clock-out-button">
-          Clock Out
-        </button>
+      <div className="clock-buttons-container">
+        <div className="clock-buttons">
+          {/* Clock In button */}
+          <button onClick={handleClockIn} className="clock-in-button">
+            Clock In
+          </button>
+          {/* Clock Out button */}
+          <button onClick={handleClockOut} className="clock-out-button">
+            Clock Out
+          </button>
+        </div>
+        <div className="clock-times">
+          <h3>Clock In Time:</h3>
+          <p>{clockInTime ? clockInTime.toLocaleString() : 'Not clocked in yet'}</p>
+          <h3>Clock Out Time:</h3>
+          <p>{clockOutTime ? clockOutTime.toLocaleString() : 'Not clocked out yet'}</p>
+          {timeDifference && (
+            <div className="time-difference">
+              <h3>Time Worked:</h3>
+              <p>{timeDifference}</p>
+            </div>
+          )}
+        </div>
       </div>
       {errorMessage && <p className="error-message">{errorMessage}</p>}
-      <div className="clock-times">
-        <h3>Clock In Time:</h3>
-        <p>{clockInTime ? clockInTime.toLocaleString() : 'Not clocked in yet'}</p>
-        <h3>Clock Out Time:</h3>
-        <p>{clockOutTime ? clockOutTime.toLocaleString() : 'Not clocked out yet'}</p>
-        {timeDifference && (
-          <div className="time-difference">
-            <h3>Time Worked:</h3>
-            <p>{timeDifference}</p>
-          </div>
-        )}
-      </div>
     </div>
   );
 };

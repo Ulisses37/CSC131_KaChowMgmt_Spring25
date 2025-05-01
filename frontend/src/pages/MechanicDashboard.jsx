@@ -6,7 +6,7 @@ import HeaderBar from '../components/HeaderBarComponent';
 function MechanicDashboardPage() {
     const { state } = useLocation();
     const { employeeData } = state || {};
-    const token = localStorage.getItem('customerToken');
+    const token = localStorage.getItem('employeeToken');
     const navigate = useNavigate();
 
     // Debugging logs 
@@ -49,6 +49,11 @@ function MechanicDashboardPage() {
                 text="TICKET HISTORY" 
                 style={{ position: 'absolute', top: '770px', left: '475px' }}
                 onClick={() => navigate('/ticket-history')}
+            />
+            <LgButton
+                text="CLOCK PAGE"
+                style={{ position: 'absolute', top: '960px', left: '475px' }}
+                onClick={() => navigate('/employee-clock')}
             />
             
             {/* Dynamic greeting container */}
