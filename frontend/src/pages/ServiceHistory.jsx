@@ -64,6 +64,10 @@ function ServiceHistoryPage() {
     if (error) return <div className="error">Error: {error}</div>;
 
     return (
+import AppointmentButton from '../components/BookAppointmentComp'
+import DropMenu from '../components/DropMenuComp'
+function ServiceHistoryPage(){
+    return(
         <div className="service-history-page">
             <HeaderBar/>
             <Menu />

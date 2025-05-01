@@ -1,6 +1,11 @@
+import BackButton from '../components/BackButtonComponent'; 
+import { EmployeeDropdown } from '../components/DropMenuComp'; 
+
 function TicketHistoryPage(){
     return (
       <div class="ticket-history-mechanic">
+      <EmployeeDropdown/>
+      <BackButton text="DASHBOARD"/>
       <div class="base">
       <div class="page-banner">
       <div class="client-name-vin-service-wrapper">

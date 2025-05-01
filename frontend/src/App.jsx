@@ -42,11 +42,17 @@ import EmployeePayroll from './pages/EmployeePayroll.jsx';
 
 import './App.css';
 
-function ProtectedRoute({ children }) {
-  const token = localStorage.getItem('customerToken');
-  return token ? children : <Navigate to="/customer-login" replace />;
+function ProtectedRoute({ isEmployee, children }) {
+  const token = isEmployee
+    ? localStorage.getItem('employeeToken')
+    : localStorage.getItem('customerToken');
+  
+  if (!token) {
+    return <Navigate to={isEmployee ? '/employee-login' : '/customer-login'} />;
+  }
+  
+  return children;
 }
-
 function App() {
   return (
     <>
@@ -83,7 +89,6 @@ function App() {
             <Route path="/admin-dashboard" element={<ADashboard />}/>
             <Route path="/assign-tickets" element={<AssignTicket/>}/>
             <Route path="/invoice" element={<Invoice/>}/>
-            <Route path="/select-mechanic" element={<AMechSelect/>}/>
             <Route path="/mechanic-details" element={<AMechDetails/>}/>
             <Route path="/mechanic-dashboard" element={<MDashboard />}/>
             <Route path="/viewappointment" element={<ViewAppointment />} />

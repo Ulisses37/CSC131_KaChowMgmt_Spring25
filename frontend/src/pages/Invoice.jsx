@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import HeaderBar from '../components/HeaderBarComponent'; 
+import BackButton from '../components/BackButtonComponent';
+import { EmployeeDropdown } from '../components/DropMenuComp';  
 import '../styles/InvoiceStyles.css';
 
 function InvoicePage() {
@@ -104,6 +106,8 @@ function InvoicePage() {
 
     return (
         <div className="invoicing">
+            <BackButton text="DASHBOARD"/>
+            <EmployeeDropdown/>
             <HeaderBar />
             <img className="srs-csc-131-1-icon" alt="" src="SRS_CSC_131 1.png"></img>
             

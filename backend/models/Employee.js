@@ -43,7 +43,8 @@ const employeeSchema = new mongoose.Schema({
     tickets: employeeTicketSchema, // Ticket subdocument with current and completed arrays
     hoursWorked: [hoursWorkedSchema], // Array of hours worked subdocuments
     payRate: { type: Number, required: true }, // Pay rate per hour (float)
-    reviews: [reviewSchema] // Array of reviews subdocuments
+    reviews: [reviewSchema], // Array of reviews subdocuments
+    employeeId: {type: String}
 });
 
 // Password hashing (pre-save hook)
@@ -117,6 +118,12 @@ employeeSchema.methods.getTimeEntries = function() {
             : null
     }));
 };
+//TO BE CONTINUED...
+/*
+const personnelSchema = new mongoose.Schema({
+    name: { type: String, required: true }, // Employee's name
 
+});
+*/
 const Employee = mongoose.model('Employee', employeeSchema);
 export default Employee;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import HeaderBar from '../components/HeaderBarComponent';
+import BackButton from '../components/BackButtonComponent'; 
 import '../styles/MechAccountEditStyles.css';
 
 function MechanicAccountEditPage() {
@@ -123,6 +124,7 @@ function MechanicAccountEditPage() {
 
     return (
         <div className="edit-account">
+            <BackButton text="DETAILS"/>
             <HeaderBar />
             
             <div className="edit-profile-component">
