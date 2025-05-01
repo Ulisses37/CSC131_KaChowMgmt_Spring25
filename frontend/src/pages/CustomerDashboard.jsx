@@ -18,8 +18,7 @@ function CustomerDashboardPage() {
 
     return (
         <div className="user-profile-page">
-            <div className="user-profile-page-child"></div>
-            
+            <div className="user-profile-page-child"></div> 
             <div className="user-profile-page-item"></div>
             <div className="user-profile-page-inner"></div>
             <img className="srs-csc-131-2-icon" alt="" src="SRS_CSC_131 1.png"></img>

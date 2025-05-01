@@ -12,6 +12,7 @@ import CDashboard from './pages/CustomerDashboard'
 import ApptManagement from './pages/AppointmentManagement'    // might need to change the name of this
 import ServiceHistory from './pages/ServiceHistory'           // might need to change the name of this
 import CPassword from './pages/ChangePassword'
+import CPasswordSuccess from './pages/ChangePasswordSuccess'
 import FPassword from './pages/ForgotPassword'
 import AccCreation from './pages/AccountCreation'
 import ApptCreation from './pages/AppointmentCreation.jsx';
@@ -41,6 +42,7 @@ function App() {
             <Route path="/account-creation" element={<AccCreation/>} />
             <Route path="/forgot-password" element={<FPassword/>} />
             <Route path="/change-password" element={<CPassword/>} />
+            <Route path="/cpass-success" element={<CPasswordSuccess/>}/>
             {/* route path for change password confirmation */}
             <Route path="/customer-dashboard" element={<CDashboard />}/>
             <Route path="/appointment-management" element={<ApptManagement />}/>  {/* might need to change the name of this */}
