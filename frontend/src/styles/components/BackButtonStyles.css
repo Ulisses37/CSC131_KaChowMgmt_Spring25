@@ -1,0 +1,32 @@
+.back-button-container {
+    position: absolute;
+    top: 60px; /* Reduced from 48px to appear above header */
+    left: 65px; /* Reduced from 65px for better spacing */
+    border-radius: 100px;
+    background-color: #c93131;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px 12px 16px; /* Reduced padding */
+    gap: 16px; /* Reduced gap */
+    cursor: pointer;
+    white-space: nowrap;
+    z-index: 1000; /* Ensure it appears above other elements */
+}
+  
+  .back-button-icon {
+    width: 33.7px;
+    position: relative;
+    height: 31.3px;
+    object-fit: contain;
+    flex-shrink: 0; /* Prevent icon from shrinking */
+  }
+  
+  .back-button-text {
+    position: relative;
+    font-weight: 500;
+    font-size: 35px; /* Adjust as needed */
+    color: white; /* Assuming you want white text */
+  }

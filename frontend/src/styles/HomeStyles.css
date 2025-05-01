@@ -5,30 +5,14 @@
   }
 
   /* === Part Specific === */
-  .home-child {
-    position: absolute;
-  	top: -3px;
-  	left: 0px;
-  	background: linear-gradient(90deg, #631818, #c93131);
-  	width: 1920px;
-  	height: 185px;
-}
 .home-item {
     position: absolute;
     top: 1480.5px;
     left: 89.5px;
     border-top: 1px solid #000;
     box-sizing: border-box;
-    width: 1741px;
+    width: 88%;
     height: 1px;
-}
-.home-inner {
-    position: absolute;
-    top: 152px;
-    left: 0px;
-    background-color: #211f1f;
-    width: 1936px;
-    height: 52px;
 }
 .homepage-pic-icon {
     position: absolute;
@@ -160,7 +144,7 @@
 }
 .services-wrapper {
     position: absolute;
-    top: 253px;
+    top: 267px;
     left: 644px;
     border-radius: 15px;
     background: linear-gradient(90deg, #741d1d, #da3737);

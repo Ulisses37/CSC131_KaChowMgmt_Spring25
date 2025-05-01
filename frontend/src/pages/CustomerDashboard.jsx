@@ -15,7 +15,7 @@ function CustomerDashboardPage() {
     console.log('Token exists:', !!token);
     console.log('CustomerData:', customerData);
 
-    if (!token) {
+     if (!token) {
         return <Navigate to="/customer-login" replace />;
     }
 

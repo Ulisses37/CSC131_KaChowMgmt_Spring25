@@ -686,3 +686,12 @@ body {
 .button1:hover:not(.disabled) {
     background-color: #45a049; /* Darker green on hover */
 }
+
+.loading-indicator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    font-size: 1.5rem;
+    color: #333;
+}

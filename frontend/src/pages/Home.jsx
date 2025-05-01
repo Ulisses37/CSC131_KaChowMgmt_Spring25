@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 import '../styles/HomeStyles.css';
+import HeaderBar from '../components/HeaderBarComponent'; 
 import AppointmentButton from '../components/BookAppointmentComp'
 
 function HomePage() {
     return (
         <div className="home">
-    		<div className="home-child"></div>
+			<HeaderBar/>
     		<div className="home-item"></div>
-    		<div className="home-inner"></div>
     		<img className="homepage-pic-icon" alt="" src="homepage pic.png"></img>
     		<img className="srs-csc-131-2-icon" alt="" src="SRS_CSC_131 1.png"></img>
             <div className="top-border"></div>

@@ -1,3 +1,6 @@
+import '../styles/AdminTicketViewStyles.css';
+import HeaderBar from '../components/HeaderBarComponent';
+
 function AdminMechSelectionPage(){
     return (
         <div class="mechanic-statistics-2">
