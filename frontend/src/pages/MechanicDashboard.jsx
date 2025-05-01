@@ -50,6 +50,11 @@ function MechanicDashboardPage() {
                 style={{ position: 'absolute', top: '770px', left: '475px' }}
                 onClick={() => navigate('/ticket-history')}
             />
+            <LgButton
+                text="CLOCK PAGE"
+                style={{ position: 'absolute', top: '960px', left: '475px' }}
+                onClick={() => navigate('/employee-clock')}
+            />
             
             {/* Dynamic greeting container */}
             <div className="admin-greeting-container">

@@ -12,8 +12,8 @@ import {
     getAllEmployees,
     updateTimeEntry,
     markEntriesAsPaid,
-    getPayrollSummary
-
+    getPayrollSummary,
+    getAllEmployees,
 } from '../controllers/employeeController.js';
 import {
     validateRequest,
