@@ -2,6 +2,7 @@ import Ticket from '../models/Ticket.js';
 import Vehicle from '../models/Vehicle.js';
 import Customer from '../models/Customer.js';
 import Employee from '../models/Employee.js';
+import Invoice from '../models/Ticket.js';
 import getNextTicketId from '../utils/getNextTicketId.js';
 //import { getNextTicketId } from '../utils/getNextTicketId.js';
 import { validationResult } from 'express-validator';
@@ -360,21 +361,46 @@ export const addTicketReview = async (req, res) => {
 // get ticket for page, get mechanics for dropdown - #ticketRoutes.js
 export const getTicketMechanics = async (req, res) => {
   try {
-      const mechanics = await Employee.find({ role: 'mechanic' }) //drop down
+      const id = req.params;
+      const updates = req.body;
 
-      const ticket = await Ticket.findById(id);
-      if (!ticket) {
+      const ticketUpdate = await Ticket.findByIdAndUpdate(id, updates, {new: true});
+      if (!ticketUpdate) {
         return res.status(404).json({
           status: 'fail',
           message: 'Ticket not found.',
         });
-      } //front end will display ticket page
-
-      const updatedTicket = ticket.toObject();
+      } //front end will display ticket page with dropdown
 
       res.json({
           success: true,
-          message: 'Mechanic dropdown loaded into ticket page',
+          message: 'Ticket updated succesfully',
+          data: ticketUpdate
+      });
+
+  } catch (err) {
+      res.status(500).json({
+          success: false,
+          error: 'Server error: ' + err.message
+      });
+  }
+};
+
+export const adminInvoice = async (req, res) => {
+  const id = req.params;
+  const updates = req.body;
+  try {
+      const invoiceUpdate = await Invoice.findByIdAndUpdate(id, updates, {new: true});
+      if (!invoiceUpdate) {
+        return res.status(404).json({
+          status: 'fail',
+          message: 'Invoice not found.',
+        });
+      } 
+      res.json({
+          success: true,
+          message: 'Invoice updated succesfully',
+          data: invoiceUpdate
       });
 
   } catch (err) {

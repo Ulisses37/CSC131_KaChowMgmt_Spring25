@@ -60,11 +60,12 @@ function EmployeeLoginPage() {
 
         try {
             const response = await authenticateEmployee(employeeId, email, password);
+            console.log("Login response:", response);
             
             if (response.success) {
                 localStorage.setItem('employeeToken', response.token);
-                localStorage.setItem('employeeId', response.employeeData.employeeId);
-                localStorage.setItem('employeeRole', response.employeeData.role)
+                localStorage.setItem('employeeId', response.employeeData.id);
+                localStorage.setItem('employeeRole', response.employeeData.admin ? 'admin' : 'mechanic');
                 // Route based on employee role from backend
                 if (localStorage.getItem('employeeRole') === 'admin') {
                     navigate("/admin-dashboard", {

@@ -4,7 +4,6 @@ import HeaderBar from '../components/HeaderBarComponent';
 import BackButton from '../components/BackButtonComponent'; 
 import '../styles/CustomerLoginPageStyles.css';
 
-
 function CustomerLoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -21,14 +20,15 @@ function CustomerLoginPage() {
                 body: JSON.stringify({ email, password })
             });
 
-            console.log('Raw API Response:', response); // Debug code
+            console.log('Raw API Response:', response);
 
             if (!response.ok) {
-                throw new Error('Login failed');
+                const errorData = await response.json().catch(() => null);
+                throw new Error(errorData?.message || 'Login failed');
             }
 
             const data = await response.json();
-            console.log('Parsed API Data:', data); // Debug code
+            console.log('Parsed API Data:', data);
 
             return {
                 success: true,
@@ -62,17 +62,21 @@ function CustomerLoginPage() {
         
         try {
             const response = await authenticateCustomer(email, password);
-            console.log('Authentication Response:', response); // Debug code
+            console.log('Authentication Response:', response);
             
             if (response.success) {
                 localStorage.setItem('customerToken', response.token);
+                localStorage.setItem('customerId', response.customerData.id);
                 
-                console.log('Login Response:', response);   // Debug code
+                console.log('Login successful. Stored:', {
+                    token: response.token,
+                    customerId: response.customerData.id
+                });
                 
                 navigate("/customer-dashboard", {
-                  state: {
-                    customerData: response.customerData
-                  }
+                    state: {
+                        customerData: response.customerData
+                    }
                 });
             } else {
                 setError(response.message || "Invalid credentials");
@@ -101,22 +105,19 @@ function CustomerLoginPage() {
             <div className="log-in">Log In</div>
             <div className="no-account">No account?</div>
             
-            {/* ----------------- NEED TO CHANGE ------------------- */}
             <Link to="/account-creation" style={{color: 'inherit',textDecoration: 'none'}}>
                 <div className="create-one" id="CREATEONEText">CREATE ONE</div>
             </Link>
-            {/* ---------------------------------------------------- */}
+            
             <div className="line-div"></div>
-            {/* ----------------- NEED TO CHANGE ------------------- */}
+            
             <Link to="/employee-login" style={{color: 'inherit',textDecoration: 'none'}}>
                 <div className="employee-login" id="EMPLOYEELOGINText">Employee Login</div>
             </Link>
             
-            {/* ----------------- NEED TO CHANGE ------------------- */}
             <Link to="/forgot-password" style={{color: 'inherit',textDecoration: 'none'}}>
                 <div className="customer-forgot-password" id="FORGOTPASSWORDText">FORGOT PASSWORD</div>
             </Link>
-            {/* ---------------------------------------------------- */}
 
             {/* Error message display */}
             {error && (
@@ -155,8 +156,6 @@ function CustomerLoginPage() {
                     />
                 </div>
 
-                {error && <div className="error-message">{error}</div>}
-
                 <button 
                     type="submit"
                     className="customer-login-button"
@@ -165,8 +164,7 @@ function CustomerLoginPage() {
                     {isLoading ? 'LOGGING IN...' : 'LOG IN'}
                 </button>
             </form>
-
-  		</div>
+        </div>
     )
 }
 
