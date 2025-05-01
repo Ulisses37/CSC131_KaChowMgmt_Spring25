@@ -2,6 +2,32 @@ import Ticket from '../models/Ticket.js';
 import Employee from '../models/Employee.js';
 import bcrypt from 'bcrypt';
 
+/**
+ * Get all employees
+ * @route GET /api/employees
+ * @access Admin
+ */
+export const getAllEmployees = async (req, res) => {
+    try {
+        // Find all employees and exclude sensitive fields
+        const employees = await Employee.find({})
+            .select('-password -resetPasswordToken -resetTokenExpiration');
+
+        // Return the list of employees
+        res.status(200).json({
+            success: true,
+            count: employees.length,
+            data: employees
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            error: 'Server error: ' + err.message
+        });
+    }
+};
+
+
 // Employee Creation
 export const createEmployee = async (req, res) => {
     try {
