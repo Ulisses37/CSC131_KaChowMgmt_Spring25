@@ -6,7 +6,7 @@ import HeaderBar from '../components/HeaderBarComponent';
 function AdminDashboardPage() {
     const { state } = useLocation();
     const { employeeData } = state || {};
-    const token = localStorage.getItem('customerToken');
+    const token = localStorage.getItem('employeeToken');
     const navigate = useNavigate();
 
     // Debugging logs 
