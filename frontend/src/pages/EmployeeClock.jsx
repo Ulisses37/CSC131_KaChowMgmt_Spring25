@@ -14,16 +14,15 @@ const EmployeeClock = () => {
   const [employeeId, setEmployeeId] = useState('');
   const navigate = useNavigate();
 
-  // Get employee ID and check initial clock status
   useEffect(() => {
     const id = localStorage.getItem('employeeId');
-    const token = localStorage.getItem('token');
-    
+    const token = localStorage.getItem('employeeToken');
+  
     if (!id || !token) {
       setErrorMessage('Please log in first');
       return;
     }
-
+  
     setEmployeeId(id);
     checkClockStatus(id);
   }, []);
@@ -36,7 +35,7 @@ const EmployeeClock = () => {
         `${import.meta.env.VITE_API_BASE_URL}/api/employees/${id}/clock-status`,
         {
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
+            'Authorization': `Bearer ${localStorage.getItem('employeeToken')}`,
           }
         }
       );
@@ -73,7 +72,7 @@ const EmployeeClock = () => {
         {
           method: 'POST',
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Authorization': `Bearer ${localStorage.getItem('employeeToken')}`,
             'Content-Type': 'application/json'
           }
         }
@@ -113,7 +112,7 @@ const EmployeeClock = () => {
         {
           method: 'POST',
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Authorization': `Bearer ${localStorage.getItem('employeeToken')}`,
             'Content-Type': 'application/json'
           }
         }
