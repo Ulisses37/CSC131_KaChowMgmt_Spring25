@@ -13,7 +13,6 @@ import {
     updateTimeEntry,
     markEntriesAsPaid,
     getPayrollSummary,
-    getAllEmployees,
 } from '../controllers/employeeController.js';
 import {
     validateRequest,
