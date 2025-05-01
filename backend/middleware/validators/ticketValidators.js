@@ -6,6 +6,8 @@ import {
     validateTicketId
 } from './coreValidators.js';
 import Customer from '../../models/Customer.js';
+import Employee from '../../models/Employee.js'; 
+import Ticket from '../../models/Ticket.js';
 
 // Helper to flatten validator arrays
 const flatValidator = (validator) => Array.isArray(validator) ? validator : [validator];
@@ -67,4 +69,28 @@ export const validateCompleteTicket = [
         .optional()
         .isMongoId()
         .withMessage('Invalid mechanic ID format')
+];
+
+// New validator for assigning mechanic to ticket
+export const validateAssignMechanic = [
+    param('id')
+        .isMongoId()
+        .withMessage('Invalid ticket ID format')
+        .custom(async (value) => {
+            const ticket = await Ticket.findById(value);
+            if (!ticket) {
+                throw new Error('Ticket not found');
+            }
+            return true;
+        }),
+    body('mechanicId')
+        .isMongoId()
+        .withMessage('Invalid mechanic ID format')
+        .custom(async (value) => {
+            const mechanic = await Employee.findById(value);
+            if (!mechanic) {
+                throw new Error('Mechanic not found');
+            }
+            return true;
+        })
 ];

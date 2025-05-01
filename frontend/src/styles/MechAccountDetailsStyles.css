@@ -1,0 +1,440 @@
+body {
+    margin: 0;
+    line-height: normal;
+}
+
+
+:root {
+    /* Fonts */
+    --font-montserrat: 'Montserrat', sans-serif;
+
+    /* font sizes */
+    --font-size-mini: 15px;
+    --font-size-base: 16px;
+    --font-size-xl: 20px;
+    
+    /* Colors */
+    --color-black: #000;
+    --color-gray-100: #211f1f;
+    --color-gray-200: #F5F5F5;
+    --color-gray-300: rgba(144, 144, 144, 0.25);
+    --color-white: #fff;
+    
+    /* Paddings */
+    --padding-xs: 12px;
+    --padding-xl: 20px;
+    
+    /* Border radiuses */
+    --br-xl: 20px;
+    
+    /* Figma Variables */
+    
+    /* Color Variables */
+    --Background-Brand-Default: #2c2c2c;
+    --Border-Brand-Default: #2c2c2c;
+    
+    /* Number Variables */
+    --Stroke-Border: 1px;
+    --Space-200: 8px;
+    --Radius-200: 8px;
+    --Space-300: 12px;
+    
+}
+.mech-name, 
+.brakes, 
+.monday-wednesday-friday, 
+.empspec p {
+    font-family: var(--font-montserrat) !important; /* Force Montserrat */
+}
+
+.background-red {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: linear-gradient(90deg, #631818, #c93131);
+    width: 1920px;
+    height: 185px;
+}
+.background-black {
+    position: absolute;
+    top: 185px;
+    left: 0px;
+    background-color: var(--color-gray-100);
+    width: 1936px;
+    height: 42px;
+}
+.srs-csc-131-1-icon {
+    position: absolute;
+    top: 0px;
+    left: 776px;
+    width: 367.3px;
+    height: 309px;
+    object-fit: cover;
+}
+.mech-name {
+    position: relative;
+}
+.titlecell {
+    width: 160px;
+    background-color: var(--color-gray-300);
+    border-right: 1px solid var(--color-black);
+    border-bottom: 1px solid var(--color-black);
+    box-sizing: border-box;
+    height: 80px;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.bodycell {
+    width: 1440px;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0px var(--padding-xs);
+    box-sizing: border-box;
+}
+.mech-name-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.titlecell1 {
+    width: 160px;
+    background-color: var(--color-gray-300);
+    border-right: 1px solid var(--color-black);
+    border-bottom: 1px solid var(--color-black);
+    box-sizing: border-box;
+    height: 64px;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.bodycell1 {
+    align-self: stretch;
+    width: 1440px;
+    background-color: #F5F5F5;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0px var(--padding-xs);
+    box-sizing: border-box;
+}
+.monday-wednesday-friday {
+    margin: 0;
+    white-space: pre-wrap;
+}
+.schedule-row {
+    width: 1600px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.titlecell3 {
+    width: 160px;
+    background-color: var(--color-gray-300);
+    border-right: 1px solid var(--color-black);
+    border-bottom: 1px solid var(--color-black);
+    box-sizing: border-box;
+    height: 76px;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.brakes {
+    margin: 0;
+}
+.empspec {
+    flex: 1;
+    position: relative;
+}
+.bodycell3 {
+    align-self: stretch;
+    flex: 1;
+    background-color: #F5F5F5;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0px var(--padding-xs);
+}
+.titlecell4 {
+    width: 160px;
+    background-color: var(--color-gray-300);
+    border-right: 1px solid var(--color-black);
+    border-bottom: 1px solid var(--color-black);
+    box-sizing: border-box;
+    height: 72px;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.bodycell4 {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0px var(--padding-xs);
+}
+.titlecell5 {
+    align-self: stretch;
+    width: 160px;
+    background-color: var(--color-gray-300);
+    border-right: 1px solid var(--color-black);
+    border-bottom: 1px solid var(--color-black);
+    box-sizing: border-box;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.bankaccttitle {
+    width: 116px;
+    position: relative;
+    display: inline-block;
+    flex-shrink: 0;
+}
+.bankacctnum {
+    width: 1170px;
+    position: relative;
+    text-align: right;
+    display: inline-block;
+    flex-shrink: 0;
+}
+.bodycell5 {
+    flex: 1;
+    height: 78px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-content: center;
+    padding: 0px var(--padding-xs);
+    box-sizing: border-box;
+    gap: 0px;
+    font-size: var(--font-size-base);
+    background-color: #F5F5F5;
+}
+.reveal-info-wrapper {
+    width: 130px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: var(--br-xl);
+    background-color: #ebebeb;
+    border: 1px solid var(--color-gray-100);
+    box-sizing: border-box;
+    height: 61px;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 0px;
+    font-size: var(--font-size-mini);
+    font-family: var(--font-inknut-antiqua);
+}
+.contact-info-row1 {
+    width: 1600px;
+    height: 89px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.edit-wrapper {
+    width: 130px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: var(--br-xl);
+    background-color: #fffa60;
+    border: 1px solid var(--color-gray-100);
+    box-sizing: border-box;
+    height: 61px;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+.bodycell6 {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+.complete-row {
+    width: 1600px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-mini);
+    font-family: var(--font-inknut-antiqua);
+}
+.table {
+    position: absolute;
+    top: 310px;
+    left: 160px;
+    width: 1600px;
+    height: 501px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.play-arrow-filled-icon {
+    width: 33.7px;
+    position: relative;
+    height: 31.3px;
+    object-fit: contain;
+}
+.text {
+    position: relative;
+    font-weight: 500;
+}
+.play-arrow-filled-parent {
+    position: absolute;
+    top: 48px;
+    left: 65px;
+    border-radius: 100px;
+    background-color: #c93131;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-xl) 62px var(--padding-xl) 21px;
+    gap: 27px;
+    cursor: pointer;
+    font-size: 40px;
+    color: var(--color-white);
+}
+.button {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0%;
+    right: 0%;
+    bottom: 0%;
+    left: 0%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: var(--Radius-200);
+    background-color: var(--Background-Brand-Default);
+    border: var(--Stroke-Border) solid var(--Border-Brand-Default);
+    box-sizing: border-box;
+    overflow: hidden;
+}
+.account-button-for-mech-child {
+    position: absolute;
+    top: 48px;
+    left: 15px;
+    background-color: var(--color-white);
+    width: 39px;
+    height: 5px;
+}
+.account-button-for-mech-item {
+    position: absolute;
+    top: 32px;
+    left: 15px;
+    background-color: var(--color-white);
+    width: 39px;
+    height: 5px;
+}
+.account-button-for-mech-inner {
+    position: absolute;
+    top: 16px;
+    left: 15px;
+    background-color: var(--color-white);
+    width: 39px;
+    height: 5px;
+}
+.account-button-for-mech {
+    position: absolute;
+    top: 55px;
+    left: 1817px;
+    width: 70px;
+    height: 70px;
+}
+.mechanic-account {
+    width: 100%;
+    position: relative;
+    background-color: var(--color-white);
+    height: 1080px;
+    overflow: hidden;
+    text-align: left;
+    font-size: var(--font-size-xl);
+    color: var(--color-black);
+    font-family: var(--font-montserrat);
+}
+
+.account-content {
+    padding-top: 200px; /* Adjust based on your header height */
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Horizontally centers child elements */
+}
+
+/* Keep all your existing styles, but remove these since they're in HeaderBar now */
+.background-red, 
+.background-black, 
+.srs-csc-131-1-icon {
+    display: none;
+}
+
+/* Adjust the table positioning */
+.table {
+    width: 1500px;
+    margin: 175px auto 0; /* Top margin for spacing + auto horizontal centering */
+    position: relative;
+    left: auto; /* Remove absolute positioning offsets */
+    top: auto;
+}
+
+/* Add to MechAccountDetailsStyles.css */
+.reveal-info-wrapper {
+    /* ... existing styles ... */
+    cursor: pointer;
+    transition: background-color 0.3s;
+    user-select: none;
+}
+
+.reveal-info-wrapper:hover {
+    background-color: #d9d9d9;
+}
+
+.bankacctnum {
+    font-family: monospace; /* Makes asterisks align better */
+    letter-spacing: 2px;
+}

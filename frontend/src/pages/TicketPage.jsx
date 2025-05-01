@@ -1,21 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../styles/TicketPage.css';
+import HeaderBar from '../components/HeaderBarComponent';
 
 const TicketPage = () => {
   const [tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(true);
+  const employeeId = 101; // Replace with the logged-in employee's ID or fetch dynamically
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Function to fetch tickets from the API
     const fetchTickets = async () => {
       try {
-        const response = await fetch('https://your-api-endpoint.com/tickets'); // Replace with your API endpoint
+        // Replace this URL with your actual API endpoint
+        const response = await fetch('https://api.example.com/tickets');
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          throw new Error('Failed to fetch tickets');
         }
         const data = await response.json();
-        setTickets(data);
+
+        // Filter tickets assigned to the specific employee
+        const assignedTickets = data.filter((ticket) => ticket.assignedTo === employeeId);
+        setTickets(assignedTickets);
       } catch (error) {
         console.error('Error fetching tickets:', error);
       } finally {
@@ -24,71 +30,39 @@ const TicketPage = () => {
     };
 
     fetchTickets();
-  }, []);
-
-  const handleAcceptTicket = async (ticketId) => {
-    try {
-      // Replace with your API endpoint for accepting a ticket
-      const response = await fetch(`https://your-api-endpoint.com/tickets/${ticketId}/accept`, {
-        method: 'POST',
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      // Update the ticket list to reflect the accepted ticket
-      setTickets((prevTickets) =>
-        prevTickets.filter((ticket) => ticket.id !== ticketId)
-      );
-
-      alert('Ticket accepted successfully!');
-    } catch (error) {
-      console.error('Error accepting ticket:', error);
-      alert('Failed to accept the ticket.');
-    }
-  };
+  }, [employeeId]);
 
   if (loading) {
     return <div>Loading tickets...</div>;
   }
 
+  if (tickets.length === 0) {
+    return <div>No tickets assigned to you.</div>;
+  }
+
   return (
     <div>
-      <h1>Mechanic Tickets</h1>
-      <section>
-        {tickets.length > 0 ? (
-          <ul>
-            {tickets.map((ticket) => (
-              <li key={ticket.id} className="ticket-item">
-                <h3>Customer: {ticket.customerName}</h3>
-                <p>Car Model: {ticket.carModel}</p>
-                <p>License Plate: {ticket.licensePlate}</p>
-                <p>Issue: {ticket.issue}</p>
-                <p>Appointment Date: {ticket.date}</p>
-                <div>
-                  <p>Progress: {ticket.progress}%</p>
-                  <div className="progress-bar">
-                    <div
-                      className="progress-bar-fill"
-                      style={{ width: `${ticket.progress}%` }}
-                    ></div>
-                  </div>
-                </div>
-                <button
-                  onClick={() => handleAcceptTicket(ticket.id)}
-                  className="accept-button"
-                >
-                  Accept Ticket
-                </button>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No tickets assigned.</p>
-        )}
-      </section>
-      <button onClick={() => navigate('/')}>Go Back to Home</button>
+      <HeaderBar />
+      <br />
+      <img
+        className="srs-csc-131-1-icon"
+        alt="Company Logo"
+        src="/SRS_CSC_131 1.png"
+        onClick={() => navigate("/")}
+      />
+      <h1 className="ticket-header">Tickets Assigned to You</h1>
+      <ul className="ticket-list">
+        {tickets.map((ticket) => (
+          <li
+            key={ticket.id}
+            className="ticket-item"
+            onClick={() => navigate(`/ticket/${ticket.id}`)} // Navigate to ticket details page
+          >
+            <strong>Issue:</strong> {ticket.issue} <br />
+            <strong>Date:</strong> {ticket.date}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

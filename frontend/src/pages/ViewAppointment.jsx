@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../styles/ViewAppointment.css';
+import HeaderBar from '../components/HeaderBarComponent';
 
 const ViewAppointment = () => {
   const [appointments, setAppointments] = useState([]);
@@ -37,9 +39,13 @@ const ViewAppointment = () => {
 
   return (
     <div>
-      <img className="srs-csc-131-2-icon" alt="" src="SRS_CSC_131 1.png"></img>
+      <br/>
+      <HeaderBar/>
+      <img className="srs-csc-131-2-icon" 
+      alt="" 
+      src="SRS_CSC_131 1.png"
+      onClick={() => navigate("/")}></img>
       <h1>Your Appointments</h1>
-
       <section>
         <h2>Current Appointments</h2>
         {currentAppointments.length > 0 ? (
@@ -71,7 +77,7 @@ const ViewAppointment = () => {
           <p>No past appointments.</p>
         )}
       </section>
-      <button onClick={() => navigate('/')}>Go Back to Home</button>
+      <button onClick={() => navigate('/appt-creation')}>Go Back to Create</button>
     </div>
   );
 };

@@ -1,103 +1,41 @@
-/* General page styling */
-.ticket-page {
+/* General styling */
+body {
+    font-family: Arial, sans-serif;
     background-color: #f9f9f9;
-    font-family: 'Montserrat', sans-serif;
-    padding: 20px;
-    text-align: center;
+    margin: 0;
+    padding: 0;
 }
 
-h1 {
+/* Header styling */
+.ticket-header {
+    font-size: 24px;
     color: #d73706;
-    font-size: 28px;
-    margin-bottom: 20px;
+    margin: 220px auto; /* Reduced margin-bottom */
+    text-align: center;
 }
 
 /* Ticket list styling */
 .ticket-list {
     list-style-type: none;
     padding: 0;
-    margin: 0 auto;
+    margin: 200px auto 0; /* Reduced margin-top */
     max-width: 800px;
 }
 
+/* Individual ticket styling */
 .ticket-item {
     background-color: #fff;
-    margin-bottom: 20px;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: left;
-}
-
-.ticket-item h3 {
-    color: #333;
     margin-bottom: 10px;
-}
-
-.ticket-item p {
-    margin: 5px 0;
-    font-size: 16px;
-    color: #555;
-}
-
-/* Progress bar styling */
-.progress-container {
-    margin-top: 10px;
-}
-
-.progress-bar {
-    background-color: #e0e0e0;
+    padding: 5px;
     border-radius: 5px;
-    overflow: hidden;
-    height: 10px;
-    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: default;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.progress-bar-fill {
-    background-color: #4caf50;
-    height: 100%;
-    transition: width 0.3s ease;
-}
-
-/* Button styling */
-.accept-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #d73706;
-    color: rgb(246, 254, 0);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-.accept-button:hover {
-    background-color: #621d08;
-}
-
-.back-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #555;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 20px;
-}
-
-.back-button:hover {
-    background-color: #333;
-}
-
-/* Loading and no tickets styling */
-.loading {
-    font-size: 18px;
-    color: #555;
-}
-
-.no-tickets {
-    font-size: 18px;
-    color: #555;
-    margin-top: 20px;
+/* Hover effect for tickets */
+.ticket-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #f4f4f4;
 }

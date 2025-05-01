@@ -1,0 +1,343 @@
+body {
+    margin: 0;
+    line-height: normal;
+}
+
+
+:root {
+    
+    /* Fonts */
+    --font-inter: Inter;
+    --font-montserrat: Montserrat;
+    
+    /* font sizes */
+    --font-size-xl: 20px;
+    
+    /* Colors */
+    --color-black: #000;
+    --color-gray-100: rgba(144, 144, 144, 0.12);
+    --color-gray-200: rgba(144, 144, 144, 0.25);
+    --color-white: #fff;
+    
+    /* Paddings */
+    --padding-xs: 12px;
+    --padding-xl: 20px;
+    
+    /* Figma Variables */
+    
+    /* Color Variables */
+    --Background-Brand-Default: #2c2c2c;
+    --Border-Brand-Default: #2c2c2c;
+    --Text-Brand-On-Brand: #f5f5f5;
+    
+    /* Number Variables */
+    --Stroke-Border: 1px;
+    --Space-200: 8px;
+    --Radius-200: 8px;
+    --Space-300: 12px;
+    --Body-Font-Weight-Regular: 400;
+    
+}
+
+.background-red {
+    position: absolute;
+    top: -13px;
+    left: 0px;
+    background: linear-gradient(90deg, #631818, #c93131);
+    width: 1920px;
+    height: 185px;
+}
+.play-arrow-filled-icon {
+    width: 33.7px;
+    position: relative;
+    height: 31.3px;
+    object-fit: contain;
+}
+.text {
+    position: relative;
+    font-weight: 500;
+}
+.play-arrow-filled-parent {
+    position: absolute;
+    top: 48px;
+    left: 65px;
+    border-radius: 100px;
+    background-color: #c93131;
+    width: 413px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-xl) 62px var(--padding-xl) 21px;
+    box-sizing: border-box;
+    gap: 27px;
+    cursor: pointer;
+    font-size: 40px;
+}
+.background-black-icon {
+    position: absolute;
+    top: 172px;
+    left: -8px;
+    width: 1936px;
+    height: 42px;
+}
+.srs-csc-131-1-icon {
+    position: absolute;
+    top: 0px;
+    left: 776px;
+    width: 367.3px;
+    height: 309px;
+    object-fit: cover;
+    cursor: pointer;
+}
+.id {
+    position: relative;
+}
+.mechanic-id {
+    width: 160px;
+    background-color: var(--color-gray-200);
+    border-right: 1px solid var(--color-black);
+    border-bottom: 1px solid var(--color-black);
+    box-sizing: border-box;
+    height: 65px;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.id-box {
+    height: 58px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.mechanic-year {
+    align-self: stretch;
+    width: 160px;
+    background-color: var(--color-gray-200);
+    border-right: 1px solid var(--color-black);
+    border-bottom: 1px solid var(--color-black);
+    box-sizing: border-box;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.year1 {
+    align-self: stretch;
+    width: 1440px;
+    background-color: var(--color-gray-100);
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0px var(--padding-xs);
+    box-sizing: border-box;
+}
+.year-box {
+    height: 45px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.working-hours {
+    width: 160px;
+    background-color: var(--color-gray-200);
+    border-right: 1px solid var(--color-black);
+    border-bottom: 1px solid var(--color-black);
+    box-sizing: border-box;
+    height: 90px;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.monday-wednesday-friday {
+    margin: 0;
+}
+.days-of-the-container {
+    width: 533px;
+    position: relative;
+    display: inline-block;
+    flex-shrink: 0;
+}
+.working-dates {
+    width: 1440px;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0px var(--padding-xs);
+    box-sizing: border-box;
+}
+.schedule-box {
+    height: 90px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.mechanic-profession {
+    width: 160px;
+    background-color: var(--color-gray-200);
+    border-right: 1px solid var(--color-black);
+    border-bottom: 1px solid var(--color-black);
+    box-sizing: border-box;
+    height: 100px;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.skill-list {
+    flex: 1;
+    position: relative;
+}
+.mechanic-skills {
+    align-self: stretch;
+    flex: 1;
+    background-color: var(--color-gray-100);
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0px var(--padding-xs);
+}
+.profession-box {
+    width: 1600px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.mechanic-past-working-history {
+    width: 160px;
+    background-color: var(--color-gray-200);
+    border-right: 1px solid var(--color-black);
+    border-bottom: 1px solid var(--color-black);
+    box-sizing: border-box;
+    height: 104px;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.vehicles-that-mechanic-worked {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0px var(--padding-xs);
+}
+.table {
+    position: absolute;
+    top: 405px;
+    left: 160px;
+    width: 1600px;
+    height: 402px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    color: var(--color-black);
+}
+.button {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0%;
+    right: 0%;
+    bottom: 0%;
+    left: 0%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: var(--Radius-200);
+    background-color: var(--Background-Brand-Default);
+    border: var(--Stroke-Border) solid var(--Border-Brand-Default);
+    box-sizing: border-box;
+    overflow: hidden;
+}
+.account-button-for-admin-child {
+    position: absolute;
+    top: 48px;
+    left: 15px;
+    background-color: var(--color-white);
+    width: 39px;
+    height: 5px;
+}
+.account-button-for-admin-item {
+    position: absolute;
+    top: 32px;
+    left: 15px;
+    background-color: var(--color-white);
+    width: 39px;
+    height: 5px;
+}
+.account-button-for-admin-inner {
+    position: absolute;
+    top: 16px;
+    left: 15px;
+    background-color: var(--color-white);
+    width: 39px;
+    height: 5px;
+}
+.account-button-for-admin {
+    position: absolute;
+    top: 55px;
+    left: 1817px;
+    width: 70px;
+    height: 70px;
+}
+.button2 {
+    position: relative;
+    line-height: 100%;
+}
+.button1 {
+    position: absolute;
+    top: 902px;
+    left: 1598px;
+    border-radius: var(--Radius-200);
+    background-color: var(--Background-Brand-Default);
+    border: var(--Stroke-Border) solid var(--Border-Brand-Default);
+    box-sizing: border-box;
+    width: 157px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--Space-300);
+    color: var(--Text-Brand-On-Brand);
+    font-family: var(--font-inter);
+}
+.mechanic-statistics-2 {
+    width: 100%;
+    position: relative;
+    background-color: var(--color-white);
+    height: 1080px;
+    overflow: hidden;
+    text-align: left;
+    font-size: var(--font-size-xl);
+    color: var(--color-white);
+    font-family: var(--font-montserrat);
+}
+

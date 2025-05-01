@@ -1,55 +1,116 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
+import '../styles/AppointmentReschedule.css';
+import HeaderBar from '../components/HeaderBarComponent';
 
 const AppointmentReschedule = () => {
-  const [appointmentId, setAppointmentId] = useState('');
-  const [newDate, setNewDate] = useState('');
+    const [appointmentId, setAppointmentId] = useState('');
+    const [newDate, setNewDate] = useState('');
+    const [newTime, setNewTime] = useState(''); // Added state for new time
+    const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
 
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const rescheduleDetails = {
-      id: appointmentId,
-      newDate: newDate,
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const rescheduleData = {
+            appointmentId,
+            newDate,
+            newTime, // Include the new time in the reschedule data
+        };
+
+        try {
+            const response = await fetch('https://your-api-endpoint.com/appointments/reschedule', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(rescheduleData),
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log('Appointment rescheduled successfully:', data);
+            setSuccessMessage('Appointment rescheduled successfully!');
+            setErrorMessage('');
+            setAppointmentId('');
+            setNewDate('');
+            setNewTime(''); // Reset the time
+            navigate('/resuccess'); // Navigate to success page
+        } catch (error) {
+            console.error('Error rescheduling appointment:', error);
+            setErrorMessage('Failed to reschedule appointment. Please try again.');
+            setSuccessMessage('');
+        }
     };
-    console.log('Appointment Rescheduled:', rescheduleDetails);
-    setAppointmentId('');
-    setNewDate('');
-    navigate('/resuccess');
-  };
 
-  return (
-    <div>
-      <h2>Reschedule Appointment</h2>
-      <img src={kachowImage} alt="Kachow" className="kachow-image" />
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="appointmentId">Appointment ID:</label>
-        <input
-          type="text"
-          id="appointmentId"
-          value={appointmentId}
-          onChange={(e) => setAppointmentId(e.target.value)}
-          required
-        />
-        <br />
-        <label htmlFor="newDate">New Appointment Date:</label>
-        <input
-          type="date"
-          id="newDate"
-          value={newDate}
-          onChange={(e) => setNewDate(e.target.value)}
-          required
-        />
-        <br />
-        <button type="submit">Reschedule</button>
-      </form>
-      <br />
-      <button onClick={() => navigate('/creation')}>Create</button>
-      <br />
-      <button onClick={() => navigate('/cancel')}>Cancel</button>
-    </div>
-  );
+    return (
+        <div>
+            <HeaderBar />
+            <br />
+            <br />
+            <img className="srs-csc-131-2-icon" 
+            alt="" 
+            src="SRS_CSC_131 1.png"
+            onClick={() => navigate("/")}></img>
+            <h2>Reschedule Appointment</h2>
+            <form onSubmit={handleSubmit}>
+                <label>
+                    Appointment ID:
+                    <input
+                        type="text"
+                        value={appointmentId}
+                        onChange={(e) => setAppointmentId(e.target.value)}
+                        required
+                    />
+                </label>
+                <br />
+                <label>
+                    New Appointment Date:
+                    <input
+                        type="date"
+                        value={newDate}
+                        onChange={(e) => setNewDate(e.target.value)}
+                        required
+                    />
+                </label>
+                <br />
+                <label>
+                    New Appointment Time:
+                    <select
+                        value={newTime}
+                        onChange={(e) => setNewTime(e.target.value)}
+                        required
+                    >
+                        <option value="" disabled>
+                            -- Select Time --
+                        </option>
+                        <option value="08:00">08:00 AM</option>
+                        <option value="09:00">09:00 AM</option>
+                        <option value="10:00">10:00 AM</option>
+                        <option value="11:00">11:00 AM</option>
+                        <option value="12:00">12:00 PM</option>
+                        <option value="13:00">01:00 PM</option>
+                        <option value="14:00">02:00 PM</option>
+                        <option value="15:00">03:00 PM</option>
+                        <option value="16:00">04:00 PM</option>
+                        <option value="17:00">05:00 PM</option>
+                    </select>
+                </label>
+                <br />
+                <br />
+                <button type="submit">Reschedule Appointment</button>
+            </form>
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
+            {successMessage && <p className="success-message">{successMessage}</p>}
+            <br />
+            <button onClick={() => navigate('/appt-creation')}>Go Back to Create</button>
+        </div>
+    );
 };
 
 export default AppointmentReschedule;

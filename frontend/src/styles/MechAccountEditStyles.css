@@ -1,0 +1,363 @@
+body {
+  margin: 0;
+  line-height: normal;
+}
+
+:root {
+  
+  /* Fonts */
+  --font-montserrat: Montserrat;
+  
+  /* font sizes */
+  --font-size-5xl: 24px;
+  --font-size-7xl: 26px;
+  
+  /* Colors */
+  --color-gray-100: #858585;
+  --color-gray-200: #1c1c1c;
+  --color-white: #fff;
+  
+  /* Paddings */
+  --padding-xl: 20px;
+  
+  /* Border radiuses */
+  --br-8xs: 5px;
+  
+}
+
+.background-red {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background: linear-gradient(90deg, #631818, #c93131);
+  width: 1920px;
+  height: 185px;
+}
+.background-black {
+  position: absolute;
+  top: 185px;
+  left: 0px;
+  background-color: #211f1f;
+  width: 1936px;
+  height: 42px;
+}
+.srs-csc-131-1-icon {
+  position: absolute;
+  top: 0px;
+  left: 776px;
+  width: 367.3px;
+  height: 309px;
+  object-fit: cover;
+}
+.edit-account-child {
+  position: absolute;
+  top: 87px;
+  left: 150px;
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+}
+.firstname-child {
+  position: absolute;
+  top: 36px;
+  left: -2px;
+  border-radius: var(--br-8xs);
+  background-color: var(--color-white);
+  border: 2px solid var(--color-gray-100);
+  box-sizing: border-box;
+  width: 409px;
+  height: 74px;
+}
+.first-name {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  font-weight: 600;
+}
+.enter-first-name {
+  position: absolute;
+  top: 59px;
+  left: 27px;
+  font-size: var(--font-size-5xl);
+  font-weight: 500;
+  color: var(--color-gray-100);
+}
+.firstname {
+  width: 405px;
+  position: relative;
+  height: 108px;
+}
+.lastname-child {
+  position: absolute;
+  top: 36px;
+  left: -2px;
+  border-radius: var(--br-8xs);
+  background-color: var(--color-white);
+  border: 2px solid var(--color-gray-100);
+  box-sizing: border-box;
+  width: 411px;
+  height: 74px;
+}
+.enter-last-name {
+  position: absolute;
+  top: 59px;
+  left: 27.13px;
+  font-size: var(--font-size-5xl);
+  font-weight: 500;
+  color: var(--color-gray-100);
+}
+.lastname {
+  width: 407px;
+  position: relative;
+  height: 108px;
+}
+.email-child {
+  position: absolute;
+  top: 36px;
+  left: -2px;
+  border-radius: var(--br-8xs);
+  background-color: var(--color-white);
+  border: 2px solid var(--color-gray-100);
+  box-sizing: border-box;
+  width: 877px;
+  height: 74px;
+}
+.email1 {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  font-weight: 600;
+  display: inline-block;
+  width: 275.9px;
+}
+.enter-email-address {
+  position: absolute;
+  top: 59px;
+  left: 27.09px;
+  font-size: var(--font-size-5xl);
+  font-weight: 500;
+  color: var(--color-gray-100);
+  display: inline-block;
+  width: 407.4px;
+}
+.email {
+  width: 873px;
+  position: relative;
+  height: 108px;
+}
+.address-child {
+  position: absolute;
+  top: 36px;
+  left: -2px;
+  border-radius: var(--br-8xs);
+  background-color: var(--color-white);
+  border: 2px solid var(--color-gray-100);
+  box-sizing: border-box;
+  width: 880px;
+  height: 74px;
+}
+.address1 {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  font-weight: 600;
+  display: inline-block;
+  width: 276.9px;
+}
+.enter-adress {
+  position: absolute;
+  top: 59px;
+  left: 27.19px;
+  font-size: var(--font-size-5xl);
+  font-weight: 500;
+  color: var(--color-gray-100);
+  display: inline-block;
+  width: 408.8px;
+}
+.address {
+  width: 876px;
+  position: relative;
+  height: 108px;
+}
+.keyboard-arrow-down {
+  position: absolute;
+  top: 49px;
+  left: 344px;
+  width: 48px;
+  height: 48px;
+  overflow: hidden;
+  display: none;
+}
+.state-child {
+  position: absolute;
+  top: 36px;
+  left: -2px;
+  border-radius: var(--br-8xs);
+  background-color: var(--color-white);
+  border: 2px solid var(--color-gray-100);
+  box-sizing: border-box;
+  width: 414px;
+  height: 74px;
+}
+.select-your-state {
+  position: absolute;
+  top: 59px;
+  left: 27.33px;
+  font-size: var(--font-size-5xl);
+  font-weight: 500;
+  color: var(--color-gray-100);
+}
+.keyboard-arrow-down1 {
+  position: absolute;
+  top: 49px;
+  left: 346.22px;
+  width: 48.6px;
+  height: 48px;
+  overflow: hidden;
+}
+.state {
+  width: 410px;
+  position: relative;
+  height: 108px;
+}
+.banknumber-child {
+  position: absolute;
+  top: 36px;
+  left: -2px;
+  border-radius: var(--br-8xs);
+  background-color: var(--color-white);
+  border: 2px solid var(--color-gray-100);
+  box-sizing: border-box;
+  width: 484px;
+  height: 74px;
+}
+.banknumber {
+  width: 480px;
+  position: relative;
+  height: 108px;
+}
+.enter-your-bank {
+  position: absolute;
+  top: 59px;
+  left: 32px;
+  font-size: var(--font-size-5xl);
+  font-weight: 500;
+  color: var(--color-gray-100);
+  display: inline-block;
+  width: 416.3px;
+}
+.edit-profile-component {
+  position: absolute;
+  top: 174px;
+  left: 404px;
+  width: 1111px;
+  height: 1099px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  padding: 106px 117px;
+  box-sizing: border-box;
+  gap: 18px 62px;
+}
+.enter {
+  position: relative;
+  font-weight: 600;
+}
+.enter-wrapper {
+  position: absolute;
+  top: 1300px;
+  left: 1110px;
+  border-radius: var(--br-8xs);
+  background-color: #33b247;
+  width: 284px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  box-sizing: border-box;
+  color: rgba(255, 255, 255, 0.75);
+}
+.edit-account-item {
+  position: absolute;
+  top: 1300px;
+  left: 1461px;
+  border-radius: var(--br-8xs);
+  width: 108px;
+  height: 52px;
+}
+.play-arrow-filled-icon {
+  width: 33.7px;
+  position: relative;
+  height: 31.3px;
+  object-fit: contain;
+}
+.text {
+  position: relative;
+  font-weight: 500;
+}
+.play-arrow-filled-parent {
+  position: absolute;
+  top: 48px;
+  left: 65px;
+  border-radius: 100px;
+  background-color: #c93131;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-xl) 62px var(--padding-xl) 21px;
+  gap: 27px;
+  cursor: pointer;
+  font-size: 40px;
+  color: var(--color-white);
+}
+.edit-account {
+  width: 100%;
+  position: relative;
+  background-color: var(--color-white);
+  height: 1400px;
+  overflow: hidden;
+  text-align: left;
+  font-size: var(--font-size-7xl);
+  color: var(--color-gray-200);
+  font-family: var(--font-montserrat);
+}
+/* Add these styles at the end of your CSS file */
+.input-field {
+  position: absolute;
+  top: 36px;
+  left: -2px;
+  border-radius: var(--br-8xs);
+  background-color: var(--color-white);
+  border: 2px solid var(--color-gray-100);
+  box-sizing: border-box;
+  width: calc(100% - 4px);
+  height: 74px;
+  padding: 0 20px;
+  font-size: var(--font-size-5xl);
+  font-family: var(--font-montserrat);
+  outline: none;
+}
+
+.input-field:focus {
+  border-color: #c93131;
+}
+
+.email-child.input-field {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.enter-wrapper {
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.enter-wrapper:hover {
+  background-color: #2a9d3f !important;
+}

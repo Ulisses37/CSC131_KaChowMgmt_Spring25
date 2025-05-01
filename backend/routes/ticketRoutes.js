@@ -6,6 +6,7 @@ import {
     validateRequest,
     validateCustomerTicketAccess,
     validateCompleteTicket,
+    validateAssignMechanic,
 } from "../middleware/validators/index.js";
 import {
     createTicket,
@@ -13,7 +14,11 @@ import {
     rescheduleTicket,
     getVehicleMaintenanceStatus,
     completeTicket,
+    addTicketReview,
+    getTicketMechanics,
 } from '../controllers/ticketController.js';
+
+import { assignMechanictoTicket } from '../controllers/patchticketController.js';
 
 const router = express.Router();
 
@@ -49,5 +54,21 @@ router.patch('/:id/complete',
     validateRequest,        // Your existing error handler
     completeTicket
 );
+
+// Add this new route at the end
+router.post('/:id/review',
+    validateRequest,
+    addTicketReview
+);
+
+// Admin Assign Ticket
+router.get('/tickets/:id',
+    getTicketMechanics);
+    
+// Updated route with validator
+router.patch('/tickets/:id',
+    validateAssignMechanic,
+    validateRequest,
+    assignMechanictoTicket);
 
 export default router;

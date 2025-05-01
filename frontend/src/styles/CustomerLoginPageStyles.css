@@ -29,6 +29,7 @@
   	height: 309px;
   	object-fit: contain;
   	cursor: pointer;
+	z-index: 10;
 }
 .login-page-0-inner {
   	position: absolute;

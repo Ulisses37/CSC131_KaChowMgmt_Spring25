@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import HeaderBar from '../components/HeaderBarComponent';
+import { useNavigate } from 'react-router';
 
 const EmployeeClock = () => {
   const [clockInTime, setClockInTime] = useState(null);
   const [clockOutTime, setClockOutTime] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [timeDifference, setTimeDifference] = useState('');
+
   const navigate = useNavigate();
 
   const handleClockIn = async () => {
@@ -73,6 +75,16 @@ const EmployeeClock = () => {
 
   return (
     <div>
+      <HeaderBar />
+      <br/>
+      <br/>
+      <br/>
+      <img
+                className="srs-csc-131-1-icon"
+                alt="Company Logo"
+                src="/SRS_CSC_131 1.png"
+                onClick={() => navigate("/")}
+            />
       <h2>Employee Clock In/Out</h2>
       <div className="clock-buttons">
         <button onClick={handleClockIn} className="clock-in-button">
@@ -95,7 +107,6 @@ const EmployeeClock = () => {
           </div>
         )}
       </div>
-      <button onClick={() => navigate('/')}>Go Back to Home</button>
     </div>
   );
 };

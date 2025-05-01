@@ -47,7 +47,7 @@
     height: 309px;
     
 }
-.rectangle-div {
+.top-border {
     position: absolute;
     top: 366px;
     left: -6px;
@@ -239,7 +239,7 @@
     cursor: pointer;
     font-size: 30px;
 }
-.home-child1 {
+.bottom-border {
     position: absolute;
     top: 984px;
     left: -9px;
