@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/EmployeeLoginStyles.css';
+import BackButton from '../components/BackButtonComponent'; 
 import HeaderBar from '../components/HeaderBarComponent'; 
 
 function EmployeeLoginPage() {
@@ -90,14 +91,9 @@ function EmployeeLoginPage() {
 
     return(
         <div className="employee-login-page">
+            <BackButton text="HOME" onClick={() => navigate('/')} />
             <HeaderBar/>
-            <img 
-                className="srs-csc-131-1-icon" 
-                alt="Company Logo" 
-                src="/SRS_CSC_131 1.png"
-                onClick={() => navigate('/')}
-                style={{ cursor: 'pointer' }}
-            />
+            <img className="srs-csc-131-1-icon" alt="Company Logo" src="/SRS_CSC_131 1.png"/>
             <div className="employee-login-page-inner"></div>
             <div className="employee-log-in">Employee Log In</div>
             <div className="line-div"></div>

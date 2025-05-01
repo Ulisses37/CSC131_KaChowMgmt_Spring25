@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import HeaderBar from '../components/HeaderBarComponent'; 
+import BackButton from '../components/BackButtonComponent'; 
 import '../styles/CustomerLoginPageStyles.css';
 
 
@@ -86,9 +87,9 @@ function CustomerLoginPage() {
 
     return (
         <div className="login-page-0">
-            {/* <div className="login-page-0-child"></div>
-            <div className="login-page-0-item"></div> */}
+            <BackButton text="HOME"/>
             <HeaderBar/>
+            
             {/* Logo (Click to go to Home Page) */}
             <img
                 className="srs-csc-131-1-icon"

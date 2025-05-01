@@ -526,4 +526,29 @@ export const updateEmployee = async (req, res) => {
     }
 };
 
+/**
+ * Get all employees
+ * @route GET /api/employees
+ * @access Admin
+ */
+export const getAllEmployees = async (req, res) => {
+    try {
+        // Find all employees and exclude sensitive fields
+        const employees = await Employee.find({})
+            .select('-password -resetPasswordToken -resetTokenExpiration');
+
+        // Return the list of employees
+        res.status(200).json({
+            success: true,
+            count: employees.length,
+            data: employees
+        });
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            error: 'Server error: ' + err.message
+        });
+    }
+};
+
 

@@ -6,90 +6,185 @@ import HeaderBar from '../components/HeaderBarComponent';
 function AdminTicketViewPage() {
     const navigate = useNavigate();
     
-    // Sample data for mechanics with their colors
-    const mechanics = [
-        { id: 1, name: 'Mechanic 1', color: '#FF5733' },
-        { id: 2, name: 'Mechanic 2', color: '#33FF57' },
-        { id: 3, name: 'Mechanic 3', color: '#3357FF' }
-    ];
-
-    // State for tickets
+    const [mechanics, setMechanics] = useState([]);
     const [unassignedTickets, setUnassignedTickets] = useState([]);
     const [assignedTickets, setAssignedTickets] = useState([]);
-    
-    // State for staged assignments before confirmation
     const [stagedAssignments, setStagedAssignments] = useState({});
-    
-    // State for dropdown visibility
     const [dropdowns, setDropdowns] = useState({
         mechanic: null,
         status: null
     });
+    const [isLoading, setIsLoading] = useState(true);
 
-    // Simulate receiving new tickets
+    const assignMechanicToTicket = async (ticketId, mechanicId) => {
+        try {
+          // Get the authentication token from localStorage
+          const token = localStorage.getItem('token');
+          
+          if (!token) {
+            throw new Error('Authentication required. Please log in.');
+          }
+          
+          // Make the PATCH request to assign the mechanic
+          const response = await fetch(`http://localhost:5000/api/tickets/tickets/${ticketId}`, {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`  // Include auth token for admin authentication
+            },
+            body: JSON.stringify({ mechanicId })  // Send the mechanicId in the request body
+          });
+          
+          // Check if the response was successful
+          if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Failed to assign mechanic');
+          }
+          
+          // Parse and return the response data
+          const data = await response.json();
+          return data;
+          
+        } catch (error) {
+          console.error('Error assigning mechanic:', error);
+          throw error;  // Re-throw so the calling code can handle it
+        }
+    };
+
+    const updateTicketStatus = async (ticketId, status) => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/tickets/${ticketId}/status`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ status }),
+        });
+        return await response.json();
+    } catch (error) {
+        console.error('Error updating ticket status:', error);
+        throw error;
+    }
+    };
+
+    const fetchTickets = async () => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/tickets`);
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching tickets:', error);
+        throw error;
+    }
+    };
+
+    // Fetch initial data
     useEffect(() => {
-        const initialTickets = [
-            { id: 1, ticketNumber: '#0001', serviceType: 'Oil Change', mechanic: null, status: 'Pending', estimatedTime: '30 mins' },
-            { id: 2, ticketNumber: '#0002', serviceType: 'Tire Rotation', mechanic: null, status: 'Pending', estimatedTime: '1 hr' },
-            { id: 3, ticketNumber: '#0003', serviceType: 'Brake Inspection', mechanic: null, status: 'Pending', estimatedTime: '1 hr 30 mins' },
-            { id: 4, ticketNumber: '#0004', serviceType: 'Battery Replacement', mechanic: 'Mechanic 1', status: 'In-Progress', estimatedTime: '2 hrs' }
-        ];
+        const loadInitialData = async () => {
+            try {
+                setIsLoading(true);
+                // Fetch mechanics and tickets in parallel
+                const [mechsResponse, ticketsResponse] = await Promise.all([
+                    fetch(`${API_BASE_URL}/mechanics`).then(res => res.json()),
+                    fetchTickets()
+                ]);
+                
+                setMechanics(mechsResponse);
+                
+                const unassigned = ticketsResponse.filter(t => !t.mechanicId);
+                const assigned = ticketsResponse.filter(t => t.mechanicId);
+                
+                setUnassignedTickets(unassigned);
+                setAssignedTickets(assigned);
+            } catch (error) {
+                console.error('Error loading initial data:', error);
+                // Optionally show error to user
+            } finally {
+                setIsLoading(false);
+            }
+        };
         
-        const unassigned = initialTickets.filter(t => !t.mechanic);
-        const assigned = initialTickets.filter(t => t.mechanic);
-        
-        setUnassignedTickets(unassigned);
-        setAssignedTickets(assigned);
+        loadInitialData();
     }, []);
 
-    // Stage mechanic selection (doesn't move ticket yet)
-    const handleMechanicSelect = (ticketId, mechanicName) => {
+    // Update handleMechanicSelect to use API
+    const handleMechanicSelect = async (ticketId, mechanicId) => {
         setStagedAssignments({
             ...stagedAssignments,
-            [ticketId]: mechanicName
+            [ticketId]: mechanicId
         });
         setDropdowns({ ...dropdowns, mechanic: null });
     };
 
-    // Handle status change (only for assigned tickets)
-    const handleStatusChange = (ticketId, newStatus) => {
-        setAssignedTickets(assignedTickets.map(ticket => 
-            ticket.id === ticketId ? { ...ticket, status: newStatus } : ticket
-        ));
-        setDropdowns({ ...dropdowns, status: null });
-    };
-
-    // Finalize staged assignments when Confirm is clicked
-    const handleConfirmAssignments = () => {
+    // Update handleConfirmAssignments to use API
+    const handleConfirmAssignments = async () => {
         if (unassignedTickets.length === 0) return;
         
-        // Only process tickets that have staged assignments
-        const ticketsToAssign = unassignedTickets.filter(ticket => 
-            stagedAssignments[ticket.id]
-        );
-    
-        const updatedUnassigned = unassignedTickets.filter(ticket => 
-            !stagedAssignments[ticket.id]
-        );
-    
-        const newlyAssigned = ticketsToAssign.map(ticket => ({
-            ...ticket,
-            mechanic: stagedAssignments[ticket.id],
-            status: 'Pending'
-        }));
-    
-        setAssignedTickets([...assignedTickets, ...newlyAssigned]);
-        setUnassignedTickets(updatedUnassigned);
-        setStagedAssignments({});
+        try {
+            setIsLoading(true);
+            const assignments = Object.entries(stagedAssignments)
+                .filter(([ticketId]) => unassignedTickets.some(t => t.id === parseInt(ticketId)));
+            
+            // Process all assignments in parallel
+            await Promise.all(
+                assignments.map(async ([ticketId, mechanicId]) => {
+                    await assignMechanicToTicket(ticketId, mechanicId);
+                })
+            );
+            
+            // Refresh the ticket list
+            const updatedTickets = await fetchTickets();
+            const unassigned = updatedTickets.filter(t => !t.mechanicId);
+            const assigned = updatedTickets.filter(t => t.mechanicId);
+            
+            setUnassignedTickets(unassigned);
+            setAssignedTickets(assigned);
+            setStagedAssignments({});
+        } catch (error) {
+            console.error('Error confirming assignments:', error);
+            // Optionally show error to user
+        } finally {
+            setIsLoading(false);
+        }
     };
 
-    const handleMechanicChange = (ticketId, newMechanic) => {
-        setAssignedTickets(assignedTickets.map(ticket => 
-            ticket.id === ticketId 
-                ? { ...ticket, mechanic: newMechanic } 
-                : ticket
-        ));
-        setDropdowns({ ...dropdowns, mechanic: null });
+    // Update handleMechanicChange to use API
+    const handleMechanicChange = async (ticketId, newMechanicId) => {
+        try {
+            setIsLoading(true);
+            await assignMechanicToTicket(ticketId, newMechanicId);
+            
+            // Update local state optimistically
+            setAssignedTickets(assignedTickets.map(ticket => 
+                ticket.id === ticketId 
+                    ? { ...ticket, mechanicId: newMechanicId } 
+                    : ticket
+            ));
+        } catch (error) {
+            console.error('Error changing mechanic:', error);
+            // Optionally show error to user
+        } finally {
+            setIsLoading(false);
+            setDropdowns({ ...dropdowns, mechanic: null });
+        }
+    };
+
+    // Update handleStatusChange to use API
+    const handleStatusChange = async (ticketId, newStatus) => {
+        try {
+            setIsLoading(true);
+            await updateTicketStatus(ticketId, newStatus);
+            
+            // Update local state optimistically
+            setAssignedTickets(assignedTickets.map(ticket => 
+                ticket.id === ticketId ? { ...ticket, status: newStatus } : ticket
+            ));
+        } catch (error) {
+            console.error('Error updating status:', error);
+            // Optionally show error to user
+        } finally {
+            setIsLoading(false);
+            setDropdowns({ ...dropdowns, status: null });
+        }
     };
 
     // Toggle dropdown visibility
@@ -115,196 +210,202 @@ function AdminTicketViewPage() {
     return (
         <div className="assigning-ticket-page">
             <HeaderBar/>
-            <div className="ticket-content-container">
-                <div className="assigning-ticket-adjust">
-                    {/* Unassigned Tickets Section */}
-                    <div className="unassigned-tickets">
-                        <div className="ticket-parent">
-                            <div className="ticket">TICKET #</div>
-                            <div className="mechanics">MECHANICS</div>
-                            <div className="status">STATUS</div>
-                            <div className="estimated-time">
-                                <span className="estimated-time-txt-container">
-                                    <div className="estimated">ESTIMATED</div>
-                                    <div className="estimated">TIME</div>
-                                </span>
+            {isLoading ? (
+                <div className="loading-indicator">
+                    Loading...
+                </div>
+            ) : (
+                <div className="ticket-content-container">
+                    <div className="assigning-ticket-adjust">
+                        {/* Unassigned Tickets Section */}
+                        <div className="unassigned-tickets">
+                            <div className="ticket-parent">
+                                <div className="ticket">TICKET #</div>
+                                <div className="mechanics">MECHANICS</div>
+                                <div className="status">STATUS</div>
+                                <div className="estimated-time">
+                                    <span className="estimated-time-txt-container">
+                                        <div className="estimated">ESTIMATED</div>
+                                        <div className="estimated">TIME</div>
+                                    </span>
+                                </div>
                             </div>
+                            
+                            {unassignedTickets.length === 0 ? (
+                                <div className="no-tickets-message">No unassigned tickets</div>
+                            ) : (
+                                unassignedTickets.map(ticket => (
+                                    <div className="instance-parent" key={ticket.id}>
+                                        {/* Ticket Number */}
+                                    <div 
+                                        className="client-name-vin-service-container" 
+                                        onClick={() => handleTicketClick(ticket.ticketNumber)}
+                                        style={{ cursor: 'pointer' }}
+                                    >
+                                        <div className="client-name-vin">{ticket.ticketNumber}</div>
+                                    </div>
+                                    
+                                    {/* Mechanics Dropdown */}
+                                    <div className="mech-default-button-frame">
+                                        <div 
+                                            className="mech-default-button4" 
+                                            onClick={() => toggleDropdown('mechanic', ticket.id)}
+                                            style={{
+                                                backgroundColor: stagedAssignments[ticket.id] 
+                                                    ? getMechanicColor(stagedAssignments[ticket.id])
+                                                    : '#a2a2a2'
+                                            }}
+                                        >
+                                            <div className="client-name-vin">
+                                                {stagedAssignments[ticket.id] || 'Assign Mechanic'}
+                                            </div>
+                                            <img className="arrow-drop-down-icon" alt="" src="arrow_drop_down.svg"/>
+                                        </div>
+                                        
+                                        {dropdowns.mechanic === ticket.id && (
+                                            <div className="mechanic-dropdown-menu">
+                                                {mechanics.map(mechanic => (
+                                                    <div 
+                                                        key={mechanic.id}
+                                                        className="mechanic-dropdown-item"
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            handleMechanicSelect(ticket.id, mechanic.id);
+                                                        }}
+                                                        style={{ backgroundColor: mechanic.color }}
+                                                    >
+                                                        {mechanic.name}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+                                    
+                                    {/* Status */}
+                                    <div className="status-drop-down-menu">
+                                        <div className="mech-default-button1">
+                                            <div className="client-name-vin">{ticket.status}</div>
+                                        </div>
+                                    </div>
+                                    
+                                    {/* Estimated Time */}
+                                    <div className="time-wrapper">
+                                        <div className="client-name-vin">{ticket.estimatedTime}</div>
+                                    </div>
+                                    </div>
+                                ))
+                            )}
                         </div>
                         
-                        {unassignedTickets.length === 0 ? (
-                            <div className="no-tickets-message">No unassigned tickets</div>
-                        ) : (
-                            unassignedTickets.map(ticket => (
+                        <div 
+                            className={`button1 ${unassignedTickets.length === 0 ? 'disabled' : ''}`} 
+                            onClick={unassignedTickets.length > 0 ? handleConfirmAssignments : undefined}
+                        >
+                            <div className="button2">Confirm</div>
+                        </div>
+                        <img className="assigning-ticket-adjust-child" alt="" src="Line 3.svg"/>
+                        
+                        {/* Assigned Tickets Section */}
+                        <div className="assigned-tickets">
+                            <div className="ticket-group">
+                                <div className="ticket1">TICKET #</div>
+                                <div className="mechanics1">MECHANICS</div>
+                                <div className="status1">STATUS</div>
+                                <div className="estimated-time">
+                                    <span className="estimated-time-txt-container">
+                                        <div className="estimated">ESTIMATED</div>
+                                        <div className="estimated">TIME</div>
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            {assignedTickets.map(ticket => (
                                 <div className="instance-parent" key={ticket.id}>
-                                    {/* Ticket Number */}
-                                <div 
-                                    className="client-name-vin-service-container" 
-                                    onClick={() => handleTicketClick(ticket.ticketNumber)}
-                                    style={{ cursor: 'pointer' }}
-                                >
-                                    <div className="client-name-vin">{ticket.ticketNumber}</div>
-                                </div>
-                                
-                                {/* Mechanics Dropdown */}
-                                <div className="mech-default-button-frame">
+                                    {/* Ticket Number - Clickable */}
                                     <div 
-                                        className="mech-default-button4" 
-                                        onClick={() => toggleDropdown('mechanic', ticket.id)}
-                                        style={{
-                                            backgroundColor: stagedAssignments[ticket.id] 
-                                                ? getMechanicColor(stagedAssignments[ticket.id])
-                                                : '#a2a2a2'
-                                        }}
+                                        className="client-name-vin-service-container" 
+                                        onClick={() => handleTicketClick(ticket.ticketNumber)}
+                                        style={{ cursor: 'pointer' }}
                                     >
-                                        <div className="client-name-vin">
-                                            {stagedAssignments[ticket.id] || 'Assign Mechanic'}
-                                        </div>
-                                        <img className="arrow-drop-down-icon" alt="" src="arrow_drop_down.svg"/>
+                                        <div className="client-name-vin">{ticket.ticketNumber}</div>
                                     </div>
                                     
-                                    {dropdowns.mechanic === ticket.id && (
-                                        <div className="mechanic-dropdown-menu">
-                                            {mechanics.map(mechanic => (
-                                                <div 
-                                                    key={mechanic.id}
-                                                    className="mechanic-dropdown-item"
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        handleMechanicSelect(ticket.id, mechanic.name);
-                                                    }}
-                                                    style={{ backgroundColor: mechanic.color }}
-                                                >
-                                                    {mechanic.name}
-                                                </div>
-                                            ))}
+                                    {/* Editable Mechanic Dropdown */}
+                                    <div className="mech-default-button-frame">
+                                        <div 
+                                            className="mech-default-button4"
+                                            onClick={() => toggleDropdown('mechanic', ticket.id)}
+                                            style={{ backgroundColor: getMechanicColor(ticket.mechanic) }}
+                                        >
+                                            <div className="mechanic-wrapper">
+                                                <div className="client-name-vin">{ticket.mechanic}</div>
+                                            </div>
+                                            <img className="arrow-drop-down-icon" alt="" src="arrow_drop_down.svg"/>
                                         </div>
-                                    )}
-                                </div>
-                                
-                                {/* Status */}
-                                <div className="status-drop-down-menu">
-                                    <div className="mech-default-button1">
-                                        <div className="client-name-vin">{ticket.status}</div>
+                                        
+                                        {dropdowns.mechanic === ticket.id && (
+                                            <div className="mechanic-dropdown-menu">
+                                                {mechanics.map(mechanic => (
+                                                    <div 
+                                                        key={mechanic.id}
+                                                        className="mechanic-dropdown-item"
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            handleMechanicSelect(ticket.id, mechanic.id);
+                                                        }}
+                                                        style={{ backgroundColor: mechanic.color }}
+                                                    >
+                                                        {mechanic.name}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+                                    
+                                    {/* Status Dropdown */}
+                                    <div className="status-drop-down-menu">
+                                        <div 
+                                            className="mech-default-button5"
+                                            onClick={() => toggleDropdown('status', ticket.id)}
+                                        >
+                                            <div className="client-name-vin">{ticket.status}</div>
+                                            <img className="arrow-drop-down-icon" alt="" src="arrow_drop_down.svg"/>
+                                        </div>
+                                        
+                                        {dropdowns.status === ticket.id && (
+                                            <div className="status-dropdown-menu">
+                                                <div 
+                                                    className="status-dropdown-item"
+                                                    onClick={() => handleStatusChange(ticket.id, 'Pending')}
+                                                >
+                                                    Pending
+                                                </div>
+                                                <div 
+                                                    className="status-dropdown-item"
+                                                    onClick={() => handleStatusChange(ticket.id, 'In-Progress')}
+                                                >
+                                                    In-Progress
+                                                </div>
+                                                <div 
+                                                    className="status-dropdown-item"
+                                                    onClick={() => handleStatusChange(ticket.id, 'Completed')}
+                                                >
+                                                    Completed
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                    
+                                    {/* Estimated Time */}
+                                    <div className="time-wrapper">
+                                        <div className="client-name-vin">{ticket.estimatedTime}</div>
                                     </div>
                                 </div>
-                                
-                                {/* Estimated Time */}
-                                <div className="time-wrapper">
-                                    <div className="client-name-vin">{ticket.estimatedTime}</div>
-                                </div>
-                                </div>
-                            ))
-                        )}
-                    </div>
-                    
-                    <div 
-                        className={`button1 ${unassignedTickets.length === 0 ? 'disabled' : ''}`} 
-                        onClick={unassignedTickets.length > 0 ? handleConfirmAssignments : undefined}
-                    >
-                        <div className="button2">Confirm</div>
-                    </div>
-                    <img className="assigning-ticket-adjust-child" alt="" src="Line 3.svg"/>
-                    
-                    {/* Assigned Tickets Section */}
-                    <div className="assigned-tickets">
-                        <div className="ticket-group">
-                            <div className="ticket1">TICKET #</div>
-                            <div className="mechanics1">MECHANICS</div>
-                            <div className="status1">STATUS</div>
-                            <div className="estimated-time">
-                                <span className="estimated-time-txt-container">
-                                    <div className="estimated">ESTIMATED</div>
-                                    <div className="estimated">TIME</div>
-                                </span>
-                            </div>
+                            ))}
                         </div>
-                        
-                        {assignedTickets.map(ticket => (
-                            <div className="instance-parent" key={ticket.id}>
-                                {/* Ticket Number - Clickable */}
-                                <div 
-                                    className="client-name-vin-service-container" 
-                                    onClick={() => handleTicketClick(ticket.ticketNumber)}
-                                    style={{ cursor: 'pointer' }}
-                                >
-                                    <div className="client-name-vin">{ticket.ticketNumber}</div>
-                                </div>
-                                
-                                {/* Editable Mechanic Dropdown */}
-                                <div className="mech-default-button-frame">
-                                    <div 
-                                        className="mech-default-button4"
-                                        onClick={() => toggleDropdown('mechanic', ticket.id)}
-                                        style={{ backgroundColor: getMechanicColor(ticket.mechanic) }}
-                                    >
-                                        <div className="mechanic-wrapper">
-                                            <div className="client-name-vin">{ticket.mechanic}</div>
-                                        </div>
-                                        <img className="arrow-drop-down-icon" alt="" src="arrow_drop_down.svg"/>
-                                    </div>
-                                    
-                                    {dropdowns.mechanic === ticket.id && (
-                                        <div className="mechanic-dropdown-menu">
-                                            {mechanics.map(mechanic => (
-                                                <div 
-                                                    key={mechanic.id}
-                                                    className="mechanic-dropdown-item"
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        handleMechanicChange(ticket.id, mechanic.name);
-                                                    }}
-                                                    style={{ backgroundColor: mechanic.color }}
-                                                >
-                                                    {mechanic.name}
-                                                </div>
-                                            ))}
-                                        </div>
-                                    )}
-                                </div>
-                                
-                                {/* Status Dropdown */}
-                                <div className="status-drop-down-menu">
-                                    <div 
-                                        className="mech-default-button5"
-                                        onClick={() => toggleDropdown('status', ticket.id)}
-                                    >
-                                        <div className="client-name-vin">{ticket.status}</div>
-                                        <img className="arrow-drop-down-icon" alt="" src="arrow_drop_down.svg"/>
-                                    </div>
-                                    
-                                    {dropdowns.status === ticket.id && (
-                                        <div className="status-dropdown-menu">
-                                            <div 
-                                                className="status-dropdown-item"
-                                                onClick={() => handleStatusChange(ticket.id, 'Pending')}
-                                            >
-                                                Pending
-                                            </div>
-                                            <div 
-                                                className="status-dropdown-item"
-                                                onClick={() => handleStatusChange(ticket.id, 'In-Progress')}
-                                            >
-                                                In-Progress
-                                            </div>
-                                            <div 
-                                                className="status-dropdown-item"
-                                                onClick={() => handleStatusChange(ticket.id, 'Completed')}
-                                            >
-                                                Completed
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
-                                
-                                {/* Estimated Time */}
-                                <div className="time-wrapper">
-                                    <div className="client-name-vin">{ticket.estimatedTime}</div>
-                                </div>
-                            </div>
-                        ))}
                     </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 }
