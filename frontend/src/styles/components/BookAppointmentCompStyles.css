@@ -1,0 +1,18 @@
+.baa-button {
+    width: 400px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin: 20px auto;
+}
+
+.book-an-appointment {
+    color: black;
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    white-space: nowrap;
+}

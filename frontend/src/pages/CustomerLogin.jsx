@@ -14,7 +14,7 @@ function CustomerLoginPage() {
     // API call function
     async function authenticateCustomer(email, password) {
         try {
-            const response = await fetch('http://localhost:5000/api/login/customer', {
+            const response = await fetch('http://localhost:3000/api/login/customer', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })
@@ -22,6 +22,9 @@ function CustomerLoginPage() {
 
             console.log('Raw API Response:', response); // Debug code
 
+            fetch('http://localhost:3000')
+            .then(res => res.text())
+            .then(console.log)
             if (!response.ok) {
                 throw new Error('Login failed');
             }

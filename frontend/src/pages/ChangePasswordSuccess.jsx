@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import HeaderBar from '../components/HeaderBarComponent'; 
 import '../styles/ChangePasswordSuccessStyles.css'
 
 function ChangePasswordSuccessPage(){
     return(
         <div className="password-change-successful">
             <div className="password-change-successful-item"></div>
-            <div className="password-change-successful-inner"></div>
+            <HeaderBar/>
             <img className="srs-csc-131-1-icon" alt="" src="SRS_CSC_131 1.png" id="sRSCSC1311Image"/>
             <div className="rectangle-div"></div>
             <div className="your-password-has">Your Password has successfully been changed.</div>
