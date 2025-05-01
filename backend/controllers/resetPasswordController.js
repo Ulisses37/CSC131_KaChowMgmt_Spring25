@@ -21,7 +21,7 @@ const forgotPassword = async (req, res) =>{
       customer.resetTokenExpiration = Date.now() + oneHour;
       await customer.save();
       //const resetUrl = `http://localhost:5000/api/auth/password/reset-password/${resetToken}`;
-      const resetUrl = `http://localhost:${process.env.HOST_PORT}/api/auth/password/reset-password/${resetToken}`;
+      const resetUrl = `http://localhost:$5173/reset-password/${resetToken}`;
   
   
       var transporter = nodemailer.createTransport({ //Our company email login information

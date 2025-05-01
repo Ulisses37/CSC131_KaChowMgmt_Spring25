@@ -12,16 +12,8 @@ import ServiceHistory from './pages/ServiceHistory';           // might need to 
 import CPassword from './pages/ChangePassword';
 import FPassword from './pages/ForgotPassword';
 import AccCreation from './pages/AccountCreation';
-import CLogin from './pages/CustomerLogin'  // note the first letter of what is being imported needs to be an upper case
-import CDashboard from './pages/CustomerDashboard'
-import ApptManagement from './pages/AppointmentManagement'    // might need to change the name of this
-import ServiceHistory from './pages/ServiceHistory'           // might need to change the name of this
-import CPassword from './pages/ChangePassword'
 import CPasswordSuccess from './pages/ChangePasswordSuccess'
 import CPasswordLink from './pages/ChangePasswordLink'
-import FPassword from './pages/ForgotPassword'
-import AccCreation from './pages/AccountCreation'
-import ApptCreation from './pages/AppointmentCreation.jsx';
 import CreationSuccess from './pages/AppointmentCreationSuccess.jsx';
 import ApptReschedule from './pages/AppointmentReschedule.jsx';
 import RescheduleSuccess from './pages/AppointmentRescheduleSuccess.jsx';
@@ -45,6 +37,7 @@ import MAccountEdit from './pages/MechanicAccountEdit';
 import TicketHistory from './pages/TicketHistory';
 import EmployeeClock from './pages/EmployeeClock.jsx';
 import EmployeePayroll from './pages/EmployeePayroll.jsx';
+import ApptCreation from './pages/AppointmentCreation.jsx';
 
 import './App.css';
 

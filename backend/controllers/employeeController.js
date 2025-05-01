@@ -133,10 +133,11 @@ export const clockIn = async (req, res) => {
         await employee.save();
         
         res.status(200).json({ 
-            success: true,
-            message: 'Clocked in successfully',
-            clockInTime: employee.hoursWorked[employee.hoursWorked.length - 1].clockIn
-        });
+          success: true,
+          message: 'Clocked in successfully',
+          clockInTime: employee.hoursWorked[employee.hoursWorked.length - 1].clockIn,
+          isClockedIn: true
+      });
     } catch (error) {
         res.status(500).json({ 
             success: false,
@@ -167,12 +168,13 @@ export const clockOut = async (req, res) => {
         const durationHours = (lastEntry.clockOut - lastEntry.clockIn) / (1000 * 60 * 60);
         
         res.status(200).json({ 
-            success: true,
-            message: 'Clocked out successfully',
-            clockInTime: lastEntry.clockIn,
-            clockOutTime: lastEntry.clockOut,
-            durationHours: durationHours.toFixed(2)
-        });
+          success: true,
+          message: 'Clocked out successfully',
+          clockInTime: lastEntry.clockIn,
+          clockOutTime: lastEntry.clockOut,
+          durationHours: durationHours.toFixed(2),
+          isClockedIn: false
+      });
     } catch (error) {
         res.status(500).json({ 
             success: false,
@@ -525,5 +527,3 @@ export const updateEmployee = async (req, res) => {
         });
     }
 };
-
-
