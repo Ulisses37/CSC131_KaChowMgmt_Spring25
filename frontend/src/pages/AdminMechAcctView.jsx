@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/AdminMechAcctViewStyles.css';
 import HeaderBar from '../components/HeaderBarComponent';
 import BackButton from '../components/BackButtonComponent'; 
-import { EmployeeDropdown } from '../components/DropMenuComp'; 
 
 function AdminMechAccountViewPage() {
     const [mechanicData, setMechanicData] = useState(null);
@@ -72,7 +71,6 @@ function AdminMechAccountViewPage() {
     return (
         <div className="mechanic-statistics-2">
             <BackButton text="DASHBOARD"/>
-            <EmployeeDropdown/>
             <HeaderBar />
             
             <img className="srs-csc-131-1-icon" alt="Company Logo" src="https://placehold.co/367x309" />

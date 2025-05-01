@@ -2,14 +2,12 @@ import { useLocation } from 'react-router-dom';
 import '../styles/ServiceHistoryStyles.css'
 import Menu from '../components/CustomerMenuComponent';
 import AppointmentButton from '../components/BookAppointmentComp'
-import DropMenu from '../components/DropMenuComp'
 function ServiceHistoryPage(){
     return(
         <div className="service-history-page">
             <div className="service-history-page-item"></div>
             <div className="service-history-page-inner"></div>
             <img className="srs-csc-131-1-icon" alt="" src="SRS_CSC_131 1.png" id="sRSCSC1311Image"></img>
-            <DropMenu/>
             <AppointmentButton/>
             <div className="gray-rectangle-bg"></div> {/*Gray background box */}
             <Menu />

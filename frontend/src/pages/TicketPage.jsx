@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/TicketPage.css';
 import HeaderBar from '../components/HeaderBarComponent';
 import BackButton from '../components/BackButtonComponent';
-import { EmployeeDropdown } from '../components/DropMenuComp'; 
 
 const TicketPage = () => {
   const [tickets, setTickets] = useState([]);
@@ -45,7 +44,6 @@ const TicketPage = () => {
   return (
     <div>
       <BackButton text="DASHBOARD"/>
-      <EmployeeDropdown/>
       <HeaderBar />
       <br />
       <img
