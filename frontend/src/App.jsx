@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css'
 // Pages
 import Home from './pages/Home';
@@ -21,11 +21,12 @@ import RescheduleSuccess from './pages/AppointmentRescheduleSuccess.jsx';
 import ApptCancel from './pages/AppointmentCancel.jsx';
 import CancelSuccess from './pages/AppointmentCancelSuccess.jsx';
 import ViewAppointment from './pages/ViewAppointment.jsx';
+import Feedback from './pages/Feedback.jsx';
 // Employee Related Pages
-import ELogin from './pages/EmployeeLogin'
-import EVerif from './pages/EmployeeVerif'
-import ADashboard from './pages/AdminDashboard'
-import AssignTicket from './pages/AdminTicketView'
+import ELogin from './pages/EmployeeLogin';
+import EVerif from './pages/EmployeeVerif';
+import ADashboard from './pages/AdminDashboard';
+import AssignTicket from './pages/AdminTicketView';
 import TicketPage from './pages/TicketPage.jsx';
 import TicketPageDetails from './pages/TicketPageDetails.jsx';
 import AMechDetails from './pages/AdminMechAcctView';
@@ -68,11 +69,13 @@ function App() {
             <Route path="/appointment-management" element={<ApptManagement />}/>  {/* might need to change the name of this */}
             <Route path="/appt-creation" element={<ApptCreation />} />
             <Route path="/crsuccess" element={<CreationSuccess />} />
+            <Route path="/viewappointment" element={<ViewAppointment />} />
             <Route path="/appt-reschedule" element={<ApptReschedule />} />
             <Route path="/resuccess" element={<RescheduleSuccess />} />
             <Route path="/appt-cancel" element={<ApptCancel />} />
             <Route path="/casuccess" element={<CancelSuccess />} />
             <Route path="/service-history" element={<ServiceHistory />}/>         {/* might need to change the name of this */}
+            <Route path="/feedback" element={<Feedback />}/>
             {/* route path for feedback page */}
             {/* route path for logged out page */}
             {/* Employee Pages */}
@@ -83,6 +86,7 @@ function App() {
             <Route path="/select-mechanic" element={<AMechSelect/>}/>
             <Route path="/mechanic-details" element={<AMechDetails/>}/>
             <Route path="/mechanic-dashboard" element={<MDashboard />}/>
+            <Route path="/viewappointment" element={<ViewAppointment />} />
             <Route path="/ticketpage" element={<TicketPage />} />
             <Route path="/ticket/:id" element={<TicketPageDetails />} />
             <Route path="/account-details" element={<MAccountDetails />} />
