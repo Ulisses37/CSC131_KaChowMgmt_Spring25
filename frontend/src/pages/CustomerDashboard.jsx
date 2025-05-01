@@ -2,7 +2,7 @@ import { useLocation, Navigate, useNavigate } from 'react-router-dom';
 import '../styles/CustomerDashboardStyles.css';
 import Menu from '../components/CustomerMenuComponent';
 import AppointmentButton from '../components/BookAppointmentComp';
-import DropMenu from '../components/CustomerDropMenuComp';
+import { CustomerDropdown } from '../components/DropMenuComp';
 
 function CustomerDashboardPage() {
     const { state } = useLocation();
@@ -40,7 +40,7 @@ function CustomerDashboardPage() {
             <div className="user-profile-page-item"></div>
             <div className="user-profile-page-inner"></div>
             <img className="srs-csc-131-2-icon" alt="" src="SRS_CSC_131 1.png" />
-            <DropMenu/>
+            <CustomerDropdown customerData={customerData} />
             <AppointmentButton/>
             <div className="gray-rectangle-bg"></div>
             <Menu />

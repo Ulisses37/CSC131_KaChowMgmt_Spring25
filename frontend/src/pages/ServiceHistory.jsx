@@ -2,7 +2,7 @@ import { useLocation } from 'react-router-dom';
 import '../styles/ServiceHistoryStyles.css'
 import Menu from '../components/CustomerMenuComponent';
 import AppointmentButton from '../components/BookAppointmentComp'
-import DropMenu from '../components/CustomerDropMenuComp'
+import DropMenu from '../components/DropMenuComp'
 function ServiceHistoryPage(){
     return(
         <div className="service-history-page">

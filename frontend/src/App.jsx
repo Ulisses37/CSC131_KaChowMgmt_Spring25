@@ -41,11 +41,17 @@ import EmployeePayroll from './pages/EmployeePayroll.jsx';
 
 import './App.css';
 
-function ProtectedRoute({ children }) {
-  const token = localStorage.getItem('customerToken');
-  return token ? children : <Navigate to="/customer-login" replace />;
+function ProtectedRoute({ isEmployee, children }) {
+  const token = isEmployee
+    ? localStorage.getItem('employeeToken')
+    : localStorage.getItem('customerToken');
+  
+  if (!token) {
+    return <Navigate to={isEmployee ? '/employee-login' : '/customer-login'} />;
+  }
+  
+  return children;
 }
-
 function App() {
   return (
     <>

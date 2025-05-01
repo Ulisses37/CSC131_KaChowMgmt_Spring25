@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/AdminMechAcctViewStyles.css';
 import HeaderBar from '../components/HeaderBarComponent';
+import BackButton from '../components/BackButtonComponent'; 
+import { EmployeeDropdown } from '../components/DropMenuComp'; 
 
 function AdminMechAccountViewPage() {
     const [mechanicData, setMechanicData] = useState(null);
@@ -69,6 +71,8 @@ function AdminMechAccountViewPage() {
 
     return (
         <div className="mechanic-statistics-2">
+            <BackButton text="DASHBOARD"/>
+            <EmployeeDropdown/>
             <HeaderBar />
             
             <div className="play-arrow-filled-parent" onClick={() => navigate(-1)}>
