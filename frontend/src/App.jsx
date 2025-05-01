@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import './App.css'
 // Pages
 import Home from './pages/Home';
@@ -14,6 +14,7 @@ import FPassword from './pages/ForgotPassword';
 import AccCreation from './pages/AccountCreation';
 import CPasswordSuccess from './pages/ChangePasswordSuccess'
 import CPasswordLink from './pages/ChangePasswordLink'
+import ApptCreation from './pages/AppointmentCreation.jsx';
 import CreationSuccess from './pages/AppointmentCreationSuccess.jsx';
 import ApptReschedule from './pages/AppointmentReschedule.jsx';
 import RescheduleSuccess from './pages/AppointmentRescheduleSuccess.jsx';
@@ -68,7 +69,6 @@ function App() {
             <Route path="/appointment-management" element={<ApptManagement />}/>  {/* might need to change the name of this */}
             <Route path="/appt-creation" element={<ApptCreation />} />
             <Route path="/crsuccess" element={<CreationSuccess />} />
-            <Route path="/viewappointment" element={<ViewAppointment />} />
             <Route path="/appt-reschedule" element={<ApptReschedule />} />
             <Route path="/resuccess" element={<RescheduleSuccess />} />
             <Route path="/appt-cancel" element={<ApptCancel />} />
@@ -84,7 +84,6 @@ function App() {
             <Route path="/select-mechanic" element={<AMechSelect/>}/>
             <Route path="/mechanic-details" element={<AMechDetails/>}/>
             <Route path="/mechanic-dashboard" element={<MDashboard />}/>
-            <Route path="/viewappointment" element={<ViewAppointment />} />
             <Route path="/ticketpage" element={<TicketPage />} />
             <Route path="/ticket/:id" element={<TicketPageDetails />} />
             <Route path="/account-details" element={<MAccountDetails />} />

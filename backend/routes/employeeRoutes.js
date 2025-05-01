@@ -11,8 +11,8 @@ import {
     getAllEmployeesTimeEntries,
     updateTimeEntry,
     markEntriesAsPaid,
-    getPayrollSummary
-
+    getPayrollSummary,
+    getAllEmployees,
 } from '../controllers/employeeController.js';
 import {
     validateRequest,
@@ -157,6 +157,13 @@ router.get('/admin/payroll-summary',
     auth,
     authorizeAdmin,
     getPayrollSummary
+);
+
+// GET all employees (admin only)
+router.get('/',
+    auth,
+    authorizeAdmin,
+    getAllEmployees
 );
 
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import HeaderBar from '../components/HeaderBarComponent';
 import { useNavigate } from 'react-router';
+import '../styles/EmployeeClock.css'; // Import the CSS file
 
 const EmployeeClock = () => {
   const [clockInTime, setClockInTime] = useState(null);
@@ -137,68 +138,41 @@ const EmployeeClock = () => {
   return (
     <div className="employee-clock-container">
       <HeaderBar />
-      
-      <div className="clock-content">
-        <img
-          className="company-logo"
-          alt="Company Logo"
-          src="/SRS_CSC_131 1.png"
-          onClick={() => navigate("/")}
-        />
-
-        <h2>Employee Time Clock</h2>
-        
-        {isLoading && <div className="loading-spinner">Loading...</div>}
-        
+      <br />
+      <br />
+      <br />
+      <img
+        className="srs-csc-131-1-icon"
+        alt="Company Logo"
+        src="/SRS_CSC_131 1.png"
+        onClick={() => navigate("/")}
+      />
+      <h2>Employee Clock In/Out</h2>
+      <div className="clock-buttons-container">
         <div className="clock-buttons">
-          <button 
-            onClick={handleClockIn} 
-            disabled={isClockedIn || isLoading || !employeeId}
-            className={`clock-btn ${isClockedIn ? 'disabled' : ''}`}
-          >
+          {/* Clock In button */}
+          <button onClick={handleClockIn} className="clock-in-button">
             Clock In
           </button>
-          
-          <button 
-            onClick={handleClockOut} 
-            disabled={!isClockedIn || isLoading || !employeeId}
-            className={`clock-btn ${!isClockedIn ? 'disabled' : ''}`}
-          >
+          {/* Clock Out button */}
+          <button onClick={handleClockOut} className="clock-out-button">
             Clock Out
           </button>
         </div>
-
-        {errorMessage && (
-          <div className="alert error">
-            {errorMessage}
-          </div>
-        )}
-
-        {successMessage && (
-          <div className="alert success">
-            {successMessage}
-          </div>
-        )}
-
-        <div className="time-display">
-          <div className="time-entry">
-            <h3>Clock In Time:</h3>
-            <p>{clockInTime ? clockInTime.toLocaleString() : 'Not clocked in'}</p>
-          </div>
-          
-          <div className="time-entry">
-            <h3>Clock Out Time:</h3>
-            <p>{clockOutTime ? clockOutTime.toLocaleString() : 'Not clocked out'}</p>
-          </div>
-          
+        <div className="clock-times">
+          <h3>Clock In Time:</h3>
+          <p>{clockInTime ? clockInTime.toLocaleString() : 'Not clocked in yet'}</p>
+          <h3>Clock Out Time:</h3>
+          <p>{clockOutTime ? clockOutTime.toLocaleString() : 'Not clocked out yet'}</p>
           {timeDifference && (
-            <div className="time-entry">
+            <div className="time-difference">
               <h3>Time Worked:</h3>
               <p>{timeDifference}</p>
             </div>
           )}
         </div>
       </div>
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
     </div>
   );
 };
