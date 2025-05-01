@@ -9,6 +9,7 @@ import {
     getClockStatus,
     getTimeEntries,
     getAllEmployeesTimeEntries,
+    getAllEmployees,
     updateTimeEntry,
     markEntriesAsPaid,
     getPayrollSummary,
@@ -166,5 +167,30 @@ router.get('/',
     getAllEmployees
 );
 
+// Gets a single employee ID
+router.get('/:employeeId',
+    auth,
+    authorizeAdmin,
+    async (req, res) => {
+        try {
+            const employee = await Employee.findById(req.params.employeeId)
+                .select('-password -resetPasswordToken -resetTokenExpiration');
+            
+            if (!employee) {
+                return res.status(404).json({ success: false, message: 'Employee not found' });
+            }
+            
+            res.status(200).json({
+                success: true,
+                data: employee
+            });
+        } catch (err) {
+            res.status(500).json({
+                success: false,
+                error: 'Server error: ' + err.message
+            });
+        }
+    }
+);
 
 export default router;

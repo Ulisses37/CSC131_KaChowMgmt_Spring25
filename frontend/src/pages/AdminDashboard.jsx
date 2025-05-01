@@ -48,7 +48,7 @@ function AdminDashboardPage() {
             <LgButton 
                 text="PAYROLL" 
                 style={{ position: 'absolute', top: '660px', left: '475px' }}
-                // onClick={() => navigate('/payroll')} change the name of this
+                onClick={() => navigate('/employee-payroll')} 
             />
             <LgButton 
                 text="INVOICE" 

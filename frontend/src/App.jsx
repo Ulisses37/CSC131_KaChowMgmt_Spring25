@@ -80,7 +80,6 @@ function App() {
             <Route path="/admin-dashboard" element={<ADashboard />}/>
             <Route path="/assign-tickets" element={<AssignTicket/>}/>
             <Route path="/invoice" element={<Invoice/>}/>
-            <Route path="/select-mechanic" element={<AMechSelect/>}/>
             <Route path="/mechanic-details" element={<AMechDetails/>}/>
             <Route path="/mechanic-dashboard" element={<MDashboard />}/>
             <Route path="/ticketpage" element={<TicketPage />} />
