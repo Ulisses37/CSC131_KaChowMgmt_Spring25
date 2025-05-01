@@ -63,9 +63,10 @@ function EmployeeLoginPage() {
             
             if (response.success) {
                 localStorage.setItem('employeeToken', response.token);
-                
+                localStorage.setItem('employeeId', response.employeeData.employeeId);
+                localStorage.setItem('employeeRole', response.employeeData.role)
                 // Route based on employee role from backend
-                if (response.role === 'admin') {
+                if (localStorage.getItem('employeeRole') === 'admin') {
                     navigate("/admin-dashboard", {
                         state: {
                             employeeData: response.employeeData
