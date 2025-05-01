@@ -38,7 +38,6 @@ import MAccountEdit from './pages/MechanicAccountEdit';
 import TicketHistory from './pages/TicketHistory';
 import EmployeeClock from './pages/EmployeeClock.jsx';
 import EmployeePayroll from './pages/EmployeePayroll.jsx';
-import ApptCreation from './pages/AppointmentCreation.jsx';
 
 import './App.css';
 
