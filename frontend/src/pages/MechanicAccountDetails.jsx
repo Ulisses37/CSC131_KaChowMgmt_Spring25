@@ -54,11 +54,6 @@ function MechanicAccountDetailsPage() {
             <img className="srs-csc-131-1-icon" alt="" src="SRS_CSC_131 1.png" id="sRSCSC1311Image"/>
             
             <div className="account-content">
-                <div className="play-arrow-filled-parent">
-                    <img className="play-arrow-filled-icon" alt="" src="play_arrow_filled.png"/>
-                    <div className="text">Account</div>
-                </div>
-                
                 <div className="table">
                     <div className="mech-name-row">
                         <div className="titlecell">

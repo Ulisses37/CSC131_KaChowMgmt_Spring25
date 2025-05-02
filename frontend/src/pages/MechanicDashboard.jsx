@@ -62,9 +62,7 @@ function MechanicDashboardPage() {
             <div className="admin-greeting-container">
                 <div className="admin-greeting">Hello, {employeeData.name || "N/A"}</div>
             </div>
-            
-            {/* Nav button Component here */}
-            {/* Clock In Component Here */}
+
         </div>
     );
 }

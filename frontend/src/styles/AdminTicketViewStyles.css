@@ -377,11 +377,11 @@ body {
     border: 1px dashed var(--color-darkgray);
     margin-top: 10px;
 } 
-.assign-button {
+.assign-button-text {
     position: relative;
     line-height: 100%;
 }
-.button1 {
+.assign-button {
     width: 157px;
     border-radius: var(--Radius-200);
     background-color: var(--Background-Brand-Default);
@@ -659,31 +659,31 @@ body {
 }
 
 /* Confirm button styling */
-.button1 {
+.assign-button {
     background-color: #4CAF50;
     transition: background-color 0.3s;
     cursor: pointer;
 }
 
-.button1:hover {
+.assign-button:hover {
     background-color: #5E5D5D;
 }
 
-.button1:active {
+.assign-button:active {
     background-color: #2C2C2C;
 }
 
-.button1.disabled {
+.assign-button.disabled {
     background-color: var(--color-darkgray); /* Gray when no unassigned tickets */
     cursor: not-allowed;
 }
 
 /* Visual feedback for when there are unassigned tickets but no selections */
-.button1:not(.disabled):not(:hover) {
+.assign-button:not(.disabled):not(:hover) {
     background-color: #2C2C2C; /* Orange when unassigned tickets exist but none selected */
 }
 
-.button1:hover:not(.disabled) {
+.assign-button:hover:not(.disabled) {
     background-color: #45a049; /* Darker green on hover */
 }
 

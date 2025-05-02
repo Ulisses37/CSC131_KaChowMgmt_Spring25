@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import HeaderBar from '../components/HeaderBarComponent';
 import { useNavigate } from 'react-router';
 import '../styles/EmployeeClock.css'; // Import the CSS file
+import BackButton from '../components/BackButtonComponent';
 
 const EmployeeClock = () => {
   const [clockInTime, setClockInTime] = useState(null);
@@ -136,6 +137,7 @@ const EmployeeClock = () => {
 
   return (
     <div className="employee-clock-container">
+      <BackButton text="DASHBOARD"/>
       <HeaderBar />
       <br />
       <br />

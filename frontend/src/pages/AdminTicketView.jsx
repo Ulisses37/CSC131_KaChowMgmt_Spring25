@@ -136,36 +136,38 @@ function AdminTicketViewPage() {
     
     const handleMechanicSelect = (ticketId, mechanicId) => {
         const mechanic = mechanics.find(m => m._id === mechanicId);
-        setStagedAssignments({
-            ...stagedAssignments,
-            [ticketId]: mechanic.name
-        });
+        if (!mechanic) return;
+    
+        setStagedAssignments(prev => ({
+            ...prev,
+            [ticketId]: mechanic._id // store ID, not name
+        }));
+    
         setDropdowns({ ...dropdowns, mechanic: null });
     };
+    
 
     const handleConfirmAssignments = async () => {
         if (Object.keys(stagedAssignments).length === 0) return;
-        
+    
         try {
             setIsLoading(true);
             setError(null);
-            
+    
             await Promise.all(
-                Object.entries(stagedAssignments).map(async ([ticketId, mechanicName]) => {
-                    const mechanic = mechanics.find(m => m.name === mechanicName);
-                    if (mechanic) {
-                        await assignMechanicToTicket(ticketId, mechanic._id);
-                    }
+                Object.entries(stagedAssignments).map(async ([ticketId, mechanicId]) => {
+                    await assignMechanicToTicket(ticketId, mechanicId);
                 })
             );
-            
+    
             const updatedTickets = await fetchTickets();
+            console.log('Updated tickets:', updatedTickets); // <-- add this
             const unassigned = updatedTickets.filter(t => !t.mechanicId);
             const assigned = updatedTickets.filter(t => t.mechanicId);
-            
+    
             setUnassignedTickets(unassigned);
             setAssignedTickets(assigned);
-            setStagedAssignments({});
+            setStagedAssignments({}); // only clear AFTER reloading
         } catch (error) {
             console.error('Error confirming assignments:', error);
             setError(error.message);
@@ -282,8 +284,13 @@ function AdminTicketViewPage() {
                                                 }}
                                             >
                                                 <div className="client-name-vin">
-                                                    {stagedAssignments[ticket.id] || 'Assign Mechanic'}
+                                                    {
+                                                        stagedAssignments[ticket.id]
+                                                            ? mechanics.find(m => m._id === stagedAssignments[ticket.id])?.name || 'Assign Mechanic'
+                                                            : mechanics.find(m => m._id === ticket.mechanicId)?.name || 'Assign Mechanic'
+                                                    }
                                                 </div>
+
                                                 <img className="arrow-drop-down-icon" alt="" src="arrow_drop_down.svg"/>
                                             </div>
                                             
@@ -317,10 +324,11 @@ function AdminTicketViewPage() {
                         </div>
                         
                         <div 
-                            className={`button1 ${Object.keys(stagedAssignments).length === 0 ? 'disabled' : ''}`} 
-                            onClick={Object.keys(stagedAssignments).length > 0 ? handleConfirmAssignments : undefined}
+                            className="assign-button"
+                            onClick={handleConfirmAssignments}
+                            style={{ opacity: Object.keys(stagedAssignments).length === 0 ? 0.5 : 1, cursor: Object.keys(stagedAssignments).length === 0 ? 'not-allowed' : 'pointer' }}
                         >
-                            <div className="assign-button">Confirm</div>
+                            <div className="assign-button-text">Confirm</div>
                         </div>
                         
                         <img className="assigning-ticket-adjust-child" alt="" src="Line 3.svg"/>

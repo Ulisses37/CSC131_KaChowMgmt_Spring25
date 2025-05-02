@@ -4,10 +4,7 @@ import Ticket from '../models/Ticket.js';
 export const assignMechanictoTicket = async (req, res) => {
   try {
     const { id } = req.params;
-    const { mechanicId } = req.body;
-
-    if (mechanicId) ticket.mechanicId = mechanicId;
-    if (status) ticket.completionStatus = status;
+    const { mechanicId, status } = req.body; // Make sure to extract `status` if you plan to use it
 
     const ticket = await Ticket.findById(id);
     if (!ticket) {
@@ -25,9 +22,9 @@ export const assignMechanictoTicket = async (req, res) => {
       });
     }
 
-    // Assign the mechanic ID to the ticket
     ticket.mechanicId = mechanicId;
-    ticket.completionStatus = 'Assigned';
+    ticket.completionStatus = status || 'Assigned'; // fallback if status not provided
+
     await ticket.save();
 
     res.status(200).json({

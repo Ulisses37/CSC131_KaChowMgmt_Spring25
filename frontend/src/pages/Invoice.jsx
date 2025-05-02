@@ -12,30 +12,41 @@ function InvoicePage() {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    // API call to fetch unpaid tickets by client name
-    const fetchUnpaidTickets = (clientName) => {
-        return new Promise((resolve, reject) => {
-            setIsLoading(true);
-            setError(null);
-            
-            fetch(`/api/tickets?client=${encodeURIComponent(clientName)}&paid=false`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    setIsLoading(false);
-                    resolve(data);
-                })
-                .catch(err => {
-                    setIsLoading(false);
-                    setError(err.message);
-                    reject(err);
-                });
+    const fetchUnpaidTickets = async (clientName) => {
+    try {
+        setIsLoading(true);
+        setError(null);
+
+        // Step 1: Find customer ID
+        const res = await fetch(`/api/customers/search/${encodeURIComponent(clientName)}`, {
+            headers: { Authorization: 'Bearer yourAuthTokenHere' } // if required
         });
-    };
+        const data = await res.json();
+
+        if (!data.success || !data.data || data.data.length === 0) {
+            throw new Error('No matching customer found.');
+        }
+
+        const customerId = data.data[0].id;
+
+        // Step 2: Fetch unpaid tickets
+        const ticketRes = await fetch(`/api/customers/${customerId}/unpaid-tickets`, {
+            headers: { Authorization: 'Bearer yourAuthTokenHere' } // if required
+        });
+        const ticketData = await ticketRes.json();
+
+        if (!ticketData.success) {
+            throw new Error('Could not fetch unpaid tickets.');
+        }
+
+        return ticketData.data;
+    } catch (err) {
+        setError(err.message);
+        return [];
+    } finally {
+        setIsLoading(false);
+    }
+};
 
     // API call to send invoice
     const sendInvoice = (ticketId) => {
