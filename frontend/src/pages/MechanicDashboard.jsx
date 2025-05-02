@@ -43,7 +43,7 @@ function MechanicDashboardPage() {
             <LgButton 
                 text="WORK TICKETS" 
                 style={{ position: 'absolute', top: '580px', left: '475px' }}
-                // onClick={() => navigate('/mechanics')} change the name of this to what brian has it as
+                onClick={() => navigate('/ticketpage')} change the name of this to what brian has it as
             />
             <LgButton 
                 text="TICKET HISTORY" 

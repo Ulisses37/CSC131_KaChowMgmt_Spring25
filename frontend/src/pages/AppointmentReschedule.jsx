@@ -21,7 +21,7 @@ const AppointmentReschedule = () => {
         };
 
         try {
-            const response = await fetch('https://your-api-endpoint.com/appointments/reschedule', {
+            const response = await fetch('http://localhost:5000/api/tickets', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -108,7 +108,6 @@ const AppointmentReschedule = () => {
             {errorMessage && <p className="error-message">{errorMessage}</p>}
             {successMessage && <p className="success-message">{successMessage}</p>}
             <br />
-            <button onClick={() => navigate('/appt-creation')}>Go Back to Create</button>
         </div>
     );
 };

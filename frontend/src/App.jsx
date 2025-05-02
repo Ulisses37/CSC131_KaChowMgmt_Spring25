@@ -21,6 +21,7 @@ import RescheduleSuccess from './pages/AppointmentRescheduleSuccess.jsx';
 import ApptCancel from './pages/AppointmentCancel.jsx';
 import CancelSuccess from './pages/AppointmentCancelSuccess.jsx';
 import ViewAppointment from './pages/ViewAppointment.jsx';
+import ViewAppointmentDetail from './pages/ViewAppointmentDetail.jsx';
 // Employee Related Pages
 import ELogin from './pages/EmployeeLogin'
 import EVerif from './pages/EmployeeVerif'
@@ -78,6 +79,8 @@ function App() {
             <Route path="/resuccess" element={<RescheduleSuccess />} />
             <Route path="/appt-cancel" element={<ApptCancel />} />
             <Route path="/casuccess" element={<CancelSuccess />} />
+            <Route path="/viewappointment" element={<ViewAppointment />} />
+            <Route path="/viewappointment/:id" element={<ViewAppointmentDetail />} />
             <Route path="/service-history" element={<ServiceHistory />}/>         {/* might need to change the name of this */}
             {/* route path for feedback page */}
             {/* route path for logged out page */}
@@ -88,7 +91,7 @@ function App() {
             <Route path="/invoice" element={<Invoice/>}/>
             <Route path="/mechanic-details" element={<AMechDetails/>}/>
             <Route path="/mechanic-dashboard" element={<MDashboard />}/>
-            <Route path="/ticketpage" element={<TicketPage />} />
+            <Route path="/tickets" element={<TicketPage />} />
             <Route path="/ticket/:id" element={<TicketPageDetails />} />
             <Route path="/account-details" element={<MAccountDetails />} />
             <Route path="/edit-account" element={<MAccountEdit />} />
