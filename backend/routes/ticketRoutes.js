@@ -1,4 +1,5 @@
 import express from 'express';
+import Ticket from '../models/Ticket.js';
 import {
     validateCreateTicket,
     validateReschedule,
@@ -18,7 +19,7 @@ import {
     getTicketMechanics,
 } from '../controllers/ticketController.js';
 
-import { assignMechanictoTicket } from '../controllers/patchticketController.js';
+import { assignMechanictoTicket } from '../controllers/patchTicketController.js';
 
 const router = express.Router();
 
@@ -62,13 +63,41 @@ router.post('/:id/review',
 );
 
 // Admin Assign Ticket
-router.get('/tickets/:id',
+router.get('/:id/mechanics',
     getTicketMechanics);
     
 // Updated route with validator
-router.patch('/tickets/:id',
+router.patch('/:id',
     validateAssignMechanic,
     validateRequest,
     assignMechanictoTicket);
+
+// Get all tickets (admin)
+router.get('/',
+    async (req, res) => {
+        try {
+            const tickets = await Ticket.find();
+            res.status(200).json(tickets);
+        } catch (err) {
+            res.status(500).json({ message: 'Failed to fetch tickets', error: err.message });
+        }
+    }
+);
+
+router.patch('/:id/status', async (req, res) => {
+    try {
+        const ticket = await Ticket.findById(req.params.id);
+        if (!ticket) return res.status(404).json({ message: 'Ticket not found' });
+
+        const { status } = req.body;
+        ticket.completionStatus = status;
+        await ticket.save();
+
+        res.status(200).json({ message: 'Status updated', ticket });
+    } catch (err) {
+        res.status(500).json({ message: 'Server error', error: err.message });
+    }
+});
+
 
 export default router;

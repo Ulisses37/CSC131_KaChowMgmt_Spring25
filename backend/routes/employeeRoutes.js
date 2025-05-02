@@ -192,4 +192,27 @@ router.get('/:employeeId',
     }
 );
 
+router.get('/',
+    auth,
+    authorizeAdmin,
+    async (req, res) => {
+        try {
+            const role = req.query.role;
+
+            let filter = {};
+            if (role === 'mechanic') {
+                filter = { admin: false }; 
+            }
+
+            const employees = await Employee.find(filter)
+                .select('-password -resetPasswordToken -resetTokenExpiration');
+
+            res.status(200).json({ success: true, data: employees });
+        } catch (err) {
+            res.status(500).json({ success: false, message: err.message });
+        }
+    }
+);
+
+
 export default router;

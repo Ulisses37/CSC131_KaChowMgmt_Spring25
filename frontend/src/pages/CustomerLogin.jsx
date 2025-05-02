@@ -96,14 +96,8 @@ function CustomerLoginPage() {
         <div className="login-page-0">
             <BackButton text="HOME"/>
             <HeaderBar/>
-            
-            {/* Logo (Click to go to Home Page) */}
-            <img
-                className="srs-csc-131-1-icon"
-                alt="Company Logo"
-                src="/SRS_CSC_131 1.png"
-                onClick={() => navigate("/")}
-            />
+    
+            <img className="srs-csc-131-1-icon"lt="Company Logo" src="/SRS_CSC_131 1.png"/>
             <div className="login-page-0-inner"></div>
             <div className="log-in">Log In</div>
             <div className="no-account">No account?</div>

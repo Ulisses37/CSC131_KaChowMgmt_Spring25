@@ -6,6 +6,9 @@ export const assignMechanictoTicket = async (req, res) => {
     const { id } = req.params;
     const { mechanicId } = req.body;
 
+    if (mechanicId) ticket.mechanicId = mechanicId;
+    if (status) ticket.completionStatus = status;
+
     const ticket = await Ticket.findById(id);
     if (!ticket) {
       return res.status(404).json({

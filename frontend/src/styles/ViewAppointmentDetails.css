@@ -1,0 +1,40 @@
+/* Container for the appointment details */
+.appointment-detail-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9; /* Light gray background */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  
+  /* Header styling */
+  .appointment-detail-container h1 {
+    text-align: center;
+    color: #333; /* Dark gray text */
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+  
+  /* Styling for each detail field */
+  .appointment-detail p {
+    font-size: 16px; /* Adjust font size */
+    margin: 10px 0; /* Add spacing between fields */
+    color: #555; /* Medium gray text */
+  }
+  
+  /* Highlight important fields */
+  .appointment-detail p strong {
+    color: #000; /* Black text for labels */
+  }
+  
+  /* Responsive design for smaller screens */
+  @media (max-width: 600px) {
+    .appointment-detail-container {
+      padding: 15px;
+    }
+  
+    .appointment-detail p {
+      font-size: 14px; /* Slightly smaller font size for mobile */
+    }
+  }

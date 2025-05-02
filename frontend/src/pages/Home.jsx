@@ -11,7 +11,7 @@ function HomePage() {
 			<HeaderBar/>
     		<div className="home-item"></div>
     		<img className="homepage-pic-icon" alt="" src="homepage pic.png"></img>
-    		<img className="srs-csc-131-2-icon" alt="" src="SRS_CSC_131 1.png"></img>
+    		<img className="srs-csc-131-2-icon" alt="" src="SRS_CSC_131 1.png"/>
             <div className="top-border"></div>
             <div className="oil-change-wrapper">
  				<div className="oil-change">Oil Change</div>

@@ -18,7 +18,7 @@ function CustomerMenuBar() {
             <div className="text-wrapper" onClick={() => goTo('/customer-dashboard')}>
                 <div className="text">Profile</div>
             </div>
-            <div className="text-container" onClick={() => goTo('/appointment-management')}>
+            <div className="text-container" onClick={() => goTo('/appt-creation')}>
                 <div className="text">
                     <div className="manage">Manage</div>
                     <div className="manage">Appointments</div>

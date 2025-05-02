@@ -408,8 +408,7 @@ body {
 
 /* Keep all your existing styles, but remove these since they're in HeaderBar now */
 .background-red, 
-.background-black, 
-.srs-csc-131-1-icon {
+.background-black {
     display: none;
 }
 

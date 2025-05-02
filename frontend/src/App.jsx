@@ -7,7 +7,6 @@ import Home from './pages/Home';
 // Customer Related Pages
 import CLogin from './pages/CustomerLogin';  // note the first letter of what is being imported needs to be an upper case
 import CDashboard from './pages/CustomerDashboard';
-import ApptManagement from './pages/AppointmentManagement';    // might need to change the name of this
 import ServiceHistory from './pages/ServiceHistory';           // might need to change the name of this
 import CPassword from './pages/ChangePassword';
 import FPassword from './pages/ForgotPassword';
@@ -21,6 +20,7 @@ import RescheduleSuccess from './pages/AppointmentRescheduleSuccess.jsx';
 import ApptCancel from './pages/AppointmentCancel.jsx';
 import CancelSuccess from './pages/AppointmentCancelSuccess.jsx';
 import ViewAppointment from './pages/ViewAppointment.jsx';
+import ViewAppointmentDetail from './pages/ViewAppointmentDetail.jsx';
 import Feedback from './pages/Feedback.jsx';
 // Employee Related Pages
 import ELogin from './pages/EmployeeLogin';
@@ -72,7 +72,6 @@ function App() {
                 <CDashboard />
               </ProtectedRoute>
             }/>
-            <Route path="/appointment-management" element={<ApptManagement />}/>  {/* might need to change the name of this */}
             <Route path="/appt-creation" element={<ApptCreation />} />
             <Route path="/crsuccess" element={<CreationSuccess />} />
             <Route path="/viewappointment" element={<ViewAppointment />} />
@@ -80,6 +79,8 @@ function App() {
             <Route path="/resuccess" element={<RescheduleSuccess />} />
             <Route path="/appt-cancel" element={<ApptCancel />} />
             <Route path="/casuccess" element={<CancelSuccess />} />
+            <Route path="/viewappointment" element={<ViewAppointment />} />
+            <Route path="/viewappointment/:id" element={<ViewAppointmentDetail />} />
             <Route path="/service-history" element={<ServiceHistory />}/>         {/* might need to change the name of this */}
             <Route path="/feedback" element={<Feedback />}/>
             {/* route path for feedback page */}
@@ -91,8 +92,8 @@ function App() {
             <Route path="/invoice" element={<Invoice/>}/>
             <Route path="/mechanic-details" element={<AMechDetails/>}/>
             <Route path="/mechanic-dashboard" element={<MDashboard />}/>
+            <Route path="/tickets" element={<TicketPage />} />
             <Route path="/viewappointment" element={<ViewAppointment />} />
-            <Route path="/ticketpage" element={<TicketPage />} />
             <Route path="/ticket/:id" element={<TicketPageDetails />} />
             <Route path="/account-details" element={<MAccountDetails />} />
             <Route path="/edit-account" element={<MAccountEdit />} />

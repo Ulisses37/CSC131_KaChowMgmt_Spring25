@@ -15,7 +15,7 @@ const AppointmentCancel = () => {
     // Fetch the user's appointments from the backend
     const fetchAppointments = async () => {
       try {
-        const response = await fetch('https://your-api-endpoint.com/appointments', {
+        const response = await fetch('http://localhost:5000/api/tickets', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`, // Include the user's token
@@ -41,7 +41,7 @@ const AppointmentCancel = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('https://your-api-endpoint.com/appointments/cancel', {
+      const response = await fetch('http://localhost:5000/api/tickets', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -98,9 +98,6 @@ const AppointmentCancel = () => {
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       {successMessage && <p className="success-message">{successMessage}</p>}
       <br />
-      <button onClick={() => navigate('/appt-creation')}>Create</button>
-      <br />
-      <button onClick={() => navigate('/appt-reschedule')}>Reschedule</button>
     </div>
   );
 };
