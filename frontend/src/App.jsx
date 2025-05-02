@@ -7,7 +7,6 @@ import Home from './pages/Home';
 // Customer Related Pages
 import CLogin from './pages/CustomerLogin';  // note the first letter of what is being imported needs to be an upper case
 import CDashboard from './pages/CustomerDashboard';
-import ApptManagement from './pages/AppointmentManagement';    // might need to change the name of this
 import ServiceHistory from './pages/ServiceHistory';           // might need to change the name of this
 import CPassword from './pages/ChangePassword';
 import FPassword from './pages/ForgotPassword';
@@ -72,7 +71,6 @@ function App() {
                 <CDashboard />
               </ProtectedRoute>
             }/>
-            <Route path="/appointment-management" element={<ApptManagement />}/>  {/* might need to change the name of this */}
             <Route path="/appt-creation" element={<ApptCreation />} />
             <Route path="/crsuccess" element={<CreationSuccess />} />
             <Route path="/appt-reschedule" element={<ApptReschedule />} />

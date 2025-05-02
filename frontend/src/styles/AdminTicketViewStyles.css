@@ -377,7 +377,7 @@ body {
     border: 1px dashed var(--color-darkgray);
     margin-top: 10px;
 } 
-.button2 {
+.assign-button {
     position: relative;
     line-height: 100%;
 }
