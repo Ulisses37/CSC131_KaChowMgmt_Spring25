@@ -1,18 +1,13 @@
-import BackButton from '../components/BackButtonComponent'; 
-
+import BackButton from '../components/BackButtonComponent';
+import '../styles/TicketHistoryStyles.css';
+import HeaderBar from '../components/HeaderBarComponent'; 
 function TicketHistoryPage(){
     return (
       <div class="ticket-history-mechanic">
       <BackButton text="DASHBOARD"/>
       <div class="base">
       <div class="page-banner">
-      <div class="client-name-vin-service-wrapper">
-      <div class="client-name-vin">#0001</div>
-      </div>
-      <div class="background-red">
-      </div>
-      <div class="background-black">
-      </div>
+      <HeaderBar/>
       <img class="srs-csc-131-1-icon" alt="" src="SRS_CSC_131 1.png"/>
       <div class="account-button">
       <div class="button">
@@ -24,10 +19,6 @@ function TicketHistoryPage(){
       <div class="account-button-inner">
       </div>
       </div>
-      <div class="play-arrow-filled-parent" id="frameContainer1">
-      <img class="play-arrow-filled-icon" alt="" src="play_arrow_filled.svg"/>
-      <div class="text">TICKET HISTORY</div>
-      </div>
       </div>
       <div class="assigning-ticket-adjust">
       <div class="assigned-tickets">
@@ -36,12 +27,12 @@ function TicketHistoryPage(){
       <div class="job-status">Job Status</div>
       <div class="job-code">Time Spent</div>
       <div class="make-model-container">
-      <p class="customer">Customer</p>
-      <p class="customer">Feedback</p>
+      <div class="customer">Customer</div>
+      <div class="customer">Feedback</div>
       </div>
       <div class="end-date">
-      <p class="customer">Appointment</p>
-      <p class="customer">Data</p>
+      <div class="customer">Appointment</div>
+      <div class="customer">Data</div>
       </div>
       </div>
       <div class="date-out-parent">
@@ -55,7 +46,7 @@ function TicketHistoryPage(){
       <div class="client-name-vin">Complete</div>
       </div>
       <div class="date-out">
-      <div class="client-name-vin">3 hoours</div>
+      <div class="client-name-vin">3 hours</div>
       </div>
       <div class="makemodel-out">
       <div class="client-name-vin">
