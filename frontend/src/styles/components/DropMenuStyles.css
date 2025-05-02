@@ -1,0 +1,64 @@
+/* DropMenuStyles.css */
+.dropdown-container {
+    position: absolute;
+    left: 1817px;
+    top: 35px;
+    z-index: 1000;
+    display: inline-block;
+  }
+  
+  .dropdown-trigger {
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .hamburger-container {
+    width: 70px;
+    height: 70px;
+    background-color: #211f1f;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .hamburger-icon {
+    font-size: 35px;
+    line-height: 1;
+    color: white;
+    transform: scale(1.2);
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    right: 0;
+    background-color: #ffff;
+    min-width: 200px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 1000;
+  }
+  
+  .dropdown-item {
+    display: block;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: black;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #C93131;
+  }
+  
+  .dropdown-item.logout {
+    color: #ff6b6b;
+  }

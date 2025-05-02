@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/AdminTicketViewStyles.css';
 import HeaderBar from '../components/HeaderBarComponent';
+import BackButton from '../components/BackButtonComponent'; 
 
 function AdminTicketViewPage() {
     const navigate = useNavigate();
@@ -209,6 +210,7 @@ function AdminTicketViewPage() {
 
     return (
         <div className="assigning-ticket-page">
+            <BackButton text="DASHBOARD"/>
             <HeaderBar/>
             {isLoading ? (
                 <div className="loading-indicator">

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/EmployeePayroll.css'; // Import the CSS file
 import HeaderBar from '../components/HeaderBarComponent';
+import BackButton from '../components/BackButtonComponent'; 
 import { useNavigate } from 'react-router';
 
 const EmployeePayroll = () => {
@@ -35,6 +36,7 @@ const EmployeePayroll = () => {
 
     return (
         <>
+        <BackButton text="DASHBOARD"/>
         <HeaderBar />
         <br/>
         <br/>

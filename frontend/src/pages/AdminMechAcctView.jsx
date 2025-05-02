@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/AdminMechAcctViewStyles.css';
 import HeaderBar from '../components/HeaderBarComponent';
+import BackButton from '../components/BackButtonComponent'; 
 
 function AdminMechAccountViewPage() {
     const [mechanicData, setMechanicData] = useState(null);
@@ -69,17 +70,8 @@ function AdminMechAccountViewPage() {
 
     return (
         <div className="mechanic-statistics-2">
+            <BackButton text="DASHBOARD"/>
             <HeaderBar />
-            
-            <div className="play-arrow-filled-parent" onClick={() => navigate(-1)}>
-                <div className="play-arrow-filled-icon">
-                    {/* Replace with your actual arrow icon */}
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
-                    </svg>
-                </div>
-                <div className="text">BACK</div>
-            </div>
             
             <img className="srs-csc-131-1-icon" alt="Company Logo" src="https://placehold.co/367x309" />
             

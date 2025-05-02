@@ -1,7 +1,8 @@
 import { useLocation, Navigate, useNavigate } from 'react-router-dom'; 
 import '../styles/EmployeeDashboardStyles.css';
 import LgButton from '../components/LightGreyButtonComponent';
-import HeaderBar from '../components/HeaderBarComponent'; 
+import HeaderBar from '../components/HeaderBarComponent';
+
 
 function AdminDashboardPage() {
     const { state } = useLocation();

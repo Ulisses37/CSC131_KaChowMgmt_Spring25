@@ -1,6 +1,9 @@
+import BackButton from '../components/BackButtonComponent'; 
+
 function TicketHistoryPage(){
     return (
       <div class="ticket-history-mechanic">
+      <BackButton text="DASHBOARD"/>
       <div class="base">
       <div class="page-banner">
       <div class="client-name-vin-service-wrapper">

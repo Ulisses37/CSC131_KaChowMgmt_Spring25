@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import HeaderBar from '../components/HeaderBarComponent';
+import BackButton from '../components/BackButtonComponent'; 
 import { Link } from 'react-router-dom';
 import '../styles/MechAccountDetailsStyles.css';
 
@@ -48,6 +49,7 @@ function MechanicAccountDetailsPage() {
 
     return (
         <div className="mechanic-account">
+            <BackButton text="DASHBOARD"/>
             <HeaderBar />
             <img className="srs-csc-131-1-icon" alt="" src="SRS_CSC_131 1.png" id="sRSCSC1311Image"/>
             

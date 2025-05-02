@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/TicketPage.css';
 import HeaderBar from '../components/HeaderBarComponent';
+import BackButton from '../components/BackButtonComponent';
 
 const TicketPage = () => {
   const [tickets, setTickets] = useState([]);
@@ -42,6 +43,7 @@ const TicketPage = () => {
 
   return (
     <div>
+      <BackButton text="DASHBOARD"/>
       <HeaderBar />
       <br />
       <img
