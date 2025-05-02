@@ -4,6 +4,8 @@ import '../styles/AdminTicketViewStyles.css';
 import HeaderBar from '../components/HeaderBarComponent';
 import BackButton from '../components/BackButtonComponent'; 
 
+const API_BASE_URL = 'http://localhost:5000/api';
+
 function AdminTicketViewPage() {
     const navigate = useNavigate();
     
@@ -20,14 +22,14 @@ function AdminTicketViewPage() {
     const assignMechanicToTicket = async (ticketId, mechanicId) => {
         try {
           // Get the authentication token from localStorage
-          const token = localStorage.getItem('token');
+          const token = localStorage.getItem('employeeToken');
           
           if (!token) {
             throw new Error('Authentication required. Please log in.');
           }
           
           // Make the PATCH request to assign the mechanic
-          const response = await fetch(`http://localhost:5000/api/tickets/tickets/${ticketId}`, {
+          const response = await fetch(`http://localhost:5000/api/tickets/${ticketId}`, {
             method: 'PATCH',
             headers: {
               'Content-Type': 'application/json',
@@ -69,43 +71,72 @@ function AdminTicketViewPage() {
     };
 
     const fetchTickets = async () => {
-    try {
-        const response = await fetch(`${API_BASE_URL}/tickets`);
-        return await response.json();
-    } catch (error) {
-        console.error('Error fetching tickets:', error);
-        throw error;
-    }
+        try {
+            // Get the authentication token from localStorage
+            const token = localStorage.getItem('token');
+            
+            if (!token) {
+                throw new Error('Authentication required. Please log in.');
+            }
+            
+            const response = await fetch(`${API_BASE_URL}/tickets`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            
+            if (!response.ok) {
+                throw new Error('Failed to fetch tickets');
+            }
+            
+            return await response.json();
+        } catch (error) {
+            console.error('Error fetching tickets:', error);
+            throw error;
+        }
     };
 
     // Fetch initial data
     useEffect(() => {
-        const loadInitialData = async () => {
-            try {
-                setIsLoading(true);
-                // Fetch mechanics and tickets in parallel
-                const [mechsResponse, ticketsResponse] = await Promise.all([
-                    fetch(`${API_BASE_URL}/mechanics`).then(res => res.json()),
-                    fetchTickets()
-                ]);
-                
-                setMechanics(mechsResponse);
-                
-                const unassigned = ticketsResponse.filter(t => !t.mechanicId);
-                const assigned = ticketsResponse.filter(t => t.mechanicId);
-                
-                setUnassignedTickets(unassigned);
-                setAssignedTickets(assigned);
-            } catch (error) {
-                console.error('Error loading initial data:', error);
-                // Optionally show error to user
-            } finally {
-                setIsLoading(false);
+    const loadInitialData = async () => {
+        try {
+            setIsLoading(true);
+            const token = localStorage.getItem('token');
+            
+            if (!token) {
+                throw new Error('Authentication required. Please log in.');
             }
-        };
-        
-        loadInitialData();
-    }, []);
+            
+            // Fetch mechanics and tickets in parallel
+            const [mechsResponse, ticketsResponse] = await Promise.all([
+                fetch(`${API_BASE_URL}/employees`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                }).then(res => {
+                    if (!res.ok) throw new Error('Failed to fetch mechanics');
+                    return res.json();
+                }),
+                fetchTickets()
+            ]);
+            
+            setMechanics(mechsResponse.data || []); // Access the 'data' property
+            
+            const unassigned = ticketsResponse.filter(t => !t.mechanicId);
+            const assigned = ticketsResponse.filter(t => t.mechanicId);
+            
+            setUnassignedTickets(unassigned);
+            setAssignedTickets(assigned);
+        } catch (error) {
+            console.error('Error loading initial data:', error);
+            // Optionally show error to user
+        } finally {
+            setIsLoading(false);
+        }
+    };
+    
+    loadInitialData();
+}, []);
 
     // Update handleMechanicSelect to use API
     const handleMechanicSelect = async (ticketId, mechanicId) => {
@@ -118,16 +149,14 @@ function AdminTicketViewPage() {
 
     // Update handleConfirmAssignments to use API
     const handleConfirmAssignments = async () => {
-        if (unassignedTickets.length === 0) return;
+        if (Object.keys(stagedAssignments).length === 0) return;
         
         try {
             setIsLoading(true);
-            const assignments = Object.entries(stagedAssignments)
-                .filter(([ticketId]) => unassignedTickets.some(t => t.id === parseInt(ticketId)));
             
             // Process all assignments in parallel
             await Promise.all(
-                assignments.map(async ([ticketId, mechanicId]) => {
+                Object.entries(stagedAssignments).map(async ([ticketId, mechanicId]) => {
                     await assignMechanicToTicket(ticketId, mechanicId);
                 })
             );
@@ -154,12 +183,13 @@ function AdminTicketViewPage() {
             setIsLoading(true);
             await assignMechanicToTicket(ticketId, newMechanicId);
             
-            // Update local state optimistically
-            setAssignedTickets(assignedTickets.map(ticket => 
-                ticket.id === ticketId 
-                    ? { ...ticket, mechanicId: newMechanicId } 
-                    : ticket
-            ));
+            // Refresh the ticket lists instead of optimistic updates
+            const updatedTickets = await fetchTickets();
+            const unassigned = updatedTickets.filter(t => !t.mechanicId);
+            const assigned = updatedTickets.filter(t => t.mechanicId);
+            
+            setUnassignedTickets(unassigned);
+            setAssignedTickets(assigned);
         } catch (error) {
             console.error('Error changing mechanic:', error);
             // Optionally show error to user
