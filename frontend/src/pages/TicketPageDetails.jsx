@@ -13,7 +13,11 @@ const TicketPageDetails = () => {
     const fetchTicketDetails = async () => {
       try {
         // Replace this URL with your actual API endpoint
-        const response = await fetch(`https://api.example.com/tickets/${id}`);
+        const response = await fetch(`http://localhost:5000/api/tickets/${id}`, {
+          headers: {
+              'Authorization': `Bearer ${localStorage.getItem('employeeToken')}`
+          }
+        })
         if (!response.ok) {
           throw new Error('Failed to fetch ticket details');
         }

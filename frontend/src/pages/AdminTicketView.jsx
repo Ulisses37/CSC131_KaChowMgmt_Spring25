@@ -77,20 +77,24 @@ function AdminTicketViewPage() {
         try {
             const token = localStorage.getItem('employeeToken');
             const response = await fetch(`${API_BASE_URL}/tickets/${ticketId}/status`, {
-                method: 'PUT',
+                method: 'PATCH', // make sure this is PATCH, not PUT
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({ status })
             });
-            return await response.json();
+    
+            const data = await response.json();
+            console.log('Status update response:', data); // ← add this
+            return data;
         } catch (error) {
             console.error('Error updating ticket status:', error);
             setError(error.message);
             throw error;
         }
     };
+    
 
     useEffect(() => {
         const loadInitialData = async () => {
@@ -98,23 +102,27 @@ function AdminTicketViewPage() {
                 setIsLoading(true);
                 setError(null);
                 const token = localStorage.getItem('employeeToken');
-                
-                const [mechsResponse, ticketsResponse] = await Promise.all([
-                    fetch(`${API_BASE_URL}/employees?role=mechanic`, {
-                        headers: {
-                            'Authorization': `Bearer ${token}`
-                        }
-                    }).then(res => res.json()),
-                    fetchTickets()
-                ]);
-                
-                setMechanics(mechsResponse);
-                
-                const unassigned = ticketsResponse.filter(t => !t.mechanicId);
-                const assigned = ticketsResponse.filter(t => t.mechanicId);
-                
-                setUnassignedTickets(unassigned);
-                setAssignedTickets(assigned);
+    
+                const mechsResponse = await fetch(`${API_BASE_URL}/employees?role=mechanic`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const mechsData = await mechsResponse.json();
+                setMechanics(mechsData.data || []);
+    
+                const tickets = await fetch(`${API_BASE_URL}/tickets`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                }).then(res => res.json());
+    
+                const ticketsWithNames = tickets.map(ticket => ({
+                    ...ticket,
+                    id: ticket._id,
+                    mechanic: ticket.mechanicId ?
+                        mechsData.data.find(m => m._id === ticket.mechanicId)?.name :
+                        'Unassigned'
+                }));
+    
+                setUnassignedTickets(ticketsWithNames.filter(t => !t.mechanicId));
+                setAssignedTickets(ticketsWithNames.filter(t => t.mechanicId));
             } catch (error) {
                 console.error('Error loading initial data:', error);
                 setError(error.message);
@@ -122,10 +130,10 @@ function AdminTicketViewPage() {
                 setIsLoading(false);
             }
         };
-        
+    
         loadInitialData();
     }, []);
-
+    
     const handleMechanicSelect = (ticketId, mechanicId) => {
         const mechanic = mechanics.find(m => m._id === mechanicId);
         setStagedAssignments({
@@ -194,8 +202,9 @@ function AdminTicketViewPage() {
             await updateTicketStatus(ticketId, newStatus);
             
             setAssignedTickets(assignedTickets.map(ticket => 
-                ticket.id === ticketId ? { ...ticket, status: newStatus } : ticket
+                ticket.id === ticketId ? { ...ticket, completionStatus: newStatus } : ticket
             ));
+            
         } catch (error) {
             console.error('Error updating status:', error);
             setError(error.message);
@@ -212,9 +221,10 @@ function AdminTicketViewPage() {
         });
     };
 
-    const handleTicketClick = (ticketNumber) => {
-        navigate(`/ticket-details/${ticketNumber.substring(1)}`);
+    const handleTicketClick = (ticketId) => {
+        navigate(`/ticket/${ticketId}`);
     };
+    
 
     const getMechanicColor = (mechanicName) => {
         const mechanic = mechanics.find(m => m.name === mechanicName);
@@ -255,10 +265,10 @@ function AdminTicketViewPage() {
                                     <div className="instance-parent" key={ticket.id}>
                                         <div 
                                             className="client-name-vin-service-container" 
-                                            onClick={() => handleTicketClick(ticket.ticketNumber)}
+                                            onClick={() => handleTicketClick(ticket.ticketId)}
                                             style={{ cursor: 'pointer' }}
                                         >
-                                            <div className="client-name-vin">{ticket.ticketNumber}</div>
+                                            <div className="client-name-vin">{ticket.ticketId}</div>
                                         </div>
                                         
                                         <div className="mech-default-button-frame">
@@ -298,7 +308,7 @@ function AdminTicketViewPage() {
                                         
                                         <div className="status-drop-down-menu">
                                             <div className="mech-default-button1">
-                                                <div className="client-name-vin">{ticket.status}</div>
+                                                <div className="client-name-vin">{ticket.completionStatus}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -327,10 +337,10 @@ function AdminTicketViewPage() {
                                 <div className="instance-parent" key={ticket.id}>
                                     <div 
                                         className="client-name-vin-service-container" 
-                                        onClick={() => handleTicketClick(ticket.ticketNumber)}
+                                        onClick={() => handleTicketClick(ticket.ticketId)}
                                         style={{ cursor: 'pointer' }}
                                     >
-                                        <div className="client-name-vin">{ticket.ticketNumber}</div>
+                                        <div className="client-name-vin">{ticket.ticketId}</div>
                                     </div>
                                     
                                     <div className="mech-default-button-frame">
@@ -369,7 +379,7 @@ function AdminTicketViewPage() {
                                             className="mech-default-button5"
                                             onClick={() => toggleDropdown('status', ticket.id)}
                                         >
-                                            <div className="client-name-vin">{ticket.status}</div>
+                                            <div className="client-name-vin">{ticket.completionStatus}</div>
                                             <img className="arrow-drop-down-icon" alt="" src="arrow_drop_down.svg"/>
                                         </div>
                                         
@@ -383,9 +393,9 @@ function AdminTicketViewPage() {
                                                 </div>
                                                 <div 
                                                     className="status-dropdown-item"
-                                                    onClick={() => handleStatusChange(ticket.id, 'In-Progress')}
+                                                    onClick={() => handleStatusChange(ticket.id, 'Assigned')}
                                                 >
-                                                    In-Progress
+                                                    Assigned
                                                 </div>
                                                 <div 
                                                     className="status-dropdown-item"
