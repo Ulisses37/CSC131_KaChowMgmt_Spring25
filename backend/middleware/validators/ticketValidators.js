@@ -6,11 +6,10 @@ import Ticket from '../../models/Ticket.js';
 
 // Utility: Validate if VIN exists in DB
 const validateVINExists = () => [
-    body('vechVIN')
+    body('vin')
         .isString().withMessage('VIN must be a string')
-        .isLength({ min: 17, max: 17 }).withMessage('VIN must be 17 characters')
         .custom(async (vin) => {
-            const vehicle = await Vehicle.findOne({ vechVIN: vin });
+            const vehicle = await Vehicle.findOne({ vin });
             if (!vehicle) {
                 throw new Error('Vehicle not found');
             }

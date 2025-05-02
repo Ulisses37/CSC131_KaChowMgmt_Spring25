@@ -25,7 +25,7 @@ const AppointmentCreation = () => {
     
         const ticketData = {
             //vin,  //? Written as this in vehicle schema
-            vechVIN,
+            vin: vechVIN,
             customerId,
             ticketType: vehicleRepairType,
             appDate: new Date(appDate),  // Ensure this is a Date object
@@ -35,7 +35,7 @@ const AppointmentCreation = () => {
         };
     
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/tickets`, {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/tickets` || 'http://localhost:5000/api/tickets', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -48,15 +48,13 @@ const AppointmentCreation = () => {
                 try {
                     errorData = await response.json();
                     console.error('Backend error:', errorData);
-                    if (errorData.errors) {
-                        errorData.errors.forEach((err, index) => {
-                            console.error(`Validation Error ${index + 1}:`, err);
-                        });
-                    }
+                    // Display the specific error message from the backend
+                    setErrorMessage(errorData.message || 'Failed to create ticket');
                 } catch (jsonErr) {
                     console.error('Failed to parse error JSON:', jsonErr);
+                    setErrorMessage('An unexpected error occurred');
                 }
-                throw new Error(errorData?.message || 'Failed to create ticket. Please try again.');
+                return; // Exit the function early
             }
         
             const data = await response.json();

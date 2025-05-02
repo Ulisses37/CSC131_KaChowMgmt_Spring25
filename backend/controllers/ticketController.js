@@ -36,10 +36,10 @@ export const createTicket = async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { appDate, vechVIN, customerId, ticketType, customerComments } = req.body;
+  const { appDate, vin, customerId, ticketType, customerComments } = req.body;
 
   try {
-    const vehicle = await Vehicle.findOne({ vin: vechVIN });
+    const vehicle = await Vehicle.findOne({ vin });
     if (!vehicle) {
       return res.status(404).json({ message: 'Vehicle not found' });
     }
@@ -53,7 +53,7 @@ export const createTicket = async (req, res) => {
     const newTicket = new Ticket({
       ticketId,
       appDate,
-      vechVIN,
+      vechVIN: vehicle.vin,
       vehicle: vehicle._id,
       customerId,
       ticketType,
