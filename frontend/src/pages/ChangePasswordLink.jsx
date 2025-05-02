@@ -1,90 +1,101 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import '../styles/ChangePasswordLinkStyles.css'
+import { useNavigate, useParams } from 'react-router-dom';
+import '../styles/ChangePasswordLinkStyles.css';
 
 function ChangePasswordLinkPage() {
+    const { token } = useParams();
     const navigate = useNavigate();
-    const [oldPassword, setOldPassword] = useState("");
-    const [newPassword, setNewPassword] = useState("");
+    const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+
+    console.log("ChangePasswordLinkPage loaded with token:", token);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (newPassword !== confirmPassword) {
-            alert("New passwords don't match!");
+        if (password !== confirmPassword) {
+            alert("Passwords don't match!");
             return;
         }
+
         try {
-            const response = await fetch('http://localhost/:' + process.env.REACT_APP_HOST_PORT + '/api/auth/change-password', {
-                method: 'POST',
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('token')}` 
-                },
-                body: JSON.stringify({ oldPassword, newPassword }),
-            });
+            const response = await fetch(
+                `${import.meta.env.VITE_API_BASE_URL}/api/auth/password/reset-password/${token}`,
+                {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password }),
+                }
+            );
+
             if (response.ok) {
-                alert("Password changed successfully!");
-                navigate('/');
+                alert("Password reset successfully!");
+                navigate('/customer-login'); // Redirect to login page
             } else {
-                alert("Failed to change password. Please check your old password.");
+                const error = await response.json();
+                alert(error.message || "Failed to reset password");
             }
         } catch (err) {
-            console.error("Password change error:", err);
+            console.error("Password reset error:", err);
+            alert("An error occurred while resetting password");
         }
     };
 
     return (
-        <div className="change-password-container">
-            {/* Header Section */}
-            <div className="header-gradient"></div>
-            <div className="nav-bar"></div>
-            
-            <img 
-                src="SRS_CSC_131 1.png" 
-                alt="Company Logo" 
-                className="logo"
-                onClick={() => navigate('/')}
-                style={{ cursor: 'pointer' }}
-            />
-            
-            {/* Main Form */}
-            <div className="form-wrapper">
-                <h1 className="form-title">Change your Password</h1>
-                
-                <form onSubmit={handleSubmit} className="password-form">
-                    
-                    <div className="input-group">
-                        <label className="input-label">Enter New Password</label>
-                        <input
-                            type="password"
-                            value={newPassword}
-                            onChange={(e) => setNewPassword(e.target.value)}
-                            placeholder="New Password"
-                            required
-                            minLength="8"
-                            className="form-input"
-                        />
-                    </div>
-                    
-                    <div className="input-group">
-                        <label className="input-label">Re-enter New Password</label>
-                        <input
-                            type="password"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            placeholder="Confirm New Password"
-                            required
-                            minLength="8"
-                            className="form-input"
-                        />
-                    </div>
-                    
-                    <button type="submit" className="submit-btn">
-                        CONFIRM
-                    </button>
-                </form>
+        <div className="change-password-page">
+            {/* Optional debug info */}
+            <div style={{ color: "black", background: "yellow", padding: "10px" }}>
+                Token: {token || 'No token'}
             </div>
+
+            {/* Header Bar */}
+            <div className="change-password-page-child"></div>
+            <div className="change-password-page-item"></div>
+
+            {/* Optional logo */}
+            <img
+                className="srs-csc-131-1-icon"
+                alt="Company Logo"
+                src="/your-logo.png" // Replace with actual logo path or remove if not needed
+            />
+
+            {/* White box container */}
+            <div className="change-password-page-inner"></div>
+
+            {/* Text Labels */}
+            <div className="change-your-password">Reset Your Password</div>
+            <div className="enter-new-password">Enter New Password</div>
+            <div className="re-enter-new-password">Re-enter New Password</div>
+
+            {/* Inputs */}
+            <div className="password-input">
+                <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="New Password"
+                    required
+                    minLength="8"
+                    style={{ width: '100%', border: 'none', outline: 'none' }}
+                />
+            </div>
+            <div className="password-input1">
+                <input
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    placeholder="Confirm New Password"
+                    required
+                    minLength="8"
+                    style={{ width: '100%', border: 'none', outline: 'none' }}
+                />
+            </div>
+
+            {/* Button */}
+            <div className="button" onClick={handleSubmit}>
+                <div className="button1">Reset Password</div>
+            </div>
+
+            <div className="line-div"></div>
         </div>
     );
 }

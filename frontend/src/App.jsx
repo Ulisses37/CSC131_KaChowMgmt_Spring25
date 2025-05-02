@@ -58,7 +58,7 @@ function App() {
             <Route path="/forgot-password" element={<FPassword/>} />
             <Route path="/change-password" element={<CPassword/>} />
             <Route path="/cpass-success" element={<CPasswordSuccess/>}/>
-            <Route path="/change-password-link" element={<CPasswordLink/>}/>
+            <Route path="/password/reset-password/:token" element={<CPasswordLink />} />  {/* NEW replaced the old one */}
             {/* route path for change password confirmation */}
             <Route path="/customer-dashboard" element={
               <ProtectedRoute>
