@@ -4,12 +4,11 @@ import '../styles/AppointmentCreation.css';
 import HeaderBar from '../components/HeaderBarComponent';
 
 const AppointmentCreation = () => {
-    const [customerID, setCustomerID] = useState('');
-    const [vehicleModel, setVehicleModel] = useState('');
-    const [vehicleNumber, setVehicleNumber] = useState('');
+    const [customerId, setcustomerId] = useState('');
+    const [vechVIN, setvechVIN] = useState('');
     const [vehicleRepairType, setVehicleRepairType] = useState('');
-    const [dateOfRepair, setDateOfRepair] = useState('');
-    const [timeOfRepair, setTimeOfRepair] = useState('');
+    const [appDate, setAppDate] = useState(''); // Combined date and time
+    const [customerComments, setCustomerComments] = useState(''); // New customerComments field
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
 
@@ -19,16 +18,15 @@ const AppointmentCreation = () => {
         e.preventDefault();
         const ticket = {
             id: Date.now(),
-            customerID,
-            vehicleModel,
-            vehicleNumber,
+            customerId,
+            vechVIN,
             repairType: vehicleRepairType,
-            date: dateOfRepair,
-            time: timeOfRepair,
+            appointmentDateTime: appDate, // Combined date and time
+            customerComments, // Include customerComments in the ticket object
         };
 
         try {
-            const response = await fetch('https://your-api-endpoint.com/tickets', {
+            const response = await fetch('http://localhost:5000/api/tickets', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -44,12 +42,11 @@ const AppointmentCreation = () => {
             console.log('Ticket created successfully:', data);
             setSuccessMessage('Ticket created successfully!');
             setErrorMessage('');
-            setCustomerID('');
-            setVehicleModel('');
-            setVehicleNumber('');
+            setcustomerId('');
+            setvechVIN('');
             setVehicleRepairType('');
-            setDateOfRepair('');
-            setTimeOfRepair('');
+            setAppDate('');
+            setCustomerComments(''); // Clear the customerComments field
             navigate('/crsuccess'); // Navigate to success page
         } catch (error) {
             console.error('Error creating ticket:', error);
@@ -63,90 +60,70 @@ const AppointmentCreation = () => {
             <HeaderBar />
             <br />
             <br />
-            <img className="srs-csc-131-2-icon" 
-            alt="" 
-            src="SRS_CSC_131 1.png"
-            onClick={() => navigate("/")}></img>
+            <img
+                className="srs-csc-131-2-icon"
+                alt=""
+                src="SRS_CSC_131 1.png"
+                onClick={() => navigate("/")}
+            ></img>
             <h2>Create a Ticket</h2>
             <form onSubmit={handleSubmit}>
-    <div className="form-group">
-        <label>Customer ID:</label>
-        <input
-            type="text"
-            value={customerID}
-            onChange={(e) => setCustomerID(e.target.value)}
-            required
-        />
-    </div>
-    <div className="form-group">
-        <label>Vehicle Model:</label>
-        <input
-            type="text"
-            value={vehicleModel}
-            onChange={(e) => setVehicleModel(e.target.value)}
-            required
-        />
-    </div>
-    <div className="form-group">
-        <label>Vehicle Number:</label>
-        <input
-            type="text"
-            value={vehicleNumber}
-            onChange={(e) => setVehicleNumber(e.target.value)}
-            required
-        />
-    </div>
-    <div className="form-group">
-        <label>Repair Type:</label>
-        <input
-            type="text"
-            value={vehicleRepairType}
-            onChange={(e) => setVehicleRepairType(e.target.value)}
-            required
-        />
-    </div>
-    <div className="form-group">
-        <label>Select appointment date:</label>
-        <input
-            type="date"
-            value={dateOfRepair}
-            onChange={(e) => setDateOfRepair(e.target.value)}
-            required
-        />
-    </div>
-    <div className="form-group">
-    <label>Select appointment time:</label>
-    <select
-        value={timeOfRepair}
-        onChange={(e) => setTimeOfRepair(e.target.value)}
-        required
-    >
-        <option value="" disabled>
-            -- Select Time --
-        </option>
-        <option value="08:00">08:00 AM</option>
-        <option value="09:00">09:00 AM</option>
-        <option value="10:00">10:00 AM</option>
-        <option value="11:00">11:00 AM</option>
-        <option value="12:00">12:00 PM</option>
-        <option value="13:00">01:00 PM</option>
-        <option value="14:00">02:00 PM</option>
-        <option value="15:00">03:00 PM</option>
-        <option value="16:00">04:00 PM</option>
-        <option value="17:00">05:00 PM</option>
-    </select>
-</div>
-</form>
+                <div className="form-group">
+                    <label>Customer ID:</label>
+                    <input
+                        type="text"
+                        value={customerId}
+                        onChange={(e) => setcustomerId(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Vehicle Number:</label>
+                    <input
+                        type="text"
+                        value={vechVIN}
+                        onChange={(e) => setvechVIN(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Repair Type:</label>
+                    <input
+                        type="text"
+                        value={vehicleRepairType}
+                        onChange={(e) => setVehicleRepairType(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Select appointment date and time:</label>
+                    <input
+                        type="datetime-local" // Combined date and time input
+                        value={appDate}
+                        onChange={(e) => setAppDate(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Customer Comments:</label>
+                    <textarea
+                        value={customerComments}
+                        onChange={(e) => setCustomerComments(e.target.value)}
+                        placeholder="Add any additional comments or details here..."
+                        rows="4"
+                        required
+                    ></textarea>
+                </div>
+                <button type="submit">Create Ticket</button>
+            </form>
             {errorMessage && <p className="error-message">{errorMessage}</p>}
             {successMessage && <p className="success-message">{successMessage}</p>}
             <br />
             <div className="navigation-buttons">
-                <button type="submit">Create Ticket</button>
                 <button onClick={() => navigate('/viewappointment')}>View Appointment</button>
-                <button onClick={() => navigate('/appt-reschedule')}>Reschedule</button>
-                <button onClick={() => navigate('/appt-cancel')}>Cancel</button>
             </div>
-     </div>
-    )};
+        </div>
+    );
+};
 
 export default AppointmentCreation;
