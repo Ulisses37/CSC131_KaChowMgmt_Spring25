@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import '../styles/ChangePasswordLinkStyles.css';
-
+import HeaderBar from '../components/HeaderBarComponent'; 
 function ChangePasswordLinkPage() {
     const { token } = useParams();
     const navigate = useNavigate();
@@ -42,21 +42,11 @@ function ChangePasswordLinkPage() {
 
     return (
         <div className="change-password-page">
-            {/* Optional debug info */}
-            <div style={{ color: "black", background: "yellow", padding: "10px" }}>
-                Token: {token || 'No token'}
-            </div>
 
             {/* Header Bar */}
-            <div className="change-password-page-child"></div>
-            <div className="change-password-page-item"></div>
-
+           <HeaderBar/>
             {/* Optional logo */}
-            <img
-                className="srs-csc-131-1-icon"
-                alt="Company Logo"
-                src="/your-logo.png" // Replace with actual logo path or remove if not needed
-            />
+            <img className="srs-csc-131-1-icon"lt="Company Logo" src="/SRS_CSC_131 1.png"/>
 
             {/* White box container */}
             <div className="change-password-page-inner"></div>
@@ -91,8 +81,8 @@ function ChangePasswordLinkPage() {
             </div>
 
             {/* Button */}
-            <div className="button" onClick={handleSubmit}>
-                <div className="button1">Reset Password</div>
+            <div className="reset-button" onClick={handleSubmit}>
+                <div className="reset-button-text">Reset Password</div>
             </div>
 
             <div className="line-div"></div>
