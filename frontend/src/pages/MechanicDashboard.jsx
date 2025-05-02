@@ -2,7 +2,6 @@ import { useLocation, Navigate, useNavigate } from 'react-router-dom';
 import '../styles/EmployeeDashboardStyles.css';
 import LgButton from '../components/LightGreyButtonComponent';
 import HeaderBar from '../components/HeaderBarComponent'; 
-import { EmployeeDropdown } from '../components/DropMenuComp'; 
 
 function MechanicDashboardPage() {
     const { state } = useLocation();
@@ -32,7 +31,6 @@ function MechanicDashboardPage() {
 
     return (
         <div className="admin-landing-page">
-            <EmployeeDropdown/>
             <HeaderBar/>
             <img className="directions-car-icon" alt="" src="directions_car.png"></img>
             <img className="srs-csc-131-1-icon" alt="" src="SRS_CSC_131 1.png"></img>
