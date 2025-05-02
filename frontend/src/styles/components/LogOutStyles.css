@@ -1,0 +1,33 @@
+.logout-button-container {
+  position: absolute; /* Change from relative to absolute */
+  width: 245px;
+  border-radius: 100px;
+  background-color: #2c2c2c;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 15px;
+  box-sizing: border-box;
+  cursor: pointer;
+  text-align: center;
+  font-size: 30px;
+  color: #fff;
+  font-family: var(--font-montserrat);
+  transition: background-color 0.3s ease;
+  top: 37px;
+  right: 30px; /* Changed from left to right for better positioning */
+  z-index: 100; /* Ensure it appears above other elements */
+}
+
+/* Keep the rest of your styles the same */
+.logout-button-container:hover {
+  background-color: #3a3a3a;
+}
+
+.logout-button-text {
+  position: relative;
+  font-weight: 500;
+  user-select: none;
+}

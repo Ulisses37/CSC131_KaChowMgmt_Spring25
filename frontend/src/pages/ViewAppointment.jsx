@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../styles/ViewAppointment.css';
+import HeaderBar from '../components/HeaderBarComponent';
 
 const ViewAppointment = () => {
   const [appointments, setAppointments] = useState([]);
@@ -7,11 +9,16 @@ const ViewAppointment = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Simulate fetching appointments from an API or local storage
     const fetchAppointments = async () => {
       try {
-        // Replace with your API call or local storage retrieval
-        const response = await fetch('/api/appointments'); // Replace with your API endpoint
+        const customerId = localStorage.getItem('customerId');
+        if (!customerId) throw new Error('Customer not logged in');
+
+        const response = await fetch(
+          `${import.meta.env.VITE_API_BASE_URL}/tickets/customer/${customerId}/tickets`
+        );
+        if (!response.ok) throw new Error('Failed to fetch appointments');
+
         const data = await response.json();
         setAppointments(data);
       } catch (error) {
@@ -29,49 +36,72 @@ const ViewAppointment = () => {
   }
 
   const currentAppointments = appointments.filter(
-    (appointment) => new Date(appointment.date) >= new Date()
-  );
-  const pastAppointments = appointments.filter(
-    (appointment) => new Date(appointment.date) < new Date()
+    (appointment) => new Date(appointment.appDate) >= new Date()
   );
 
   return (
     <div>
-      <img className="srs-csc-131-2-icon" alt="" src="SRS_CSC_131 1.png"></img>
+      <br />
+      <HeaderBar />
+      <img
+        className="srs-csc-131-2-icon"
+        alt=""
+        src="SRS_CSC_131 1.png"
+        onClick={() => navigate('/')}
+      />
       <h1>Your Appointments</h1>
-
       <section>
         <h2>Current Appointments</h2>
         {currentAppointments.length > 0 ? (
           <ul>
-            {currentAppointments.map((appointment) => (
-              <li key={appointment.id}>
-                <strong>Repair Type:</strong> {appointment.title} <br />
-                <strong>Date:</strong> {appointment.date}
-              </li>
-            ))}
+            {currentAppointments.map((appointment) => {
+              const appointmentDate = new Date(appointment.appDate);
+              const formattedDate = appointmentDate.toLocaleDateString();
+              const formattedTime = appointmentDate.toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit',
+              });
+
+              return (
+                <li key={appointment._id}>
+                  {/* Left Section */}
+                  <div className="left-section">
+                    <span><strong>Ticket #:</strong> {appointment.ticketId}</span>
+                    <span><strong>Make/Model:</strong> {appointment.makeModel || 'N/A'}</span>
+                    <span><strong>VIN #:</strong> {appointment.vechVIN}</span>
+                    <button
+                      className="cancel"
+                      onClick={() => navigate(`/appt-cancel/${appointment._id}`)}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+
+                  {/* Center Section */}
+                  <div className="center-section">
+                    <span><strong>Repair Type:</strong> {appointment.ticketType}</span>
+                  </div>
+
+                  {/* Right Section */}
+                  <div className="right-section">
+                    <span className="date-label">Date/Time</span>
+                    <span className="date-value">{formattedDate}</span>
+                    <span className="time-value">{formattedTime}</span>
+                    <button
+                      className="reschedule"
+                      onClick={() => navigate(`/appt-reschedule/${appointment._id}`)}
+                    >
+                      Reschedule
+                    </button>
+                  </div>
+                </li>
+              );
+            })}
           </ul>
         ) : (
           <p>No current appointments.</p>
         )}
       </section>
-
-      <section>
-        <h2>Past Appointments</h2>
-        {pastAppointments.length > 0 ? (
-          <ul>
-            {pastAppointments.map((appointment) => (
-              <li key={appointment.id}>
-                <strong>Repair Type:</strong> {appointment.title} <br />
-                <strong>Date:</strong> {appointment.date}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No past appointments.</p>
-        )}
-      </section>
-      <button onClick={() => navigate('/')}>Go Back to Home</button>
     </div>
   );
 };

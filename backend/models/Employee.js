@@ -7,14 +7,18 @@ const reviewSchema = new mongoose.Schema({
     customerName: { type: String, required: true }, // Name of the customer who left the review
     ticketNumber: { type: String, required: true }, // Ticket number associated with the review
     starRating: { type: Number, required: true, min: 1, max: 5 }, // Star rating (1-5)
+    satisfactory: { type: Boolean, required: true }, // Whether the customer was satisfied (yes/no)
     comments: { type: String } // Comments from the customer
 });
 
 // the HoursWorked subdocument schema
 const hoursWorkedSchema = new mongoose.Schema({
     clockIn: { type: Date, required: true }, // Clock-in time
-    clockOut: { type: Date } // Clock-out time (optional, as it may not be set initially)
+    clockOut: { type: Date }, // Clock-out time (optional, as it may not be set initially)
+    isPaid: { type: Boolean, default: false }, // Whether this time period has been paid
+    paymentDate: { type: Date } // When the payment was processed
 });
+
 
 // BankInfo subdocument schema
 const bankInfoSchema = new mongoose.Schema({
@@ -39,7 +43,7 @@ const employeeSchema = new mongoose.Schema({
     tickets: employeeTicketSchema, // Ticket subdocument with current and completed arrays
     hoursWorked: [hoursWorkedSchema], // Array of hours worked subdocuments
     payRate: { type: Number, required: true }, // Pay rate per hour (float)
-    reviews: [reviewSchema] // Array of reviews subdocuments
+    reviews: [reviewSchema], // Array of reviews subdocuments
 });
 
 // Password hashing (pre-save hook)
@@ -83,5 +87,42 @@ employeeSchema.statics.findByCredentials = async function(email, password) {
     return employee;
 };
 
+// Get total hours worked (for all entries)
+employeeSchema.methods.getTotalHoursWorked = function() {
+    return this.hoursWorked.reduce((total, entry) => {
+        if (entry.clockOut) {
+            const hours = (entry.clockOut - entry.clockIn) / (1000 * 60 * 60);
+            return total + hours;
+        }
+        return total;
+    }, 0);
+};
+
+// Get current session hours (if clocked in)
+employeeSchema.methods.getCurrentSessionHours = function() {
+    const lastEntry = this.hoursWorked[this.hoursWorked.length - 1];
+    if (lastEntry && !lastEntry.clockOut) {
+        return (new Date() - lastEntry.clockIn) / (1000 * 60 * 60);
+    }
+    return 0;
+};
+
+// Get all time entries (formatted)
+employeeSchema.methods.getTimeEntries = function() {
+    return this.hoursWorked.map(entry => ({
+        clockIn: entry.clockIn,
+        clockOut: entry.clockOut || null,
+        duration: entry.clockOut 
+            ? (entry.clockOut - entry.clockIn) / (1000 * 60 * 60)
+            : null
+    }));
+};
+//TO BE CONTINUED...
+/*
+const personnelSchema = new mongoose.Schema({
+    name: { type: String, required: true }, // Employee's name
+
+});
+*/
 const Employee = mongoose.model('Employee', employeeSchema);
 export default Employee;

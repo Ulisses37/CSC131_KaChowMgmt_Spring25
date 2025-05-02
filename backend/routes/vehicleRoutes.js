@@ -5,7 +5,7 @@ import Customer from "../models/Customer.js";
 const router = express.Router();
 
 router.post("/", async (req, res) => {
-    const { customerID, vechVIN, make, model } = req.body;
+    const { customerID, vin, make, model } = req.body;
 
     if (!customerID || !vechVIN || !make || !model) {
         return res.status(400).json({ message: "Please fill all fields" });
@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
         const newVehicle = new Vehicle({
             make: make,
             model: model,
-            vin: vechVIN,
+            vin,
             owner: customerID,
         });
 

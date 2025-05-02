@@ -1,16 +1,50 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/EmployeeLoginStyles.css';
+import BackButton from '../components/BackButtonComponent'; 
+import HeaderBar from '../components/HeaderBarComponent'; 
 
 function EmployeeLoginPage() {
-	const [email, setEmail] = useState('');
+    const [email, setEmail] = useState('');
     const [employeeId, setEmployeeId] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
-    const handleLogin = async () => {
+    // API call function
+    async function authenticateEmployee(employeeId, email, password) {
+        try {
+            const response = await fetch('http://localhost:5000/api/login/employee', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ employeeId, email, password })
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Login failed');
+            }
+
+            const data = await response.json();
+            return {
+                success: true,
+                token: data.token,
+                employeeData: data.employee,
+                role: data.role // This will be 'admin' or 'mechanic'
+            };
+            
+        } catch (err) {
+            return {
+                success: false,
+                message: err.message || "Authentication failed"
+            };
+        }
+    }
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+
         if (!email || !employeeId || !password) {
             setError('Please fill all fields');
             return;
@@ -22,131 +56,46 @@ function EmployeeLoginPage() {
         }
 
         setIsLoading(true);
+        setError("");
 
         try {
-            // Replace with actual API call
-            const { success, userType, userData } = await verifyEmployeeLogin({
-                email,
-                employeeId,
-                password
-            });
-
-            if (success) {
-                if (userType === 'admin') {
-                    navigate('/admin-dashboard', { state: { userData } });
+            const response = await authenticateEmployee(employeeId, email, password);
+            console.log("Login response:", response);
+            
+            if (response.success) {
+                localStorage.setItem('employeeToken', response.token);
+                localStorage.setItem('employeeId', response.employeeData.id);
+                localStorage.setItem('employeeRole', response.employeeData.admin ? 'admin' : 'mechanic');
+                // Route based on employee role from backend
+                if (localStorage.getItem('employeeRole') === 'admin') {
+                    navigate("/admin-dashboard", {
+                        state: {
+                            employeeData: response.employeeData
+                        }
+                    });
                 } else {
-                    // Pass mechanic ID and data to dashboard
-                    navigate('/mechanic-dashboard', { 
-                        state: { 
-                            employeeId,
-                            userData 
-                        } 
+                    navigate("/mechanic-dashboard", {
+                        state: {
+                            employeeData: response.employeeData
+                        }
                     });
                 }
             } else {
-                setError('Invalid credentials');
+                setError(response.message || "Invalid credentials");
             }
         } catch (err) {
-            setError('Login failed. Please try again.');
-            console.error('Login error:', err);
+            setError(err.message || "An unexpected error occurred");
+            console.error("Login error:", err);
         } finally {
             setIsLoading(false);
         }
-    };
-
-    // Enhanced mock verification with sample user data
-    const verifyEmployeeLogin = async (credentials) => {
-        
-
-        const realLogin = async (email, password) => {
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            const response = await fetch('https://your-api.com/login', {  // REMEMBER TO CHANGE PORT NUMBER IF ITS DIFFERENT http://localhost/:' + process.env.REACT_APP_HOST_PORT + '/api/employeeLogin
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password })
-            });
-            return await response.json();
-        };
-
-        // // Sample admin user
-        // const adminUsers = [{
-        //     email: 'admin@company.com',
-        //     id: 'ADMIN001',
-        //     password: 'admin123',
-        //     data: {
-        //         name: "Admin User",
-        //         role: "Administrator",
-        //         permissions: ["all"]
-        //     }
-        // }];
-
-        // // Sample mechanic users with individual data
-        // const mechanicUsers = [
-        //     {
-        //         email: 'mechanic1@company.com',
-        //         id: 'MECH001',
-        //         password: 'mechanic123',
-        //         data: {
-        //             name: "John Mechanic",
-        //             specialty: "Engine Repair",
-        //             currentJobs: 3,
-        //             schedule: ["Mon", "Wed", "Fri"]
-        //         }
-        //     },
-        //     {
-        //         email: 'mechanic2@company.com',
-        //         id: 'MECH002',
-        //         password: 'mechanic123',
-        //         data: {
-        //             name: "Sarah Technician",
-        //             specialty: "Electrical Systems",
-        //             currentJobs: 1,
-        //             schedule: ["Tue", "Thu"]
-        //         }
-        //     }
-        // ];
-
-        const foundAdmin = adminUsers.find(user => 
-            user.email === credentials.email &&
-            user.id === credentials.employeeId &&
-            user.password === credentials.password
-        );
-
-        const foundMechanic = mechanicUsers.find(user => 
-            user.email === credentials.email &&
-            user.id === credentials.employeeId &&
-            user.password === credentials.password
-        );
-
-        if (foundAdmin) {
-            return { 
-                success: true, 
-                userType: 'admin',
-                userData: foundAdmin.data
-            };
-        }
-        if (foundMechanic) {
-            return { 
-                success: true, 
-                userType: 'mechanic',
-                userData: foundMechanic.data
-            };
-        }
-
-        return { success: false };
-    };
+    }
 
     return(
-        <div class="employee-login-page">
-    		<div className="employee-login-page-child"></div>
-            <div className="employee-login-page-item"></div>
-            <img 
-                className="srs-csc-131-1-icon" 
-                alt="Company Logo" 
-                src="/SRS_CSC_131 1.png"
-                onClick={() => navigate('/')}
-                style={{ cursor: 'pointer' }}
-            />
+        <div className="employee-login-page">
+            <BackButton text="HOME" onClick={() => navigate('/')} />
+            <HeaderBar/>
+            <img className="srs-csc-131-1-icon" alt="Company Logo" src="/SRS_CSC_131 1.png"/>
             <div className="employee-login-page-inner"></div>
             <div className="employee-log-in">Employee Log In</div>
             <div className="line-div"></div>
@@ -162,68 +111,63 @@ function EmployeeLoginPage() {
                 </div>
             )}
 
-            <div className="emp-email-input">
-                <input
-                    type="email"
-                    className="key-field"
-                    placeholder="Email Address"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-            </div>
-
-            <div className="emp-id-input">
-                <input
-                    type="text"
-                    className="key-field"
-                    placeholder="Employee ID"
-                    value={employeeId}
-                    onChange={(e) => setEmployeeId(e.target.value)}
-                />
-            </div>
-
-            <div className="emp-password-input">
-                <input
-                    type="password"
-                    className="key-field"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-            </div>
-
-            <div 
-                className="emp-forgot-password" 
-                id="fORGOTPASSWORDText"
-                onClick={() => navigate('/forgot-password')}
-                style={{ cursor: 'pointer' }}
-            >
-                FORGOT PASSWORD
-            </div>
-
-            <div 
-                className="emp-login-button"
-                onClick={!isLoading ? handleLogin : null}
-                style={{
-                    cursor: isLoading ? 'not-allowed' : 'pointer',
-                    opacity: isLoading ? 0.7 : 1
-                }}
-            >
-                <div className="button1">
-                    {isLoading ? 'LOGGING IN...' : 'LOG IN'}
+            <form onSubmit={handleLogin} className="employee-login-form">
+                <div className="emp-id-input">
+                    <input
+                        type="text"
+                        className="key-field"
+                        placeholder="Employee ID"
+                        value={employeeId}
+                        onChange={(e) => setEmployeeId(e.target.value)}
+                        required
+                    />
                 </div>
-            </div>
-  	    </div>
+
+                <div className="emp-email-input">
+                    <input
+                        type="email"
+                        className="key-field"
+                        placeholder="Email Address"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                </div>
+
+                <div className="emp-password-input">
+                    <input
+                        type="password"
+                        className="key-field"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                </div>
+
+                <div 
+                    className="emp-forgot-password" 
+                    id="fORGOTPASSWORDText"
+                    onClick={() => navigate('/forgot-password')}
+                    style={{ cursor: 'pointer' }}
+                >
+                    FORGOT PASSWORD
+                </div>
+
+                <button
+                    type="submit"
+                    className="emp-login-button"
+                    disabled={isLoading}
+                    style={{
+                        cursor: isLoading ? 'not-allowed' : 'pointer',
+                        opacity: isLoading ? 0.7 : 1
+                    }}
+                >
+                    {isLoading ? 'LOGGING IN...' : 'LOG IN'}
+                </button>
+            </form>
+        </div>
     )
 }
 
-export default EmployeeLoginPage
-
-// const realLogin = async (email, password) => {
-//     const response = await fetch('https://your-api.com/login', {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify({ email, password })
-//     });
-//     return await response.json();
-// };
+export default EmployeeLoginPage;

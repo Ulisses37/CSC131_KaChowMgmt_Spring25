@@ -1,0 +1,311 @@
+body {
+  margin: 0;
+  line-height: normal;
+}
+
+
+:root {
+  
+  /* Fonts */
+  --font-montserrat: Montserrat;
+  
+  /* font sizes */
+  --font-size-mini: 15px;
+  --font-size-base: 16px;
+  --font-size-13xl: 32px;
+  
+  /* Colors */
+  --color-black: #000;
+  --color-gray-100: #211f1f;
+  --color-lavender: #ecdefe;
+  --color-white: #fff;
+  
+  /* Gaps */
+  --gap-0: 0px;
+  --gap-3xs: 10px;
+  
+  /* Paddings */
+  --padding-3xs: 10px;
+  --padding-mini: 15px;
+  --padding-xl: 20px;
+  --padding-31xl: 50px;
+  
+  /* Border radiuses */
+  --br-11xs: 2px;
+  
+  /* Figma Variables */
+  
+  /* Color Variables */
+  --Background-Brand-Default: #2c2c2c;
+  --Border-Brand-Default: #2c2c2c;
+  
+  /* Number Variables */
+  --Stroke-Border: 1px;
+  --Space-200: 8px;
+  --Radius-200: 8px;
+  --Space-300: 12px;
+  
+}
+
+.client-name-vin {
+  position: relative;
+}
+.client-name-vin-service-wrapper {
+  position: absolute;
+  top: 10px;
+  left: 79px;
+  background-color: #ffed91;
+  width: 306px;
+  height: 111px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--padding-3xs);
+  box-sizing: border-box;
+}
+.background-red {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background: linear-gradient(90deg, #631818, #c93131);
+  width: 1920px;
+  height: 185px;
+}
+.background-black {
+  position: absolute;
+  top: 183px;
+  left: 0px;
+  background-color: var(--color-gray-100);
+  width: 1936px;
+  height: 42px;
+}
+.srs-csc-131-1-icon {
+  position: absolute;
+  top: 0px;
+  left: 776px;
+  width: 367.3px;
+  height: 309px;
+  object-fit: cover;
+}
+.button {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+  left: 0%;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: var(--Radius-200);
+  background-color: var(--Background-Brand-Default);
+  border: var(--Stroke-Border) solid var(--Border-Brand-Default);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.account-button-child {
+  position: absolute;
+  top: 48px;
+  left: 15px;
+  background-color: var(--color-white);
+  width: 39px;
+  height: 5px;
+}
+.account-button-item {
+  position: absolute;
+  top: 32px;
+  left: 15px;
+  background-color: var(--color-white);
+  width: 39px;
+  height: 5px;
+}
+.account-button-inner {
+  position: absolute;
+  top: 16px;
+  left: 15px;
+  background-color: var(--color-white);
+  width: 39px;
+  height: 5px;
+}
+.account-button {
+  position: absolute;
+  top: 55px;
+  left: 1817px;
+  width: 70px;
+  height: 70px;
+}
+.play-arrow-filled-icon {
+  width: 33.7px;
+  position: relative;
+  height: 31.3px;
+  object-fit: contain;
+}
+.text {
+  position: relative;
+  font-weight: 500;
+}
+.play-arrow-filled-parent {
+  position: absolute;
+  top: 48px;
+  left: 65px;
+  border-radius: 100px;
+  background-color: #c93131;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-xl) 62px var(--padding-xl) 21px;
+  gap: 27px;
+  cursor: pointer;
+  font-size: 40px;
+  color: var(--color-white);
+}
+.page-banner {
+  width: 1920px;
+  position: relative;
+  height: 284px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.start-date {
+  position: absolute;
+  top: 56px;
+  left: 108.5px;
+  font-weight: 600;
+  text-shadow: 1px 0 0 #480303, 0 1px 0 #480303, -1px 0 0 #480303, 0 -1px 0 #480303;
+}
+.job-status {
+  position: absolute;
+  top: 56px;
+  left: 784.5px;
+  font-weight: 600;
+  text-shadow: 1px 0 0 #480303, 0 1px 0 #480303, -1px 0 0 #480303, 0 -1px 0 #480303;
+}
+.job-code {
+  position: absolute;
+  top: 56px;
+  left: 1097.5px;
+  font-weight: 600;
+  text-shadow: 1px 0 0 #480303, 0 1px 0 #480303, -1px 0 0 #480303, 0 -1px 0 #480303;
+}
+.customer {
+  margin: 0;
+}
+.make-model-container {
+  position: absolute;
+  top: 36px;
+  left: 1454.5px;
+  font-weight: 600;
+  text-shadow: 1px 0 0 #480303, 0 1px 0 #480303, -1px 0 0 #480303, 0 -1px 0 #480303;
+}
+.end-date {
+  position: absolute;
+  top: 36px;
+  left: 397.5px;
+  font-weight: 600;
+  text-shadow: 1px 0 0 #480303, 0 1px 0 #480303, -1px 0 0 #480303, 0 -1px 0 #480303;
+}
+.start-date-parent {
+  align-self: stretch;
+  position: relative;
+  background-color: #961a1a;
+  height: 131px;
+  overflow: hidden;
+  flex-shrink: 0;
+  text-align: center;
+  font-size: var(--font-size-13xl);
+  color: var(--color-white);
+}
+.date-out {
+  width: 306px;
+  border-radius: var(--br-11xs);
+  background-color: var(--color-lavender);
+  border: 1px solid var(--color-gray-100);
+  box-sizing: border-box;
+  height: 57px;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-3xs);
+}
+.makemodel-out {
+  width: 306px;
+  border-radius: var(--br-11xs);
+  background-color: var(--color-lavender);
+  border: 1px solid var(--color-gray-100);
+  box-sizing: border-box;
+  height: 57px;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-3xs);
+  text-align: center;
+  font-size: var(--font-size-base);
+}
+.date-out-parent {
+  width: 1745px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: var(--padding-3xs) var(--padding-31xl) var(--padding-3xs) var(--padding-mini);
+  box-sizing: border-box;
+  gap: var(--gap-0);
+}
+.assigned-tickets {
+  width: 1745px;
+  background-color: #f1f1f1;
+  border: 1px solid var(--color-black);
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 2px 0px;
+  gap: var(--gap-3xs);
+}
+.assigning-ticket-adjust {
+  width: 1766px;
+  height: 774px;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0px var(--padding-3xs) 300px;
+  box-sizing: border-box;
+}
+.base {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: var(--color-white);
+  width: 1920px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0px 77px;
+  box-sizing: border-box;
+  gap: var(--gap-3xs);
+}
+.ticket-history-mechanic {
+  width: 100%;
+  position: relative;
+  height: 1080px;
+  text-align: left;
+  font-size: var(--font-size-mini);
+  color: var(--color-black);
+  font-family: var(--font-montserrat);
+}

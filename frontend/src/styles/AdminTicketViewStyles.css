@@ -1,256 +1,697 @@
-/* === Global Styles === */
-* {
+body {
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
     line-height: normal;
 }
 
-/* === Page Structure === */
-.assigning-ticket-page {
-    width: 100%;
-    min-height: 100vh;
-    background-color: #fff;
-    position: relative;
-    overflow-x: hidden;
-}
 
-.assigning-ticket-page-banner {
-    position: relative;
-    width: 100%;
-    height: 225px;
-    background: linear-gradient(90deg, #631818, #c93131);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 50px;
+:root {
+    
+    /* Fonts */
+    --font-inter: Inter;
+    --font-montserrat: Montserrat;
+    
+    /* font sizes */
+    --font-size-mini: 15px;
+    --font-size-21xl: 40px;
+    
+    /* Colors */
+    --color-black: #000;
+    --color-brown: #961a1a;
+    --color-darkgray: #a2a2a2;
+    --color-gainsboro: #e4e4e4;
+    --color-gray-100: #211f1f;
+    --color-khaki-100: #ffff9c;
+    --color-lavender: #ecdefe;
+    --color-peachpuff: #ffc4ae;
+    --color-white: #fff;
+    --color-whitesmoke-100: #f1f1f1;
+    
+    /* Gaps */
+    --gap-3xs: 10px;
+    --gap-21xl: 40px;
+    --gap-206xl: 225px;
+    
+    /* Paddings */
+    --padding-3xs: 10px;
+    --padding-mini: 15px;
+    --padding-xl: 20px;
+    --padding-50xl: 69px;
+    --padding-60xl: 79px;
+    
+    /* Border radiuses */
+    --br-11xs: 2px;
+    
+    /* Figma Variables */
+    
+    /* Color Variables */
+    --Background-Brand-Default: #2c2c2c;
+    --Border-Brand-Default: #2c2c2c;
+    --Text-Brand-On-Brand: #f5f5f5;
+    
+    /* Number Variables */
+    --Stroke-Border: 1px;
+    --Space-200: 8px;
+    --Radius-200: 8px;
+    --Space-300: 12px;
+    --Body-Size-Medium: 16px;
+    --Body-Font-Weight-Regular: 400;
+    
 }
-
-.assigning-ticket-adjust {
+.client-name-vin {
+    position: relative;
+}
+.client-name-vin-service-wrapper {
+    position: absolute;
+    top: 10px;
+    left: 79px;
+    background-color: #ffed91;
+    width: 306px;
+    height: 111px;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
-    padding: 30px 50px;
-    gap: 40px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-3xs);
+    box-sizing: border-box;
 }
-
-/* === Tables === */
-.unassigned-tickets,
-.assigned-tickets {
+.background-red {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: linear-gradient(90deg, #631818, #c93131);
+    width: 1920px;
+    height: 185px;
+}
+.background-black {
+    position: absolute;
+    top: 183px;
+    left: 0px;
+    background-color: var(--color-gray-100);
+    width: 1936px;
+    height: 42px;
+}
+.srs-csc-131-1-icon {
+    position: absolute;
+    top: 0px;
+    left: 776px;
+    width: 367.3px;
+    height: 309px;
+    object-fit: cover;
+}
+.button {
+    position: absolute;
+    height: 100%;
     width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    top: 0%;
+    right: 0%;
+    bottom: 0%;
+    left: 0%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: var(--Radius-200);
+    background-color: var(--Background-Brand-Default);
+    border: var(--Stroke-Border) solid var(--Border-Brand-Default);
+    box-sizing: border-box;
     overflow: hidden;
 }
-
-.ticket-parent,
-.ticket-group {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    background-color: #961a1a;
-    color: white;
-    padding: 15px 20px;
-    font-weight: 600;
-    text-align: center;
+.account-button-child {
+    position: absolute;
+    top: 48px;
+    left: 15px;
+    background-color: var(--color-white);
+    width: 39px;
+    height: 5px;
 }
-
-.instance-parent {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    padding: 15px 20px;
-    border-bottom: 1px solid #e0e0e0;
-    align-items: center;
+.account-button-item {
+    position: absolute;
+    top: 32px;
+    left: 15px;
+    background-color: var(--color-white);
+    width: 39px;
+    height: 5px;
+}
+.account-button-inner {
+    position: absolute;
+    top: 16px;
+    left: 15px;
+    background-color: var(--color-white);
+    width: 39px;
+    height: 5px;
+}
+.account-button {
+    position: absolute;
+    top: 55px;
+    left: 1817px;
+    width: 70px;
+    height: 70px;
+}
+.play-arrow-filled-icon {
+    width: 33.7px;
     position: relative;
+    height: 31.3px;
+    object-fit: contain;
 }
-
-/* === Ticket Elements === */
-.client-name-vin-service-container {
-    cursor: pointer;
-    color: #2c2c2c;
+.text {
+    position: relative;
     font-weight: 500;
-    transition: color 0.2s;
 }
-
-.client-name-vin-service-container:hover {
-    color: #c93131;
+.play-arrow-filled-parent {
+    position: absolute;
+    top: 48px;
+    left: 65px;
+    border-radius: 100px;
+    background-color: #c93131;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-xl) 62px var(--padding-xl) 21px;
+    gap: 27px;
+    cursor: pointer;
+    font-size: var(--font-size-21xl);
+    color: var(--color-white);
 }
-
-.mech-default-button,
-.mech-default-button1,
-.mech-default-button4,
-.mech-default-button5 {
+.assigning-ticket-page-banner {
+    width: 1920px;
+    position: relative;
+    height: 284px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+.ticket {
+    position: absolute;
+    top: 41px;
+    left: 114px;
+    font-weight: 600;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 8px 15px;
-    border-radius: 4px;
-    background-color: #f5f5f5;
-    cursor: pointer;
-    position: relative;
-    min-height: 40px;
+    justify-content: center;
+    width: 267px;
+    text-shadow: 1px 0 0 #480303, 0 1px 0 #480303, -1px 0 0 #480303, 0 -1px 0 #480303;
 }
-
-.mech-default-button1.disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-.arrow-drop-down-icon {
-    width: 20px;
-    height: 20px;
-}
-
-/* === Dropdown Menus === */
-.mechanic-dropdown-menu,
-.status-dropdown-menu {
+.mechanics {
     position: absolute;
-    top: 100%;
-    left: 0;
+    top: 42px;
+    left: 595px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 267px;
+    height: 48px;
+    text-shadow: 1px 0 0 #480303, 0 1px 0 #480303, -1px 0 0 #480303, 0 -1px 0 #480303;
+}
+.status {
+    position: absolute;
+    top: 42px;
+    left: 1076px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 267px;
+    height: 48px;
+    text-shadow: 1px 0 0 #480303, 0 1px 0 #480303, -1px 0 0 #480303, 0 -1px 0 #480303;
+}
+.estimated {
+    margin: 0;
+}
+.estimated-time-txt-container {
+    line-break: anywhere;
     width: 100%;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.estimated-time {
+    position: absolute;
+    top: 48px;
+    left: 1376px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    width: 412px;
+    height: 48px;
+    text-shadow: 1px 0 0 #480303, 0 1px 0 #480303, -1px 0 0 #480303, 0 -1px 0 #480303;
+}
+.ticket-parent {
+    align-self: stretch;
+    position: relative;
+    background-color: var(--color-brown);
+    border: 1px solid var(--color-black);
+    box-sizing: border-box;
+    height: 131px;
+    overflow: hidden;
+    flex-shrink: 0;
+    text-align: center;
+    font-size: var(--font-size-21xl);
+    color: var(--color-white);
+}
+.client-name-vin-service-container {
+    width: 306px;
+    border-radius: var(--br-11xs);
+    background-color: var(--color-lavender);
+    border: 1px solid var(--color-gray-100);
+    box-sizing: border-box;
+    height: 57px;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-3xs);
+}
+.arrow-drop-down-icon {
+    width: 24px;
+    position: relative;
+    height: 24px;
+}
+.mech-default-button {
+    width: 230px;
+    border-radius: var(--br-11xs);
+    background-color: var(--color-darkgray);
+    border: 1px solid var(--color-gray-100);
+    box-sizing: border-box;
+    height: 57px;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-3xs) 0px var(--padding-3xs) var(--padding-50xl);
+    gap: var(--gap-21xl);
+}
+.mech-default-button-wrapper {
+    width: 250px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    color: var(--color-gray-100);
+}
+.mech-default-button1 {
+    width: 230px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: var(--br-11xs);
+    background-color: var(--color-gainsboro);
+    border: 1px solid var(--color-gray-100);
+    box-sizing: border-box;
+    height: 57px;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-3xs) 0px var(--padding-3xs) var(--padding-50xl);
+    gap: var(--gap-21xl);
+}
+.status-drop-down-menu {
+    width: 238px;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+.time-wrapper {
+    width: 86px;
+    border-radius: var(--br-11xs);
+    background-color: var(--color-peachpuff);
+    border: 1px solid var(--color-gray-100);
+    box-sizing: border-box;
+    height: 57px;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-3xs);
+}
+.instance-parent {
+    width: 1745px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-3xs) var(--padding-3xs) var(--padding-3xs) var(--padding-60xl);
+    box-sizing: border-box;
+    gap: var(--gap-206xl);
+}
+.instance-group {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-3xs) var(--padding-3xs) var(--padding-3xs) var(--padding-60xl);
+    gap: var(--gap-206xl);
+}
+.unassigned-tickets {
+    width: 1745px;
+    background-color: var(--color-whitesmoke-100);
+    border: 1px solid var(--color-black);
+    box-sizing: border-box;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--gap-3xs);
+    min-height: 200px; /* Ensure consistent height even when empty */
+    position: relative;
+}
+/* No tickets message styling */
+.no-tickets-message {
+    width: 100%;
+    text-align: center;
+    padding: 40px;
+    font-size: 24px;
+    color: var(--color-darkgray);
+    background-color: var(--color-whitesmoke-100);
+    border: 1px dashed var(--color-darkgray);
+    margin-top: 10px;
+} 
+.assign-button-text {
+    position: relative;
+    line-height: 100%;
+}
+.assign-button {
+    width: 157px;
+    border-radius: var(--Radius-200);
+    background-color: var(--Background-Brand-Default);
+    border: var(--Stroke-Border) solid var(--Border-Brand-Default);
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--Space-300);
+    font-size: var(--Body-Size-Medium);
+    color: var(--Text-Brand-On-Brand);
+    font-family: var(--font-inter);
+}
+.assigning-ticket-adjust-child {
+    width: 1528px;
+    position: relative;
+    height: 1.1px;
+    object-fit: contain;
+}
+.ticket1 {
+    position: absolute;
+    top: 40.93px;
+    left: 113px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 267px;
+    text-shadow: 1px 0 0 #480303, 0 1px 0 #480303, -1px 0 0 #480303, 0 -1px 0 #480303;
+}
+.mechanics1 {
+    position: absolute;
+    top: 41.93px;
+    left: 598px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 267px;
+    height: 48px;
+    text-shadow: 1px 0 0 #480303, 0 1px 0 #480303, -1px 0 0 #480303, 0 -1px 0 #480303;
+}
+.status1 {
+    position: absolute;
+    top: 41.93px;
+    left: 1066px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 267px;
+    height: 48px;
+    text-shadow: 1px 0 0 #480303, 0 1px 0 #480303, -1px 0 0 #480303, 0 -1px 0 #480303;
+}
+.estimated-time1 {
+    position: absolute;
+    top: 37.93px;
+    left: 1380px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    width: 412px;
+    height: 48px;
+    text-shadow: 1px 0 0 #480303, 0 1px 0 #480303, -1px 0 0 #480303, 0 -1px 0 #480303;
+}
+.ticket-group {
+    align-self: stretch;
+    position: relative;
+    background-color: var(--color-brown);
+    height: 131px;
+    overflow: hidden;
+    flex-shrink: 0;
+    text-align: center;
+    font-size: var(--font-size-21xl);
+    color: var(--color-white);
+}
+.mechanic-wrapper {
+    width: 85px;
+    height: 41px;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0px var(--padding-mini);
+    box-sizing: border-box;
+}
+.mech-default-button4 {
+    width: 230px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: var(--br-11xs);
+    background-color: #ffb145;
+    border: 1px solid var(--color-gray-100);
+    box-sizing: border-box;
+    height: 57px;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-3xs) 0px var(--padding-3xs) 53px;
+    gap: 41px;
+}
+.mech-default-button-frame {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--padding-3xs);
+}
+.mech-default-button5 {
+    width: 230px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: var(--br-11xs);
+    background-color: var(--color-khaki-100);
+    border: 1px solid var(--color-gray-100);
+    box-sizing: border-box;
+    height: 57px;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-3xs) 0px var(--padding-3xs) var(--padding-50xl);
+    gap: var(--gap-21xl);
+}
+.mechanic-container {
+    height: 41px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0px var(--padding-mini);
+    box-sizing: border-box;
+}
+.frame {
+    width: 230px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: var(--br-11xs);
+    background-color: #d66dff;
+    border: 1px solid var(--color-gray-100);
+    box-sizing: border-box;
+    height: 57px;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: var(--padding-3xs) 0px var(--padding-3xs) 40px;
+    gap: 22px;
+}
+.assigned-tickets {
+    width: 1745px;
+    background-color: var(--color-whitesmoke-100);
+    border: 1px solid var(--color-black);
+    box-sizing: border-box;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 2px 0px;
+    gap: var(--gap-3xs);
+}
+.assigning-ticket-adjust {
+    width: 1766px;
+    height: 951px;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px var(--padding-3xs);
+    box-sizing: border-box;
+    gap: 0px;
+}
+.assigning-ticket-page {
+    width: 100%;
+    position: relative;
+    background-color: var(--color-white);
+    height: 1364px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    gap: var(--gap-3xs);
+    text-align: left;
+    font-size: var(--font-size-mini);
+    color: var(--color-black);
+    font-family: var(--font-montserrat);
+}
+/* Dropdown styles */
+.mechanic-dropdown-menu, .status-dropdown-menu {
+    position: absolute;
     z-index: 100;
-    max-height: 200px;
-    overflow-y: auto;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 5px;
+    width: 230px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.mechanic-option,
-.status-option {
-    padding: 10px 15px;
+.mechanic-dropdown-item, .status-dropdown-item {
+    padding: 10px;
     cursor: pointer;
     transition: background-color 0.2s;
+    overflow-y: auto; /* Scroll if many mechanics */
 }
 
-.mechanic-option:hover,
-.status-option:hover {
+.mechanic-dropdown-item:hover, .status-dropdown-item:hover {
     background-color: #f0f0f0;
 }
 
-/* === Mechanic Color Coding === */
-.mechanic-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.mechanic-color-indicator {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    display: inline-block;
-}
-
-/* === Status Badges === */
-.status-badge {
-    padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 600;
-}
-
-.status-badge.pending {
-    background-color: #FFD700;
-    color: #333;
-}
-
-.status-badge.in-progress {
-    background-color: #4CAF50;
-    color: white;
-}
-
-.status-badge.completed {
-    background-color: #2196F3;
-    color: white;
-}
-
-/* === Divider === */
-.assigning-ticket-adjust-child {
-    width: 100%;
-    height: 2px;
-    background-color: #ddd;
-    margin: 20px 0;
-}
-
-/* === Confirm Button === */
-.button1 {
-    align-self: flex-end;
-    margin-top: 20px;
-}
-
-.button2 {
-    background-color: #c93131;
-    color: white;
-    border: none;
-    padding: 12px 30px;
-    border-radius: 4px;
-    font-weight: 600;
+.mech-default-button, .mech-default-button1, 
+.mech-default-button4, .mech-default-button5 {
     cursor: pointer;
     transition: background-color 0.2s;
 }
 
-.button2:hover {
-    background-color: #a02828;
+.mech-default-button:hover, .mech-default-button1:hover, 
+.mech-default-button4:hover, .mech-default-button5:hover {
+    opacity: 0.9;
 }
 
-/* === Header Elements === */
-.play-arrow-filled-parent {
+/* Color for different statuses */
+.mech-default-button1 {
+    background-color: #e4e4e4; /* Pending */
+}
+
+.mech-default-button5[data-status="Pending"] {
+    background-color: #e4e4e4;
+}
+
+.mech-default-button5[data-status="In-Progress"] {
+    background-color: #ffff9c;
+}
+
+.mech-default-button5[data-status="Completed"] {
+    background-color: #a2ff9c;
+}
+.ticket-content-container {
+    margin-top: 350px; /* Adjust this value as needed */
+    width: 100%;
+    padding: 0 20px; /* Optional: Add some side padding */
+}
+
+/* Adjust the banner positioning if needed */
+.assigning-ticket-page-banner {
+    margin-bottom: 30px; /* Adds space below the banner */
+}
+
+/* Adjust the overall page container */
+.assigning-ticket-page {
+    padding-top: 0; /* Remove any existing top padding */
+    height: auto; /* Change from fixed height to auto */
+    min-height: 100vh; /* Ensure it takes at least full viewport height */
+}
+
+/* Visual indicator for staged assignments */
+.mech-default-button[data-staged="true"] {
+    border: 2px solid #4CAF50;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.3);
+}
+
+/* Confirm button styling */
+.assign-button {
+    background-color: #4CAF50;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.assign-button:hover {
+    background-color: #5E5D5D;
+}
+
+.assign-button:active {
+    background-color: #2C2C2C;
+}
+
+.assign-button.disabled {
+    background-color: var(--color-darkgray); /* Gray when no unassigned tickets */
+    cursor: not-allowed;
+}
+
+/* Visual feedback for when there are unassigned tickets but no selections */
+.assign-button:not(.disabled):not(:hover) {
+    background-color: #2C2C2C; /* Orange when unassigned tickets exist but none selected */
+}
+
+.assign-button:hover:not(.disabled) {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+.loading-indicator {
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 10px;
-    color: white;
-    font-weight: 600;
-    font-size: 24px;
-}
-
-.play-arrow-filled-icon {
-    width: 24px;
-    height: 24px;
-}
-
-.account-button {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.account-button-child,
-.account-button-item,
-.account-button-inner {
-    width: 30px;
-    height: 4px;
-    background-color: white;
-}
-
-/* === Responsive Adjustments === */
-@media (max-width: 1200px) {
-    .assigning-ticket-adjust {
-        padding: 20px;
-    }
-    
-    .ticket-parent,
-    .ticket-group,
-    .instance-parent {
-        grid-template-columns: 1.5fr 1.5fr 1fr 1fr;
-    }
-}
-
-@media (max-width: 768px) {
-    .ticket-parent,
-    .ticket-group {
-        grid-template-columns: 1fr 1fr;
-    }
-    
-    .estimated-time,
-    .estimated-time1 {
-        display: none;
-    }
-    
-    .instance-parent {
-        grid-template-columns: 1fr 1fr;
-    }
-    
-    .time-wrapper {
-        display: none;
-    }
+    height: 200px;
+    font-size: 1.5rem;
+    color: #333;
 }

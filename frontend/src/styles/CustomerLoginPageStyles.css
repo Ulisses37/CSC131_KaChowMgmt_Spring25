@@ -29,6 +29,7 @@
   	height: 309px;
   	object-fit: contain;
   	cursor: pointer;
+	z-index: 10;
 }
 .login-page-0-inner {
   	position: absolute;
@@ -76,7 +77,7 @@
 }
 .customer-login-button {
   	position: absolute;
-  	top: 653px;
+  	top: 630px;
   	left: 920px;
   	border-radius: 8px;
   	background-color: #2c2c2c;
@@ -116,6 +117,7 @@
   	border: 1px solid #adadad;
   	box-sizing: border-box;
   	width: 327px;
+	height: 60px;
   	overflow: hidden;
   	display: flex;
   	flex-direction: row;
@@ -133,6 +135,7 @@
   	border: 1px solid #adadad;
   	box-sizing: border-box;
   	width: 327px;
+	height: 60px;
   	overflow: hidden;
   	display: flex;
   	flex-direction: row;

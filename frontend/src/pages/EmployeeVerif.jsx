@@ -13,6 +13,38 @@ function EmployeeVerifPage() {
         setError('');
     };
 
+    // API call function
+    async function authenticateEmployeeID(employeeId){
+        try {
+            const response = await fetch('http://localhost:5000/api/login/employee', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ employeeId })
+            });
+
+            console.log('Raw API Response:', response); // Debug code
+
+            if (!response.ok) {
+                throw new Error('Login failed');
+            }
+
+            const data = await response.json();
+            console.log('Parsed API Data:', data); // Debug code
+
+            return {
+                success: true,
+                token: data.token,
+                employeeData: data.employee 
+            };
+            
+        } catch (err) {
+            return {
+                success: false,
+                message: err.message || "Authentication failed"
+            };
+        }
+    }
+
     const handleVerification = async (e) => {
         e.preventDefault();
         
@@ -21,57 +53,76 @@ function EmployeeVerifPage() {
             return;
         }
 
-        // Basic ID format validation
         if (!/^[A-Za-z0-9]{6,10}$/.test(employeeId)) {
             setError('Please enter a valid Employee ID (6-10 alphanumeric characters)');
             return;
         }
 
         setIsLoading(true);
-        
+        setError("");
+
         try {
-            // Real API call to verify employee ID
-            const response = await axios.post(
-                'http://localhost/:'+ process.env.REACT_APP_HOST_PORT + '/api/employeeLogin',
-                { employeeId },
-                {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    withCredentials: true
-                }
-            );
-
-            const { isValid, employeeType, temporaryToken } = response.data;
-
-            if (isValid) {
-                // Store temporary verification token
-                sessionStorage.setItem('empVerificationToken', temporaryToken);
+            const response = await authenticateEmployeeID(employeeId);
+            console.log('Authentication Response:', response); // Debug code
+            
+            if (response.success) {
+                localStorage.setItem('employeeToken', response.token);
                 
-                // Navigate to employee login with ID pre-filled
-                navigate('/employee-login', { 
-                    state: { 
-                        verifiedEmployeeId: employeeId,
-                        employeeType // 'admin' or 'mechanic'
-                    } 
+                console.log('Verfication Response:', response);   // Debug code
+                
+                navigate("/employee-login", {
+                  state: {
+                    employeeData: response.employeeData
+                  }
                 });
             } else {
-                setError('Invalid Employee ID. Please try again.');
+                setError(response.message || "Invalid credentials");
             }
         } catch (err) {
-            // Enhanced error handling
-            if (err.response) {
-                setError(err.response.data.message || "Verification failed");
-            } else if (err.request) {
-                setError("Network error. Please try again.");
-            } else {
-                setError("An unexpected error occurred");
-                console.error("Verification error:", err);
-            }
+            setError(err.message || "An unexpected error occurred");
+            console.error("Login error:", err);
         } finally {
             setIsLoading(false);
         }
-    };
+        
+        // try {
+        //     // Using Fetch API with Promise
+        //     const response = await fetch(
+        //         'http://localhost:' + 5000 +'/api/employeeLogin',
+        //         {
+        //             method: 'POST',
+        //             headers: {'Content-Type': 'application/json',},
+        //             credentials: 'include',
+        //             body: JSON.stringify({ employeeId })
+        //         }
+        //     );
+
+        //     if (!response.ok) {
+        //         throw new Error(`HTTP error! status: ${response.status}`);
+        //     }
+
+        //     const data = await response.json();
+        //     const { isValid, employeeType, temporaryToken } = data;
+
+        //     if (isValid) {
+        //         sessionStorage.setItem('empVerificationToken', temporaryToken);
+                
+        //         navigate('/employee-login', { 
+        //             state: { 
+        //                 verifiedEmployeeId: employeeId,
+        //                 employeeType
+        //             } 
+        //         });
+        //     } else {
+        //         setError(data.message || 'Invalid Employee ID. Please try again.');
+        //     }
+        // } catch (err) {
+        //     setError(err.message || "An unexpected error occurred");
+        //     console.error("Verification error:", err);
+        // } finally {
+        //     setIsLoading(false);
+        // }
+    }
     
     return (
         <div className="employee-verifcation-page">
@@ -88,9 +139,8 @@ function EmployeeVerifPage() {
             <div className="line-div"></div>
             <div className="employee-verification">EMPLOYEE VERIFICATION</div>
 
-            {/* Error message display */}
             {error && (
-                  <div className="error-message" style={{ 
+                <div className="error-message" style={{ 
                     color: 'red', 
                     textAlign: 'center',
                     margin: '10px 0',
@@ -100,7 +150,6 @@ function EmployeeVerifPage() {
                 </div>
             )}
 
-            {/* ID Input Field */}
             <div className="id-input-verif">
                 <input
                     type="text"
@@ -117,7 +166,6 @@ function EmployeeVerifPage() {
                 />
             </div>
 
-            {/* Verification Button */}
             <div 
                 className="verif-button" 
                 id="buttonContainer"
@@ -127,21 +175,10 @@ function EmployeeVerifPage() {
                     opacity: isLoading ? 0.7 : 1
                 }}
             >
-                <div className="button1"> {isLoading ? 'VERIFYING...' : 'ENTER'}</div>
+                <div className="verif-button1"> {isLoading ? 'VERIFYING...' : 'ENTER'}</div>
             </div>
-            
-      </div> 
+        </div> 
     )
 }
 
-export default EmployeeVerifPage
-
-//  // Mock verification function - replace with actual API call
-//  const verifyEmployeeId = async (id) => {
-//     // Simulate API delay
-//     await new Promise(resolve => setTimeout(resolve, 1000));
-    
-//     // Mock verification logic (replace with real verification)
-//     // In a real app, this would call your backend API
-//     return id === 'EMP12345'; // Example valid ID
-// }
+export default EmployeeVerifPage;

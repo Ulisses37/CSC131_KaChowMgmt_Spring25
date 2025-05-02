@@ -1,0 +1,71 @@
+/* Gradient background container */
+.clock-buttons-container {
+    background: linear-gradient(to bottom, rgb(134, 0, 0), white); /* Red-to-white gradient */
+    padding: 40px 20px; /* Increase top padding to raise the gradient */
+    border-radius: 10px; /* Slightly rounded corners */
+    display: inline-block; /* Ensure the rectangle wraps around the content */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+    text-align: center; /* Center-align the content inside the rectangle */
+    width: 80%; /* Set a width for the rectangle */
+    max-width: 600px; /* Limit the maximum width */
+    margin: -20px auto 0; /* Raise the rectangle by reducing the top margin */
+}
+
+/* Button container */
+.clock-buttons {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: center; /* Center align the buttons */
+    gap: 10px; /* Add spacing between buttons */
+    margin-bottom: 20px; /* Add spacing below the buttons */
+}
+
+/* Button styling */
+button {
+    padding: 10px 20px; /* Adjust padding for oval shape */
+    font-size: 16px; /* Set font size */
+    font-weight: bold; /* Make text bold */
+    border: 2px solid black; /* Add a black border */
+    border-radius: 50px; /* Make the buttons oval */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    background-color: white; /* Set white background */
+    color: black; /* Set black text */
+    transition: all 0.3s ease; /* Add smooth transition for hover effects */
+}
+
+button:hover {
+    background-color: #f0f0f0; /* Slightly darker background on hover */
+    color: #333; /* Slightly darker text on hover */
+    transform: scale(1.05); /* Slightly enlarge the button on hover */
+}
+
+/* Clock times styling */
+.clock-times h3 {
+    margin: 10px 0;
+    color: #333;
+}
+
+.clock-times p {
+    font-size: 16px;
+    color: #555;
+}
+
+/* Time difference styling */
+.time-difference h3 {
+    margin-top: 20px;
+    color: #333;
+}
+
+.time-difference p {
+    font-size: 18px;
+    color: #4caf50;
+    font-weight: bold;
+}
+
+/* Error message styling */
+.error-message {
+    color: #f44336;
+    font-size: 14px;
+    margin-top: 10px;
+    font-weight: bold;
+}

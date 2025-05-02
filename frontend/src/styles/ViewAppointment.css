@@ -1,0 +1,123 @@
+h1 {
+  color: #d73706;
+  font-size: 28px;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+/* Style for the container holding the appointments */
+ul {
+  background-color: #e4e1e1; /* Light gray background for the list */
+  padding: 20px; /* Add padding inside the rectangle */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  margin: 20px auto; /* Center the rectangle and add spacing */
+  max-width: 1000px; /* Limit the width of the rectangle */
+  list-style-type: none; /* Remove bullet points */
+  min-height: 400px;
+}
+
+/* Style for each individual appointment */
+li {
+  background-color: #ffffff; /* White background for each appointment */
+  margin-bottom: 15px; /* Add spacing between appointments */
+  padding: 15px; /* Add padding inside each appointment */
+  border-radius: 8px; /* Rounded corners for each appointment */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  border: 1px solid #ddd; /* Light border around each appointment */
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-between; /* Push content to the edges */
+  align-items: flex-start; /* Align items to the top */
+}
+
+/* Left-aligned content: Ticket #, Make/Model, VIN # */
+li .left-section {
+  flex: 1; /* Take up space on the left */
+  display: flex;
+  flex-direction: column; /* Stack fields vertically */
+  align-items: flex-start; /* Align content to the left */
+}
+
+li .left-section .repair-type {
+  margin-bottom: 5px; /* Add spacing between fields */
+  font-weight: bold;
+  font-size: 14px; /* Match font size with other fields */
+  color: #333; /* Consistent color */
+}
+
+/* Center-aligned content: Repair Type */
+li .center-section {
+  flex: 1; /* Center content */
+  text-align: center; /* Align text to the center */
+  font-weight: bold;
+  font-size: 14px; /* Match font size with other fields */
+  color: #333; /* Consistent color */
+  display: flex;
+  flex-direction: column; /* Stack Repair Type and Status button vertically */
+  align-items: center; /* Center align content */
+  justify-content: flex-start; /* Ensure content starts at the top */
+}
+
+li .center-section .status {
+  margin-top: 10px; /* Add spacing above the Status button */
+  align-self: center; /* Ensure the button stays centered */
+}
+
+/* Right-aligned content: Date */
+li .right-section {
+  flex: 1; /* Take up space on the right */
+  text-align: right; /* Align text to the right */
+  display: flex;
+  flex-direction: column; /* Stack "Date" and the actual date/time vertically */
+  align-items: flex-end; /* Align content to the right */
+}
+
+li .right-section .date-label {
+  font-weight: bold; /* Make the "Date" label bold */
+  font-size: 14px; /* Match font size with other fields */
+  color: #333; /* Consistent color */
+  margin-bottom: 5px; /* Add spacing below the label */
+}
+
+li .right-section .date-value {
+  font-size: 14px; /* Match font size with other fields */
+  color: #333; /* Consistent color */
+}
+
+li .right-section .time-value {
+  font-size: 14px; /* Match font size with other fields */
+  color: #333; /* Consistent color */
+  margin-top: 2px; /* Add a small gap above the time */
+}
+
+/* Style for the Reschedule button */
+button.reschedule {
+  background-color: #ffd700; /* Yellow background */
+  color: #000; /* Black text */
+  border: none; /* Remove border */
+  padding: 10px 15px; /* Add padding */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 14px; /* Adjust font size */
+  margin-right: 10px; /* Add spacing between buttons */
+}
+
+button.reschedule:hover {
+  background-color: #ffc107; /* Slightly darker yellow on hover */
+}
+
+/* Style for the Cancel button */
+button.cancel {
+  background-color: #e7409c; /* Pink background */
+  color: #fff; /* White text */
+  border: none; /* Remove border */
+  padding: 10px 15px; /* Add padding */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 14px; /* Adjust font size */
+}
+
+button.cancel:hover {
+  background-color: #cd0673; /* Slightly darker pink on hover */
+}

@@ -1,9 +1,9 @@
 import express from 'express';
 import { getServiceHistory } from '../controllers/serviceHistoryController.js';
-import { authenticate } from '../middleware/authMiddleware.js';
+import { authenticateCustomer } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-router.get('/:customerId', authenticate, getServiceHistory);
+router.get('/:customerId', authenticateCustomer, getServiceHistory);
 
 export default router;

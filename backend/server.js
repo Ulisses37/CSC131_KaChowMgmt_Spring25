@@ -8,6 +8,7 @@ import authRoutes  from "./routes/authRoutes.js";
 import serviceHistoryRouter from './routes/serviceHistoryRoutes.js';
 import employeeRoutes from "./routes/employeeRoutes.js";
 import loginRouter from "./routes/loginRoute.js";
+import customerRoutes from './routes/customerRoutes.js';
 
 dotenv.config();
 connectDB();
@@ -26,6 +27,7 @@ app.use('/api/tickets', ticketRoutes);
 app.use('/api/vehicles', vehicleRoutes);
 app.use('/api/login', loginRouter);
 app.use('/api/employees', employeeRoutes);
+app.use('/api/customers', customerRoutes);
 
 
 app.listen(process.env.HOST_PORT,() =>

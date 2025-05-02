@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import '../styles/ForgotPasswordStyles.css';
-import {Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function ForgotPasswordPage() {
     const [email, setEmail] = useState('');
@@ -28,8 +28,7 @@ function ForgotPasswordPage() {
         }
 
         try {
-            // First check if email exists in your system
-            const checkResponse = await fetch('http://localhost/:' + process.env.REACT_APP_HOST_PORT + '/api/auth/password/forgot-password', {
+            const checkResponse = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/auth/password/forgot-password`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -45,8 +44,7 @@ function ForgotPasswordPage() {
                 return;
             }
 
-            // If email exists, send reset link
-            const resetResponse = await fetch('http://localhost:5000/api/auth/password/reset-password/', {
+            const resetResponse = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/auth/password/reset-password/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -76,32 +74,26 @@ function ForgotPasswordPage() {
                 className="srs-csc-131-icon"
                 alt="Company Logo"
                 src="SRS_CSC_131 1.png"
-                id="KachowMngmtImage"
                 onClick={() => navigate('/')}
                 style={{ cursor: 'pointer' }}
             />
             <div className="forgot-password-inner"></div>
-            <div className="line-div"></div>
             <div className="reset-password">RESET PASSWORD</div>
             <div className="a-link-will">A link will be sent to your email address to reset your password</div>
 
             <div className={`message ${buttonColor}`}>{message}</div>
 
-            <div
-                className={`button ${buttonColor}`}
+            <button 
+                className={`send-button ${buttonColor}`}
                 id="sendButton"
                 onClick={handleSendClick}
             >
-                <div className="button1">
-                    SEND
-                </div>
-            </div>
+                SEND
+            </button>
 
             <div 
                 className="go-to-login" 
-                id="goToLogin"
                 onClick={() => navigate('/customer-login')}
-                style={{ cursor: 'pointer' }}
             >
                 GO TO LOGIN
             </div>
@@ -111,7 +103,6 @@ function ForgotPasswordPage() {
                     type="email"
                     placeholder="Email Address"
                     onChange={handleEmailChange}
-                    className="key-field"
                     value={email}
                 />
             </div>

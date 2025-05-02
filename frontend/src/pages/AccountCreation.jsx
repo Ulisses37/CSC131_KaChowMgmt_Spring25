@@ -2,19 +2,19 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/AccountCreationStyles.css';
 
-
 function AccountCreationPage() {
     const navigate = useNavigate();
+    const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost/:' + process.env.REACT_APP_HOST_PORT + '/api/auth/register', {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/auth/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password }),
+                body: JSON.stringify({ name: fullName, email, password }),
             });
             if (response.ok) navigate('/customer-login');
         } catch (err) {
@@ -40,6 +40,17 @@ function AccountCreationPage() {
                 <h1 className="form-title">Create Account</h1>
                 
                 <form onSubmit={handleSubmit} className="account-form">
+                    <div className="input-group">
+                        <input
+                            type="text"
+                            value={fullName}
+                            onChange={(e) => setFullName(e.target.value)}
+                            placeholder="Full Name"
+                            required
+                            className="form-input"
+                        />
+                    </div>
+                    
                     <div className="input-group">
                         <input
                             type="email"
