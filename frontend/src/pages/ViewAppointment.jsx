@@ -9,50 +9,18 @@ const ViewAppointment = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Simulate fetching appointments from an API or local storage
     const fetchAppointments = async () => {
       try {
-        // Mock data for testing
-        const mockData = [
-          {
-            id: 1,
-            ticketNumber: 'TCK12345',
-            title: 'Engine Repair',
-            date: '2025-05-10T10:00:00.000Z',
-            makeModel: 'Toyota Corolla',
-            vin: '1HGCM82633A123456',
-          },
-          {
-            id: 2,
-            ticketNumber: 'TCK12346',
-            title: 'Oil Change',
-            date: '2025-04-20T14:00:00.000Z',
-            makeModel: 'Honda Civic',
-            vin: '2HGCM82633A654321',
-          },
-          {
-            id: 3,
-            ticketNumber: 'TCK12347',
-            title: 'Brake Inspection',
-            date: '2025-04-15T09:00:00.000Z',
-            makeModel: 'Ford Focus',
-            vin: '3HGCM82633A789012',
-          },
-          {
-            id: 4,
-            ticketNumber: 'TCK12348',
-            title: 'Tire Replacement',
-            date: '2025-05-15T11:00:00.000Z',
-            makeModel: 'Chevrolet Malibu',
-            vin: '4HGCM82633A345678',
-          },
-        ];
+        const customerId = localStorage.getItem('customerId');
+        if (!customerId) throw new Error('Customer not logged in');
 
-        // Simulate API delay
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        const response = await fetch(
+          `${import.meta.env.VITE_API_BASE_URL}/tickets/customer/${customerId}/tickets`
+        );
+        if (!response.ok) throw new Error('Failed to fetch appointments');
 
-        // Use mock data instead of API response
-        setAppointments(mockData);
+        const data = await response.json();
+        setAppointments(data);
       } catch (error) {
         console.error('Error fetching appointments:', error);
       } finally {
@@ -68,7 +36,7 @@ const ViewAppointment = () => {
   }
 
   const currentAppointments = appointments.filter(
-    (appointment) => new Date(appointment.date) >= new Date()
+    (appointment) => new Date(appointment.appDate) >= new Date()
   );
 
   return (
@@ -80,36 +48,30 @@ const ViewAppointment = () => {
         alt=""
         src="SRS_CSC_131 1.png"
         onClick={() => navigate('/')}
-      ></img>
+      />
       <h1>Your Appointments</h1>
       <section>
         <h2>Current Appointments</h2>
         {currentAppointments.length > 0 ? (
           <ul>
             {currentAppointments.map((appointment) => {
-              const appointmentDate = new Date(appointment.date);
-              const formattedDate = appointmentDate.toLocaleDateString(); // Extract date
+              const appointmentDate = new Date(appointment.appDate);
+              const formattedDate = appointmentDate.toLocaleDateString();
               const formattedTime = appointmentDate.toLocaleTimeString([], {
                 hour: '2-digit',
                 minute: '2-digit',
-              }); // Extract time
+              });
 
               return (
-                <li key={appointment.id}>
+                <li key={appointment._id}>
                   {/* Left Section */}
                   <div className="left-section">
-                    <span>
-                      <strong>Ticket #:</strong> {appointment.ticketNumber}
-                    </span>
-                    <span>
-                      <strong>Make/Model:</strong> {appointment.makeModel}
-                    </span>
-                    <span>
-                      <strong>VIN #:</strong> {appointment.vin}
-                    </span>
+                    <span><strong>Ticket #:</strong> {appointment.ticketId}</span>
+                    <span><strong>Make/Model:</strong> {appointment.makeModel || 'N/A'}</span>
+                    <span><strong>VIN #:</strong> {appointment.vechVIN}</span>
                     <button
                       className="cancel"
-                      onClick={() => navigate(`/appt-cancel/${appointment.id}`)} // Navigate to cancel page
+                      onClick={() => navigate(`/appt-cancel/${appointment._id}`)}
                     >
                       Cancel
                     </button>
@@ -117,9 +79,7 @@ const ViewAppointment = () => {
 
                   {/* Center Section */}
                   <div className="center-section">
-                    <span>
-                      <strong>Repair Type:</strong> {appointment.title}
-                    </span>
+                    <span><strong>Repair Type:</strong> {appointment.ticketType}</span>
                   </div>
 
                   {/* Right Section */}
@@ -129,7 +89,7 @@ const ViewAppointment = () => {
                     <span className="time-value">{formattedTime}</span>
                     <button
                       className="reschedule"
-                      onClick={() => navigate(`/appt-reschedule/${appointment.id}`)} // Navigate to reschedule page
+                      onClick={() => navigate(`/appt-reschedule/${appointment._id}`)}
                     >
                       Reschedule
                     </button>
