@@ -44,7 +44,6 @@ const employeeSchema = new mongoose.Schema({
     hoursWorked: [hoursWorkedSchema], // Array of hours worked subdocuments
     payRate: { type: Number, required: true }, // Pay rate per hour (float)
     reviews: [reviewSchema], // Array of reviews subdocuments
-    employeeId: {type: String}
 });
 
 // Password hashing (pre-save hook)
