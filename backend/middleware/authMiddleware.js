@@ -13,6 +13,13 @@ export const authenticateCustomer = async (req, res, next) => {
         if (!customer) return res.status(401).json({ message: 'User no longer exists' });
 
         req.user = customer;
+        if (req.params.customerId && req.params.customerId !== customer._id.toString()) {
+            console.log('Auth mismatch:', {
+                tokenUserId: customer._id.toString(),
+                requestedId: req.params.customerId
+            });
+            return res.status(403).json({ message: 'You are not authorized to access this data' });
+        }
         next();
     } catch (error) {
         if (error.name === 'TokenExpiredError') {
