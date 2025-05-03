@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import '../styles/ForgotPasswordStyles.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function ForgotPasswordPage() {
     const [email, setEmail] = useState('');
@@ -27,8 +27,11 @@ function ForgotPasswordPage() {
             return;
         }
 
+        const forgotPasswordUrl = `${import.meta.env.VITE_API_BASE_URL}/api/auth/password/forgot-password`;
+        console.log('Sending forgot password request to:', forgotPasswordUrl);
+
         try {
-            const checkResponse = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/auth/password/forgot-password`, {
+            const response = await fetch(forgotPasswordUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -36,32 +39,23 @@ function ForgotPasswordPage() {
                 body: JSON.stringify({ email }),
             });
 
-            const checkData = await checkResponse.json();
-
-            if (!checkResponse.ok || !checkData.exists) {
-                setMessage('No account found with this email address.');
-                setButtonColor('invalid');
-                return;
+            let data = {};
+            try {
+                data = await response.json();
+            } catch (jsonError) {
+                console.warn('Invalid JSON in response:', jsonError);
             }
 
-            const resetResponse = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/auth/password/reset-password/`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email }),
-            });
-
-            if (resetResponse.ok) {
-                setMessage('A reset link has been sent to your email address.');
+            if (response.ok) {
+                setMessage(data.message || 'A reset link has been sent to your email address.');
                 setButtonColor('valid');
             } else {
-                const errorData = await resetResponse.json();
-                setMessage(errorData.message || 'Failed to send reset link.');
+                setMessage(data.message || 'No account found with this email address.');
                 setButtonColor('invalid');
             }
         } catch (error) {
-            setMessage('An error occurred. Please try again later.');
+            console.error('Unexpected error:', error);
+            setMessage(`Unexpected error: ${error.message || 'Please try again later.'}`);
             setButtonColor('invalid');
         }
     }
@@ -79,7 +73,9 @@ function ForgotPasswordPage() {
             />
             <div className="forgot-password-inner"></div>
             <div className="reset-password">RESET PASSWORD</div>
-            <div className="a-link-will">A link will be sent to your email address to reset your password</div>
+            <div className="a-link-will">
+                A link will be sent to your email address to reset your password
+            </div>
 
             <div className={`message ${buttonColor}`}>{message}</div>
 

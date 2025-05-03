@@ -67,12 +67,9 @@ body {
     margin: 0;
 }
 .datetime {
-    position: absolute;
-    top: 343px;
-    left: 1586px;
-    display: inline-block;
-    width: 178px;
-    height: 87px;
+    position: relative;
+    margin-top: 10px;
+    font-weight: 500;
 }
 .service-history-header {
     position: absolute;

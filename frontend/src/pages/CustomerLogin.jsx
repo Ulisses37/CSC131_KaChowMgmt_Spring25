@@ -19,23 +19,24 @@ function CustomerLoginPage() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })
             });
-
+    
             console.log('Raw API Response:', response);
 
             if (!response.ok) {
                 const errorData = await response.json().catch(() => null);
                 throw new Error(errorData?.message || 'Login failed');
             }
-
+    
             const data = await response.json();
+    
             console.log('Parsed API Data:', data);
-
+    
             return {
-                success: true,
+                success: data.success,
                 token: data.token,
-                customerData: data.customer 
+                customerData: data.customer,
+                message: data.message
             };
-            
         } catch (err) {
             return {
                 success: false,

@@ -203,6 +203,10 @@ export const completeTicket = async (req, res) => {
     ticket.completionStatus = 'Completed';
     ticket.timeSpentMinutes = timeSpentMinutes;
 
+    if (ticket.completionStatus === 'Completed') {
+      updates.completionDate = new Date();
+    }
+
     if (mechanicComments) {
       ticket.mechanicComments.push(mechanicComments);
     }
@@ -408,5 +412,27 @@ export const adminInvoice = async (req, res) => {
           success: false,
           error: 'Server error: ' + err.message
       });
+  }
+};
+
+export const getTicketsByCustomer = async (req, res) => {
+  try {
+    const { customerId } = req.params;
+
+    if (!customerId) {
+      return res.status(400).json({ error: 'Customer ID is required' });
+    }
+
+    const tickets = await Ticket.find({
+      customerId,
+      completionStatus: { $nin: ['Completed', 'Canceled'] } // ✅ Exclude completed/canceled
+    }).sort({ appDate: 1 });
+
+    res.status(200).json(tickets);
+  } catch (err) {
+    res.status(500).json({
+      error: 'Failed to fetch tickets for customer',
+      details: err.message
+    });
   }
 };

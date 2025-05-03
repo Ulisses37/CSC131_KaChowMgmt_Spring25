@@ -15,7 +15,7 @@ const ViewAppointment = () => {
         if (!customerId) throw new Error('Customer not logged in');
 
         const response = await fetch(
-          `${import.meta.env.VITE_API_BASE_URL}/tickets/customer/${customerId}/tickets`
+          `${import.meta.env.VITE_API_BASE_URL}/api/tickets/customer/${customerId}/tickets`
         );
         if (!response.ok) throw new Error('Failed to fetch appointments');
 
@@ -35,9 +35,7 @@ const ViewAppointment = () => {
     return <div>Loading appointments...</div>;
   }
 
-  const currentAppointments = appointments.filter(
-    (appointment) => new Date(appointment.appDate) >= new Date()
-  );
+  const currentAppointments = appointments;
 
   return (
     <div>
@@ -45,7 +43,7 @@ const ViewAppointment = () => {
       <HeaderBar />
       <img
         className="srs-csc-131-2-icon"
-        alt=""
+        alt="Company Logo"
         src="SRS_CSC_131 1.png"
         onClick={() => navigate('/')}
       />
@@ -79,7 +77,8 @@ const ViewAppointment = () => {
 
                   {/* Center Section */}
                   <div className="center-section">
-                    <span><strong>Repair Type:</strong> {appointment.ticketType}</span>
+                    <span className="repair-type"><strong>Repair Type:</strong> {appointment.ticketType}</span>
+                    <span className="repair-type"><strong>Status:</strong> {appointment.completionStatus}</span>
                   </div>
 
                   {/* Right Section */}

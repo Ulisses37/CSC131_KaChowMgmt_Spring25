@@ -1,5 +1,6 @@
 import express from 'express';
 import Ticket from '../models/Ticket.js';
+import { getTicketsByCustomer } from '../controllers/ticketController.js';
 import {
     validateCreateTicket,
     validateReschedule,
@@ -99,5 +100,6 @@ router.patch('/:id/status', async (req, res) => {
     }
 });
 
+router.get('/customer/:customerId/tickets', getTicketsByCustomer);
 
 export default router;
