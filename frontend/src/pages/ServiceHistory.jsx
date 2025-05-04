@@ -4,7 +4,6 @@ import '../styles/ServiceHistoryStyles.css';
 import HeaderBar from '../components/HeaderBarComponent'; 
 import Menu from '../components/CustomerMenuComponent';
 import AppointmentButton from '../components/BookAppointmentComp';
-//import DropMenu from '../components/DropMenuComp';
 
 function ServiceHistoryPage() {
     const [serviceHistory, setServiceHistory] = useState([]);
@@ -73,8 +72,9 @@ function ServiceHistoryPage() {
             {serviceHistory.length === 0 ? (
                 <div className="no-history">No service history found</div>
             ) : (
-                serviceHistory.map((ticket, index) => (
-                    <div key={index} className="vin-parent">
+                <div className="service-history-list">
+                    {serviceHistory.map((ticket, index) => (
+                        <div key={index} className="vin-parent">
                         <div className="vin">
                             <span className="vin1">VIN #: </span>
                             <span>{ticket["VIN #"]}</span>
@@ -99,7 +99,8 @@ function ServiceHistoryPage() {
                             <div className="button2">Submit Feedback</div>
                         </div>
                     </div>
-                ))
+                    ))}
+                    </div>
             )}
             
             <AppointmentButton/>

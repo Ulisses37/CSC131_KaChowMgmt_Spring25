@@ -92,7 +92,7 @@ function CustomerLoginPage() {
 
     return (
         <div className="login-page-0">
-            <BackButton text="HOME"/>
+            <BackButton text="HOME" onClick={() => navigate('/')} />
             <HeaderBar/>
     
             <img className="srs-csc-131-1-icon"lt="Company Logo" src="/SRS_CSC_131 1.png"/>
