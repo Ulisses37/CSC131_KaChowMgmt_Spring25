@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router';
 import '../styles/AppointmentCreation.css';
 import HeaderBar from '../components/HeaderBarComponent';
 
-
 const AppointmentCreation = () => {
     const [vechVIN, setvechVIN] = useState('');
     const [vehicleRepairType, setVehicleRepairType] = useState('');
@@ -12,51 +11,53 @@ const AppointmentCreation = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
 
+    const [make, setMake] = useState('');
+    const [model, setModel] = useState('');
+    const [vehicleSaveMessage, setVehicleSaveMessage] = useState('');
+
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
         const customerId = localStorage.getItem('customerId');
         if (!customerId) {
             setErrorMessage('You must be logged in to create a ticket.');
             return;
         }
-    
+
         const ticketData = {
-            //vin,  //? Written as this in vehicle schema
             vin: vechVIN,
             customerId,
             ticketType: vehicleRepairType,
-            appDate: new Date(appDate),  // Ensure this is a Date object
+            appDate: new Date(appDate),
             customerComments,
-            completionStatus: 'Unassigned',  // Default value if needed
-            paymentStatus: false,  // Default value if needed
+            completionStatus: 'Unassigned',
+            paymentStatus: false,
         };
-    
+
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/tickets` || 'http://localhost:5000/api/tickets', {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/tickets`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(ticketData),
             });
-        
+
             if (!response.ok) {
                 let errorData;
                 try {
                     errorData = await response.json();
                     console.error('Backend error:', errorData);
-                    // Display the specific error message from the backend
                     setErrorMessage(errorData.message || 'Failed to create ticket');
                 } catch (jsonErr) {
                     console.error('Failed to parse error JSON:', jsonErr);
                     setErrorMessage('An unexpected error occurred');
                 }
-                return; // Exit the function early
+                return;
             }
-        
+
             const data = await response.json();
             console.log('Ticket created successfully:', data);
             setSuccessMessage('Ticket created successfully!');
@@ -71,7 +72,50 @@ const AppointmentCreation = () => {
             setErrorMessage(error.message || 'Failed to create ticket. Please try again.');
             setSuccessMessage('');
         }
-    }
+    };
+
+    const handleRegisterVehicle = async () => {
+        const customerId = localStorage.getItem('customerId');
+        if (!customerId) {
+            setVehicleSaveMessage('You must be logged in to register a vehicle.');
+            return;
+        }
+
+        const vehicleData = {
+            vin: vechVIN,
+            make,
+            model,
+            owner: customerId,
+        };
+
+        console.log('Vehicle fields:', {
+            make,
+            model,
+            vin: vechVIN,
+            owner: localStorage.getItem('customerId')
+          });
+
+        try {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/vehicles`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(vehicleData),
+            });
+
+            if (!response.ok) {
+                const err = await response.json();
+                throw new Error(err.message || 'Failed to save vehicle');
+            }
+
+            setVehicleSaveMessage('Vehicle successfully saved!');
+        } catch (err) {
+            console.error('Vehicle save error:', err);
+            setVehicleSaveMessage(err.message || 'Vehicle save failed');
+        }
+    };
+
     return (
         <div>
             <HeaderBar />
@@ -82,17 +126,42 @@ const AppointmentCreation = () => {
                 src="SRS_CSC_131 1.png"
                 onClick={() => navigate("/")}
             />
+
+            <h2>Register Vehicle to Database</h2>
+            <div className="form-group">
+                <label>Make:</label>
+                <input
+                    type="text"
+                    value={make}
+                    onChange={(e) => setMake(e.target.value)}
+                    required
+                />
+            </div>
+            <div className="form-group">
+                <label>Model:</label>
+                <input
+                    type="text"
+                    value={model}
+                    onChange={(e) => setModel(e.target.value)}
+                    required
+                />
+            </div>
+            <div className="form-group">
+                <label>Vehicle VIN:</label>
+                <input
+                    type="text"
+                    value={vechVIN}
+                    onChange={(e) => setvechVIN(e.target.value)}
+                    required
+                />
+            </div>
+            <button type="button" onClick={handleRegisterVehicle}>
+                Register Vehicle to Database
+            </button>
+            {vehicleSaveMessage && <p className="success-message">{vehicleSaveMessage}</p>}
+
             <h2>Create a Ticket</h2>
             <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label>Vehicle VIN:</label>
-                    <input
-                        type="text"
-                        value={vechVIN}
-                        onChange={(e) => setvechVIN(e.target.value)}
-                        required
-                    />
-                </div>
                 <div className="form-group">
                     <label>Repair Type:</label>
                     <input
@@ -127,7 +196,6 @@ const AppointmentCreation = () => {
             {errorMessage && <p className="error-message">{errorMessage}</p>}
             {successMessage && <p className="success-message">{successMessage}</p>}
 
-            <br />
             <div className="navigation-buttons">
                 <button onClick={() => navigate('/viewappointment')}>View Appointment</button>
             </div>
