@@ -7,14 +7,14 @@ function CustomerDashboardPage() {
     const { state } = useLocation();
     const { customerData } = state || {};
     const token = localStorage.getItem('customerToken');
-    const navigate = useNavigate(); // Initialize the navigate function
+    const navigate = useNavigate();
 
     // Debugging logs 
     console.log('Dashboard State:', state);
     console.log('Token exists:', !!token);
     console.log('CustomerData:', customerData);
 
-     if (!token) {
+    if (!token) {
         return <Navigate to="/customer-login" replace />;
     }
 
@@ -39,27 +39,26 @@ function CustomerDashboardPage() {
             <div className="user-profile-page-item"></div>
             <div className="user-profile-page-inner"></div>
             <img className="srs-csc-131-2-icon" alt="" src="SRS_CSC_131 1.png" />
-            <LogoutButton/>
-            <AppointmentButton/>
+            <LogoutButton />
+            <AppointmentButton />
             <div className="gray-rectangle-bg"></div>
             <Menu />
-            
+
             <div className="registered-vehicles">Registered Vehicles</div>
-            {customerData.cars?.length > 0 ? (
-                customerData.cars.map((car, index) => (
+            {customerData.vehicles?.length > 0 ? (
+                customerData.vehicles.map((car, index) => (
                     <div key={index} className={`${index === 0 ? 'st-reg-car-holder' : 'nd-reg-car-holder'}`}>
                         <div className="user-info-bar">
-                            {car.make} {car.model} ({car.year || car.plateNumber})
+                            {car.make} {car.model} (VIN: {car.vin})
                         </div>
                     </div>
                 ))
             ) : (
                 <div className="st-reg-car-holder">
-                    <div className="user-info-bar">No cars registered</div>
+                    <div className="user-info-bar">No vehicles registered</div>
                 </div>
             )}
 
-            {/* User Info Section */}
             <div className="user-info-header">User Information</div>
             <div className="name">Name</div>
             <div className="name-holder">

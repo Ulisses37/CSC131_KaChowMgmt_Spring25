@@ -17,7 +17,8 @@ const customerLogin = async (req, res) => {
       });
     }
 
-    const customer = await Customer.findOne({ email });
+    // ✅ POPULATE vehicles
+    const customer = await Customer.findOne({ email }).populate('vehicles');
 
     if (!customer) {
       return res.status(401).json({
