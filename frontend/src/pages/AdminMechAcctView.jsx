@@ -8,52 +8,46 @@ function AdminMechAccountViewPage() {
     const [mechanicData, setMechanicData] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
-    const [allMechanics, setAllMechanics] = useState([]);
     const navigate = useNavigate();
 
-    // Fetch all mechanics on component mount
-    useEffect(() => {
-        const fetchMechanics = async () => {
+    const handleSearch = async () => {
+        try {
+            const token = localStorage.getItem('employeeToken');
+            console.log("Searching for:", searchTerm);
+
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/employees/search?name=${encodeURIComponent(searchTerm)}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            const text = await response.text();
+            console.log("Raw response text:", text);
+
             try {
-                const response = await fetch('/api/employees', {
-                    headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                    }
-                });
-                if (!response.ok) throw new Error('Failed to fetch mechanics');
-                const data = await response.json();
-                setAllMechanics(data.data);
-            } catch (error) {
-                console.error('Error fetching mechanics:', error);
+                const data = JSON.parse(text);
+                if (!response.ok) throw new Error(data.message || 'Search failed');
+                setSearchResults(data.data);
+            } catch (err) {
+                console.error('❌ JSON parsing failed:', err);
             }
-        };
-        fetchMechanics();
-    }, []);
-
-    // Handle search input changes
-    useEffect(() => {
-        if (searchTerm.trim() === '') {
-            setSearchResults([]);
-            return;
+        } catch (err) {
+            console.error('Search failed:', err);
         }
+    };
 
-        const results = allMechanics.filter(mechanic =>
-            mechanic.name.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        setSearchResults(results);
-    }, [searchTerm, allMechanics]);
-
-    // Fetch specific mechanic data when selected
     const fetchMechanicData = async (mechanicId) => {
         try {
-            const response = await fetch(`/api/employees/${mechanicId}`, {
+            const token = localStorage.getItem('employeeToken');
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/employees/${mechanicId}`, {
                 headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    'Authorization': `Bearer ${token}`
                 }
             });
             if (!response.ok) throw new Error('Failed to fetch mechanic data');
             const data = await response.json();
-            setMechanicData(data);
+            setMechanicData(data.data);
             setSearchTerm('');
             setSearchResults([]);
         } catch (error) {
@@ -61,7 +55,6 @@ function AdminMechAccountViewPage() {
         }
     };
 
-    // Handle edit button click
     const handleEditClick = () => {
         if (mechanicData) {
             navigate(`/edit-account/${mechanicData._id}`);
@@ -70,12 +63,10 @@ function AdminMechAccountViewPage() {
 
     return (
         <div className="mechanic-statistics-2">
-            <BackButton text="DASHBOARD"/>
+            <BackButton text="DASHBOARD" />
             <HeaderBar />
-            
             <img className="srs-csc-131-1-icon" alt="Company Logo" src="https://placehold.co/367x309" />
-            
-            {/* Search Bar */}
+
             <div style={{ position: 'absolute', top: '220px', left: '160px', zIndex: 100 }}>
                 <input
                     type="text"
@@ -89,6 +80,7 @@ function AdminMechAccountViewPage() {
                         border: '1px solid #ccc'
                     }}
                 />
+                <button onClick={handleSearch}>Search</button>
                 {searchResults.length > 0 && (
                     <ul style={{
                         listStyle: 'none',
@@ -102,7 +94,7 @@ function AdminMechAccountViewPage() {
                         width: '300px'
                     }}>
                         {searchResults.map(mechanic => (
-                            <li 
+                            <li
                                 key={mechanic._id}
                                 onClick={() => fetchMechanicData(mechanic._id)}
                                 style={{
@@ -117,8 +109,7 @@ function AdminMechAccountViewPage() {
                     </ul>
                 )}
             </div>
-            
-            {/* Mechanic Data Table */}
+
             {mechanicData ? (
                 <div className="table">
                     <div className="profession-box">
@@ -131,7 +122,7 @@ function AdminMechAccountViewPage() {
                             <div className="id">{mechanicData._id}</div>
                         </div>
                     </div>
-                    
+
                     <div className="profession-box">
                         <div className="mechanic-year">
                             <div className="year-box">
@@ -142,7 +133,7 @@ function AdminMechAccountViewPage() {
                             <div className="id">{new Date(mechanicData.createdAt).toLocaleDateString()}</div>
                         </div>
                     </div>
-                    
+
                     <div className="profession-box">
                         <div className="working-hours">
                             <div className="schedule-box">
@@ -156,26 +147,27 @@ function AdminMechAccountViewPage() {
                             </div>
                         </div>
                     </div>
-                    
+
                     <div className="profession-box">
                         <div className="mechanic-profession">
                             <div className="id">Specialist</div>
                         </div>
                         <div className="mechanic-skills">
                             <div className="skill-list">
-                                {mechanicData.specialties.join('<br/>')}
+                                {Array.isArray(mechanicData.specialties) && mechanicData.specialties.length > 0
+                                    ? mechanicData.specialties.join(', ')
+                                    : 'No specialties listed'}
                             </div>
                         </div>
                     </div>
-                    
+
                     <div className="profession-box">
                         <div className="mechanic-past-working-history">
                             <div className="id">History</div>
                         </div>
                         <div className="vehicles-that-mechanic-worked">
                             <div className="skill-list">
-                                {/* You would replace this with actual vehicle history from your data */}
-                                Ferrari<br/>Fiat<br/>Ford
+                                Ferrari<br />Fiat<br />Ford
                             </div>
                         </div>
                     </div>
@@ -192,14 +184,13 @@ function AdminMechAccountViewPage() {
                     {searchTerm ? 'No mechanics found' : 'Search for a mechanic to view their details'}
                 </div>
             )}
-            
-            {/* Edit Button - Only shown when a mechanic is selected */}
+
             {mechanicData && (
                 <div className="button1" onClick={handleEditClick}>
                     <div className="button2">Edit</div>
                 </div>
             )}
-            
+
             <div className="account-button-for-admin">
                 <div className="button"></div>
                 <div className="account-button-for-admin-child"></div>

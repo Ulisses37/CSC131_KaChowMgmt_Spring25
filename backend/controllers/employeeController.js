@@ -553,3 +553,28 @@ export const updateEmployee = async (req, res) => {
         });
     }
 };
+
+export const searchEmployeesByName = async (req, res) => {
+    try {
+      const { name } = req.query;
+      console.log('🔍 Received search query:', name);
+  
+      if (!name || name.trim() === '') {
+        return res.status(400).json({ success: false, message: 'Name query is required' });
+      }
+  
+      const employees = await Employee.find({
+        name: { $regex: name, $options: 'i' } // ✅ case-insensitive
+      }).select('name email employeeId specialties');
+  
+      console.log('✅ Matched employees:', employees.length);
+      return res.status(200).json({
+        success: true,
+        count: employees.length,
+        data: employees
+      });
+    } catch (err) {
+      console.error('❌ searchEmployeesByName error:', err);
+      return res.status(500).json({ success: false, message: err.message });
+    }
+  };
