@@ -39,13 +39,13 @@ const ViewAppointment = () => {
 
   return (
     <div>
-      <br />
       <HeaderBar />
+      <br />
       <img
         className="srs-csc-131-2-icon"
         alt="Company Logo"
         src="SRS_CSC_131 1.png"
-        onClick={() => navigate('/')}
+        onClick={() => navigate("/")}
       />
       <h1>Your Appointments</h1>
       <section>
@@ -68,10 +68,10 @@ const ViewAppointment = () => {
                     <span><strong>Make/Model:</strong> {appointment.makeModel || 'N/A'}</span>
                     <span><strong>VIN #:</strong> {appointment.vechVIN}</span>
                     <button
-                      className="cancel"
+                      className="cancel-button"
                       onClick={() => navigate(`/appt-cancel/${appointment._id}`)}
                     >
-                      Cancel
+                      Cancel Appointment
                     </button>
                   </div>
 
@@ -79,6 +79,12 @@ const ViewAppointment = () => {
                   <div className="center-section">
                     <span className="repair-type"><strong>Repair Type:</strong> {appointment.ticketType}</span>
                     <span className="repair-type"><strong>Status:</strong> {appointment.completionStatus}</span>
+                    <button
+                className="status-button"
+                onClick={() => navigate(`/viewappointmentdetail/${appointment._id}`)}
+              >
+                View Status
+              </button>
                   </div>
 
                   {/* Right Section */}
@@ -87,7 +93,7 @@ const ViewAppointment = () => {
                     <span className="date-value">{formattedDate}</span>
                     <span className="time-value">{formattedTime}</span>
                     <button
-                      className="reschedule"
+                      className="reschedule-button"
                       onClick={() => navigate(`/appt-reschedule/${appointment._id}`)}
                     >
                       Reschedule

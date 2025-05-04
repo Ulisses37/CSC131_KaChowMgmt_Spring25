@@ -120,6 +120,7 @@ const AppointmentCreation = () => {
         <div>
             <HeaderBar />
             <br />
+            <br/>
             <img
                 className="srs-csc-131-2-icon"
                 alt="Logo"
@@ -128,7 +129,7 @@ const AppointmentCreation = () => {
             />
 
             <h2>Register Vehicle to Database</h2>
-            <div className="form-group">
+            <div className="form-group1">
                 <label>Make:</label>
                 <input
                     type="text"
@@ -137,7 +138,7 @@ const AppointmentCreation = () => {
                     required
                 />
             </div>
-            <div className="form-group">
+            <div className="form-group1">
                 <label>Model:</label>
                 <input
                     type="text"
@@ -146,7 +147,7 @@ const AppointmentCreation = () => {
                     required
                 />
             </div>
-            <div className="form-group">
+            <div className="form-group1">
                 <label>Vehicle VIN:</label>
                 <input
                     type="text"

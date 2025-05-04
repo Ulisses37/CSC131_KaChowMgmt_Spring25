@@ -1,15 +1,30 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../styles/AppointmentCreationSuccess.css';
+import HeaderBar from '../components/HeaderBarComponent';
 
 const AppointmentCreationSuccess = () => {
   const navigate = useNavigate();
 
   return (
-    <div>
-      <h2>Ticket Created Successfully!</h2>
-      <img src={kachowImage} alt="Kachow" className="kachow-image" />
-      <p>Your ticket has been created. You will be contacted shortly for further updates.</p>
-      <button onClick={() => navigate('/')}>Go Back to Home</button>
+    <div className="appointment-success">
+      <HeaderBar />
+      <br/>
+      <img
+                className="srs-csc-131-2-icon"
+                alt="Logo"
+                src="SRS_CSC_131 1.png"
+                onClick={() => navigate("/")}
+            />
+            <br/>
+      <h2>Appointment Created Successfully!</h2>
+      <p>
+        Your appointment has been successfully created. You will receive a confirmation email or call shortly.
+      </p>
+      <div className="success-buttons">
+        <button onClick={() => navigate('/viewappointment')}>View Appointments</button>
+        <button onClick={() => navigate('/customer-dashboard')}>Go Back to Dashboard</button>
+      </div>
     </div>
   );
 };
