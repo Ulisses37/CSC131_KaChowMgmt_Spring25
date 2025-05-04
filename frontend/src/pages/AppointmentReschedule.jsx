@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router-dom'; // Import useParams
 import '../styles/AppointmentReschedule.css';
 import HeaderBar from '../components/HeaderBarComponent';
 
 const AppointmentReschedule = () => {
-    const [appointmentId, setAppointmentId] = useState('');
+    const { id } = useParams(); // Get the appointment ID from the URL
     const [newDate, setNewDate] = useState('');
-    const [newTime, setNewTime] = useState(''); // Added state for new time
+    const [newTime, setNewTime] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
 
@@ -14,15 +14,21 @@ const AppointmentReschedule = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const customerId = localStorage.getItem('customerId');
+        if (!customerId) {
+            setErrorMessage('You must be logged in to reschedule an appointment.');
+            return;
+        }
+
         const rescheduleData = {
-            appointmentId,
             newDate,
             newTime, // Include the new time in the reschedule data
         };
 
         try {
-            const response = await fetch('http://localhost:5000/api/tickets', {
-                method: 'POST',
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/tickets/${id}/reschedule`, {
+                method: 'PUT', // Use PUT for updating
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -37,9 +43,8 @@ const AppointmentReschedule = () => {
             console.log('Appointment rescheduled successfully:', data);
             setSuccessMessage('Appointment rescheduled successfully!');
             setErrorMessage('');
-            setAppointmentId('');
             setNewDate('');
-            setNewTime(''); // Reset the time
+            setNewTime('');
             navigate('/resuccess'); // Navigate to success page
         } catch (error) {
             console.error('Error rescheduling appointment:', error);
@@ -53,22 +58,14 @@ const AppointmentReschedule = () => {
             <HeaderBar />
             <br />
             <br />
-            <img className="srs-csc-131-2-icon" 
-            alt="" 
-            src="SRS_CSC_131 1.png"
-            onClick={() => navigate("/")}></img>
+            <img
+                className="srs-csc-131-2-icon"
+                alt=""
+                src="SRS_CSC_131 1.png"
+                onClick={() => navigate("/")}
+            />
             <h2>Reschedule Appointment</h2>
             <form onSubmit={handleSubmit}>
-                <label>
-                    Appointment ID:
-                    <input
-                        type="text"
-                        value={appointmentId}
-                        onChange={(e) => setAppointmentId(e.target.value)}
-                        required
-                    />
-                </label>
-                <br />
                 <label>
                     New Appointment Date:
                     <input

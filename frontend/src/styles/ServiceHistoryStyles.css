@@ -67,12 +67,9 @@ body {
     margin: 0;
 }
 .datetime {
-    position: absolute;
-    top: 343px;
-    left: 1586px;
-    display: inline-block;
-    width: 178px;
-    height: 87px;
+    position: relative;
+    margin-top: 10px;
+    font-weight: 500;
 }
 .service-history-header {
     position: absolute;
@@ -217,33 +214,44 @@ body {
     position: relative;
     line-height: 100%;
 }
+.feedback-button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
 .button1 {
-    position: absolute;
-    top: 97px;
-    left: 514px;
     border-radius: 8px;
     background-color: #fdd01f;
     border: 1px solid #2c2c2c;
-    box-sizing: border-box;
-    width: 157px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding: 12px;
-    cursor: pointer;
+    padding: 12px 20px;
     font-size: 16px;
+    cursor: pointer;
     color: #131518;
     font-family: Inter;
 }
+.service-history-list {
+    margin-top: 340px; /* pushes the list down */
+    margin-left:320px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center; /* optional: centers the boxes */
+}
 .vin-parent {
-    position: absolute;
-    top: 336px;
-    left: 507px;
-    width: 1253px;
-    height: 148px;
-    overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* slightly wider columns */
+    gap: 15px 30px; /* slightly more spacing */
+    padding: 24px; /* slightly more padding */
+    position: relative;
+    background-color: #f5f0f0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    max-width: 1200px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    font-size: 20px; /* increased from 16px or 18px */
+    font-family: Montserrat;
 }
 .baa-button-child {
     width: 100%;
@@ -278,7 +286,7 @@ body {
     box-sizing: border-box;
     gap: 0px;
     cursor: pointer;
-    font-size: 32px;
+    font-size: 30px;
 }
 .service-history-page {
     width: 100%;
@@ -294,4 +302,12 @@ body {
     color: #000;
     font-family: Montserrat;
 }
+
+.vin, .makemodel, .ticket, .appointment-type, .datetime {
+    font-size: inherit;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
 

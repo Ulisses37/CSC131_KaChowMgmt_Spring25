@@ -19,23 +19,24 @@ function CustomerLoginPage() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })
             });
-
+    
             console.log('Raw API Response:', response);
 
             if (!response.ok) {
                 const errorData = await response.json().catch(() => null);
                 throw new Error(errorData?.message || 'Login failed');
             }
-
+    
             const data = await response.json();
+    
             console.log('Parsed API Data:', data);
-
+    
             return {
-                success: true,
+                success: data.success,
                 token: data.token,
-                customerData: data.customer 
+                customerData: data.customer,
+                message: data.message
             };
-            
         } catch (err) {
             return {
                 success: false,
@@ -91,7 +92,7 @@ function CustomerLoginPage() {
 
     return (
         <div className="login-page-0">
-            <BackButton text="HOME"/>
+            <BackButton text="HOME" onClick={() => navigate('/')} />
             <HeaderBar/>
     
             <img className="srs-csc-131-1-icon"lt="Company Logo" src="/SRS_CSC_131 1.png"/>

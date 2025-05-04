@@ -15,7 +15,7 @@ const AppointmentCancel = () => {
     // Fetch the user's appointments from the backend
     const fetchAppointments = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/tickets', {
+        const response = await fetch('http://localhost:5000/api/tickets/${id}/cancel', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`, // Include the user's token
@@ -41,7 +41,7 @@ const AppointmentCancel = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:5000/api/tickets', {
+      const response = await fetch('http://localhost:5000/api/tickets/${id}/cancel', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -73,12 +73,15 @@ function App() {
             }/>
             <Route path="/appt-creation" element={<ApptCreation />} />
             <Route path="/crsuccess" element={<CreationSuccess />} />
-            <Route path="/appt-reschedule" element={<ApptReschedule />} />
+            <Route path="/appt-reschedule/:id" element={<ApptReschedule />} />
             <Route path="/resuccess" element={<RescheduleSuccess />} />
             <Route path="/appt-cancel" element={<ApptCancel />} />
+            <Route path="/appt-cancel/:id" element={<ApptCancel />} />
+            <Route path="/appt-cancel/:id" element={<ApptCancel />} />
             <Route path="/casuccess" element={<CancelSuccess />} />
             <Route path="/viewappointment" element={<ViewAppointment />} />
-            <Route path="/viewappointment/:id" element={<ViewAppointmentDetail />} />
+            <Route path="/viewappointmentdetail" element={<ViewAppointmentDetail />} />
+            <Route path="/viewappointmentdetail/:id" element={<ViewAppointmentDetail />} />
             <Route path="/service-history" element={<ServiceHistory />}/>         {/* might need to change the name of this */}
             {/* route path for feedback page */}
             {/* route path for logged out page */}

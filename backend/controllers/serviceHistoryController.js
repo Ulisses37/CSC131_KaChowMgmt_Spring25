@@ -31,7 +31,7 @@ export const getServiceHistory = async (req, res) => {
             customerId: customerObjectId,
             completionStatus: 'Completed'
         })
-            .select('ticketId appDate ticketType vechVIN mechanicComments')
+            .select('ticketId appDate ticketType vechVIN mechanicComments completionDate')
             .sort({ appDate: -1 })
             .lean();
 
@@ -54,9 +54,9 @@ export const getServiceHistory = async (req, res) => {
                         "Make/Model": vehicle ? `${vehicle.make || 'Unknown'} ${vehicle.model || 'Unknown'}` : 'Unknown',
                         "VIN #": ticket.vechVIN || 'Unknown',
                         "Appointment Type": ticket.ticketType || 'Unknown',
-                        "Date Completion": ticket.appDate ? (
-                            new Date(ticket.appDate).toISOString().split('T')[0] + ' ' +
-                            new Date(ticket.appDate).toISOString().split('T')[1].substring(0, 5)
+                        "Date Completion": ticket.completionDate ? (
+                            new Date(ticket.completionDate).toISOString().split('T')[0] + ' ' +
+                            new Date(ticket.completionDate).toISOString().split('T')[1].substring(0, 5)
                         ) : 'Unknown',
                         "Mechanic Notes": ticket.mechanicComments ? (
                             Array.isArray(ticket.mechanicComments) ?

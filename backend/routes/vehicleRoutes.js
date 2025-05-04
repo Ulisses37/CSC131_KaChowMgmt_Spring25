@@ -5,32 +5,31 @@ import Customer from "../models/Customer.js";
 const router = express.Router();
 
 router.post("/", async (req, res) => {
-    const { customerID, vin, make, model } = req.body;
+    const { owner, vin, make, model } = req.body;
 
-    if (!customerID || !vechVIN || !make || !model) {
+    if (!owner || !vin || !make || !model) {
         return res.status(400).json({ message: "Please fill all fields" });
     }
 
     try {
-
         const newVehicle = new Vehicle({
-            make: make,
-            model: model,
+            make,
+            model,
             vin,
-            owner: customerID,
+            owner,
         });
 
         const savedVehicle = await newVehicle.save();
 
         await Customer.findByIdAndUpdate(
-            customerID,
+            owner,
             { $push: { vehicles: newVehicle._id } },
-        )
+        );
 
         res.status(200).json({ savedVehicle });
-    } catch (error){
+    } catch (error) {
         return res.status(400).json({ message: 'Error creating vehicle', error: error.message });
     }
-})
+});
 
 export default router;

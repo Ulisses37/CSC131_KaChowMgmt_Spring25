@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import './Invoice.js';
 
 // Customer schema
 const customerSchema = new mongoose.Schema({

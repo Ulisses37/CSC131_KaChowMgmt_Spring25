@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import BackButton from '../components/BackButtonComponent'; 
 import '../styles/AccountCreationStyles.css';
 
 function AccountCreationPage() {
@@ -24,6 +25,7 @@ function AccountCreationPage() {
 
     return (
         <div className="account-creation-container">
+            <BackButton text="HOME" onClick={() => navigate('/')} />
             {/* Header Section */}
             <div className="header-gradient"></div>
             <div className="nav-bar"></div>
